@@ -187,26 +187,14 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
 import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
-import il.cshaifasweng.OCSFMediatorExample.server.SimpleServer; // Add this import statement
 import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 
 public class SimpleChatServer
 {
@@ -215,7 +203,7 @@ public class SimpleChatServer
     private static Session session;
     private static SimpleServer server;
 
-    private static SessionFactory getSessionFactory() throws HibernateException
+ /*   private static SessionFactory getSessionFactory() throws HibernateException
     {
         Configuration configuration = new Configuration();
 
@@ -229,7 +217,7 @@ public class SimpleChatServer
                 .applySettings(configuration.getProperties())
                 .build();
         return configuration.buildSessionFactory(serviceRegistry);
-    }
+    }*/
 
 
     public static void main( String[] args ) throws IOException
@@ -237,7 +225,7 @@ public class SimpleChatServer
         server = new SimpleServer(3000);
 
         try {
-            SessionFactory sessionFactory = getSessionFactory();
+            SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
             session = sessionFactory.openSession();
             session.beginTransaction();
             System.out.println("1");

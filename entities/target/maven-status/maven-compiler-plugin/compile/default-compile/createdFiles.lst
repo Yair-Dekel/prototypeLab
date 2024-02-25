@@ -2,3 +2,4 @@ il\cshaifasweng\OCSFMediatorExample\entities\Task.class
 il\cshaifasweng\OCSFMediatorExample\entities\MessageOfStatus.class
 il\cshaifasweng\OCSFMediatorExample\entities\Message.class
 il\cshaifasweng\OCSFMediatorExample\entities\Registered_user.class
+il\cshaifasweng\OCSFMediatorExample\entities\FactoryUtil.class

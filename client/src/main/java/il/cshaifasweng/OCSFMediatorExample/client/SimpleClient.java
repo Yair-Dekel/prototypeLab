@@ -17,6 +17,8 @@ public class SimpleClient extends AbstractClient {
 		super(host, port);
 	}
 
+
+
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		System.out.println("got into handleMessageFromServer ");
