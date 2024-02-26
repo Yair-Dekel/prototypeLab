@@ -97,11 +97,12 @@ public class Registered_user
 
 package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Users")
-public class Registered_user //extends User
-{
+public class Registered_user implements Serializable { //extends User
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -243,17 +243,14 @@ public class SimpleChatServer
             session.save(aba);
             session.flush();
             LocalDateTime time = LocalDateTime.now();
-            Task t1 = new Task("help1",aba , time);
-            Task t2 = new Task("help2", abc, time);
-            Task t3 = new Task("help3",abd,time);
-            Task t4 = new Task("help4",abd,time);
-            System.out.println("3");
+            Task t1 = new Task("clean house",aba , time);
+            Task t2 = new Task("buy food", abc, time);
+            Task t3 = new Task("Babysitter",abd,time);
+            Task t4 = new Task("take my dog out",abd,time);
+
 
 
             session.save(t1);
-            System.out.println("4");
-
-
             session.save(t2);
             session.save(t3);
             session.save(t4);

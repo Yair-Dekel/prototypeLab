@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.DisplayTasksMassage;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.MessageOfStatus;
 import il.cshaifasweng.OCSFMediatorExample.entities.Task;
@@ -36,9 +37,9 @@ public class SimpleClient extends AbstractClient {
 //			EventBus.getDefault().post(new NewSubscriberEvent(message));
 //		}else if(message.getMessage().equals("Error! we got an empty message")){
 //			EventBus.getDefault().post(new ErrorEvent(message));
-		else if (msg instanceof List<?>) {
-			List<Task> tasks = (List<Task>) msg;
-			EventBus.getDefault().post(new TasksMessageEvent(tasks));
+		else if (msg instanceof DisplayTasksMassage) {
+			DisplayTasksMassage dis = (DisplayTasksMassage) msg;
+			EventBus.getDefault().post(new TasksMessageEvent(dis));
 			System.out.println("recognized massage as a list of tasks");
 		}
 

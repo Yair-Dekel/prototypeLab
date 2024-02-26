@@ -13,29 +13,50 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.getClient;
+
 public class PrimaryController {
 
 	@FXML
-	private Button displayTasks;
-
+	public VBox tasksContainer;
+	@FXML
+	public TextArea DataFromServerTF;
+	@FXML
+	public VBox newVbox;
+	@FXML
+	public AnchorPane btn1;
+	public VBox tasksContaine;
 
 	@FXML
-	private VBox tasksContainer;
-
+	private Button displayTasks;
+	@FXML
+	private VBox showingVbox;
 
 	private int msgId;
 
 
+	// Define the font size and family you want to use
+	double fontSize = 15.0; // Example font size
+	String fontFamily = "Arial"; // Example font family
+
+	// Create a Font object with the desired font size and family
+	Font font = Font.font(fontFamily, fontSize);
+
+
+
+
 	@FXML
-	void changeRequest(Task task) {
+	void changeRequest(Task task)
+	{
+		System.out.println("enter to void changeRequest(Task task)");
 		try {
 			MessageOfStatus message = new MessageOfStatus(task, "change status");
 			SimpleClient.getClient().sendToServer(message);
@@ -58,8 +79,8 @@ public class PrimaryController {
 
 		Platform.runLater(() -> {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION,
-					String.format("Task ID: %d\nType of task: %s\nCreation time: %s\n" +
-									"\nDeadline time: %s\nStatus: %s\n",
+					String.format("Task ID: %d\n\nType of task: %s\n\nCreation time: %s\n\n" +
+									"\n\nDeadline time: %s\n\nStatus: %s",
 							event.getMessage().getTask().getId(),
 							event.getMessage().getTask().getType_of_task(),
 							event.getMessage().getTask().getCreation_time().format(creationTime),
@@ -71,25 +92,6 @@ public class PrimaryController {
 			alert.show();
 		});
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	@FXML
 	void displayTasks() {
@@ -107,17 +109,18 @@ public class PrimaryController {
 	@Subscribe
 	public void displayTasks(TasksMessageEvent event) {/////////////////////////////////////////////////////////////////////////////////////////////
 		System.out.println("got into displaytasks func2");
-		tasksContainer.getChildren().clear(); // Clear existing content
+		tasksContaine.getChildren().clear(); // Clear existing content
 
+		//for(Task T:tasks) System.out.println(T.getType_of_task());
 		if (event != null) {
-			List<Task> tasks = event.getTasks();
-			System.out.println("recognized event");
+			System.out.println("evet is not null");
 
+			List<Task> tasks = event.getTasksE().getTasks();
 			if (tasks != null && !tasks.isEmpty()) {
 				System.out.println("tasks!=null");
 				for (Task task : tasks) {
 					Button taskButton = createTaskButton(task);
-					tasksContainer.getChildren().add(taskButton);
+					tasksContaine.getChildren().add(taskButton);
 				}
 			} else {
 				showAlert("Tasks Information", "Tasks Information", "No tasks found in the data base.", Alert.AlertType.INFORMATION);
@@ -126,6 +129,9 @@ public class PrimaryController {
 		} else {
 			showAlert("Error", "Error", "Invalid event received.", Alert.AlertType.ERROR);
 		}
+		// Set the vertical spacing between buttons
+		tasksContaine.setSpacing(10); // Adjust the spacing as neede
+	showingVbox.setSpacing(10);
 	}
 	private void showAlert(String title, String header, String content, Alert.AlertType alertType) {
 		Alert alert = new Alert(alertType, content);
@@ -137,10 +143,15 @@ public class PrimaryController {
 
 	private Button createTaskButton(Task task) {
 		Button button = new Button(String.format("Task %d", task.getId()));
+		// Set the button to use its preferred width
+		button.setMaxWidth(Double.MAX_VALUE);
+		button.setPrefWidth(Control.USE_PREF_SIZE);
+		// Set the preferred height of the button
+		button.setPrefHeight(40); // Adjust the height as needed
 
 		/*we'll think as a group what information we'll show here, before displaying tasks*/
 
-//		button.setOnAction(event -> handleTaskButtonClick(task));
+		button.setOnAction(event -> handleTaskButtonClick(task));
 
 		return button;
 	}
@@ -151,26 +162,48 @@ public class PrimaryController {
 
 
 
-/*	private void handleTaskButtonClick(Task task){
+	private void handleTaskButtonClick(Task task
+	){
 		// Construct detailed task information
 
-		String taskDetails = String.format("Task ID: %d\nType: %s\nDeadline: %s\nStatus: %s",
-				task.getId(), task.getType_of_task(), task.getDeadline(), task.getStatus());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Define your desired date format
+		String formattedDeadline = task.getDeadline().format(formatter); // Format the deadline date
+
+		String taskDetails = String.format("Task ID: %d\n\nType: %s\n\nDeadline: %s\n\nStatus: %s",
+				task.getId(), task.getType_of_task(), formattedDeadline, task.getStatus());
 
 		// Update the TextArea with task details
 		DataFromServerTF.setText(taskDetails);
 		DataFromServerTF.setVisible(true);
-		Button button = new Button(String.format("Change Status"));
-		// add button of change status
+		// Enable text wrapping
+		DataFromServerTF.setWrapText(true);
+		// Set the font to the TextArea
+		DataFromServerTF.setFont(font);
+
+	Button button = new Button(String.format("Change Status"));
+
+
+		button.setPrefHeight(40); // Adjust the height as needed
+
+		// Apply CSS to change the text color of the button
+		button.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+		button.setFont(font);
+		// Remove the second element from showingVbox if it exists
+		if (showingVbox.getChildren().size() > 1) {
+			showingVbox.getChildren().remove(1);
+		}
+
+	    showingVbox.getChildren().add(button);
+		// Set the button to use its preferred width
+		button.setMaxWidth(Double.MAX_VALUE);
+		button.setPrefWidth(Control.USE_PREF_SIZE);
+		System.out.println("B call  to void changeRequest(Task task)");
+
+		//changeRequest(task);//add at 12:32*/
+		///add button of change status
 		button.setOnAction(event -> changeRequest(task));
-	}*/
+	}
 
-
-	/*@Subscribe
-	public void setSubmittersTF(UpdateMessageEvent event) {
-		submitterID1.setText(event.getMessage().getData().substring(0,9));
-		submitterID2.setText(event.getMessage().getData().substring(11,20));
-	}*/
 
 	@Subscribe
 	public void getStarterData(NewSubscriberEvent event) {
@@ -204,7 +237,12 @@ public class PrimaryController {
 	@FXML
 	void initialize() {
 		EventBus.getDefault().register(this);
-	//	MessageTF.clear();
+        try {
+            getClient().sendToServer("display tasks");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //	MessageTF.clear();
 	//	DataFromServerTF.clear();
 		msgId=0;
 	/*	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");

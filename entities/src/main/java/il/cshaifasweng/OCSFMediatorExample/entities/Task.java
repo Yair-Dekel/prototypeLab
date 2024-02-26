@@ -1,11 +1,12 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
 @Table(name="Tasks")
-public class Task {
+public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -36,7 +37,7 @@ public class Task {
         Type_of_task = type_of_task;
         Creation_time = LocalDateTime.now();
         this.Deadline=LocalDateTime.now();
-        Status = "waiting for approval";
+        Status = "A task waiting for a volunteer";
     }
 
     public Task()

@@ -3,7 +3,6 @@ il\cshaifasweng\OCSFMediatorExample\client\NewSubscriberEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\PrimaryController.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableSWRClient.class
 il\cshaifasweng\OCSFMediatorExample\client\NewDetailsEvent.class
-il\cshaifasweng\OCSFMediatorExample\client\UpdateMessageEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\SimpleClient.class
 il\cshaifasweng\OCSFMediatorExample\client\TasksMessageEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableClient.class

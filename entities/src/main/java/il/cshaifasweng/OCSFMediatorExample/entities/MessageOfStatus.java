@@ -1,7 +1,4 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
-
-import jdk.jfr.Registered;
-
 import java.io.Serializable;
 public class MessageOfStatus implements Serializable{
 
