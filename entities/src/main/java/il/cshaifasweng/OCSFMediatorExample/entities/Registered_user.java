@@ -32,7 +32,7 @@ public class Registered_user
 */
 /*    public Registered_user() {
         // Default constructor required by JPA
-    }*//*
+    }//
 
 
     // Constructor with parameters
@@ -74,7 +74,7 @@ public class Registered_user
 
     public void setTask_list(List<Task> task_list) {
         this.task_list = task_list;
-    }*//*
+    }//
 
 
     public String getSerialNumber() {
@@ -207,5 +207,3 @@ public class Registered_user implements Serializable { //extends User
         this.phone_number = phone_number;
     }
 }
-
-

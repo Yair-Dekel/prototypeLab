@@ -253,18 +253,9 @@ public class PrimaryController {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		//	MessageTF.clear();
-		//	DataFromServerTF.clear();
+
 		msgId=0;
-	/*	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-		Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-			LocalTime currentTime = LocalTime.now();
-			timeTF.setText(currentTime.format(dtf));
-		}),
-				new KeyFrame(Duration.seconds(1))
-		)*
-		clock.setCycleCount(Animation.INDEFINITE);
-		clock.play();*/
+
 		try {
 			Message message = new Message(msgId, "add client");
 			SimpleClient.getClient().sendToServer(message);

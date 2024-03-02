@@ -1,17 +1,17 @@
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\TasksMessageEvent.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\MainController.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\MessageEvent.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\Main.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\NewSubscriberEvent.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\AdaptableClient.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\NewDetailsEvent.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\registered_user_Controller.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\SimpleClient.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ErrorEvent.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableSWRClient.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\SimpleChatClient.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableClient.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\PrimaryController.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\show_new_task_Controller.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\AbstractClient.java
-C:\Users\shake\OneDrive\שולחן העבודה\study\שנה ד'\s.w engneering\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\SecondaryController.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ErrorEvent.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\SecondaryController.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\AdaptableClient.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\MessageEvent.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\SimpleChatClient.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\SimpleClient.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\NewDetailsEvent.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableSWRClient.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\Main.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\TasksMessageEvent.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\show_new_task_Controller.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\AbstractClient.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableClient.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\registered_user_Controller.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\NewSubscriberEvent.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\PrimaryController.java
+C:\Users\Yair\IdeaProjects\prototypeLab\client\src\main\java\il\cshaifasweng\OCSFMediatorExample\client\MainController.java

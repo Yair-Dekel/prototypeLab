@@ -36,11 +36,11 @@ public class SimpleChatClient extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    	EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
         appStage = stage;
-    	client = SimpleClient.getClient();
+        client = SimpleClient.getClient();
         client.openConnection();
-        scene = new Scene(loadFXML("All_tasks_fxml"), 600, 600);
+        scene = new Scene(loadFXML("main"), 600, 600);
         stage.setScene(scene);
         stage.show();
     }
@@ -65,11 +65,11 @@ public class SimpleChatClient extends Application {
 
 
     @Override
-	public void stop() throws Exception {
-		// TODO Auto-generated method stub
-    	EventBus.getDefault().unregister(this);
-		super.stop();
-	}
+    public void stop() throws Exception {
+        // TODO Auto-generated method stub
+        EventBus.getDefault().unregister(this);
+        super.stop();
+    }
 
 
     @Subscribe

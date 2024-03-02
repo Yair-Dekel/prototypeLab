@@ -1,6 +1,7 @@
 il\cshaifasweng\OCSFMediatorExample\server\ocsf\ConnectionToClient.class
 il\cshaifasweng\OCSFMediatorExample\server\ocsf\SubscribedClient.class
 il\cshaifasweng\OCSFMediatorExample\server\DataBaseCheck.class
+il\cshaifasweng\OCSFMediatorExample\server\DatabaseChecker.class
 il\cshaifasweng\OCSFMediatorExample\server\ocsf\ObservableOriginatorServer.class
 il\cshaifasweng\OCSFMediatorExample\server\ocsf\AbstractServer.class
 il\cshaifasweng\OCSFMediatorExample\server\ocsf\AbstractConnectionFactory.class
