@@ -18,6 +18,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.service.ServiceRegistry;
@@ -191,6 +192,8 @@ public class SimpleServer extends AbstractServer {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
 
 	/*public void sendToAllClients(Message message) {
 		try {
