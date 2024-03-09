@@ -40,7 +40,9 @@ public class SimpleChatClient extends Application {
         appStage = stage;
         client = SimpleClient.getClient();
         client.openConnection();
-        scene = new Scene(loadFXML("main"), 600, 600);
+        managerClient = ManagerClient.getManagerClient();
+        managerClient.openConnection();
+        scene = new Scene(loadFXML("manager"), 600, 600);
         stage.setScene(scene);
         stage.show();
     }

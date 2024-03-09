@@ -104,6 +104,12 @@ public class Task implements Serializable {
         Volunteer = volunteer;
     }
 
+    @Override
+    public String toString() {
+        // Example with more information:
+        return "Task ID: " + id + ", Type: " + Type_of_task + ", Status: " + Status;
+    }
+
 
 
 
