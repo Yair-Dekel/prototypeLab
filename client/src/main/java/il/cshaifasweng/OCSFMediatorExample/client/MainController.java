@@ -28,17 +28,6 @@ public class MainController {
 
     @FXML
     void switchToAllTask(ActionEvent event) throws IOException {
-   /*     Task T1=new Task("help");
-        Task T2=new Task("clean");*/
-//        Task T1=new Task();
-//        Task T2=new Task();
-
-//        List <Task> mylist = new ArrayList<>();
-//        mylist.add(T1);
-//        mylist.add(T2);
-//        DisplayTasksMassage dis= new DisplayTasksMassage(mylist);
-//
-//        TasksMessageEvent Event=new TasksMessageEvent(dis);
 
         Platform.runLater(() -> {
             try {

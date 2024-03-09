@@ -32,6 +32,16 @@ public class Task implements Serializable {
         Deadline = time;
         Status = "waiting for approval";
     }
+    public Task(Task task) {
+        this.Type_of_task = task.Type_of_task;
+        this.registered_user = task.registered_user;
+        this.id = task.id;
+        this.Creation_time = task.Creation_time;
+        this.Deadline = task.Deadline;
+        this.Status = task.Status;
+        this.Volunteer = task.Volunteer;
+    }
+
     public Task( String type_of_task)
     {
         Type_of_task = type_of_task;

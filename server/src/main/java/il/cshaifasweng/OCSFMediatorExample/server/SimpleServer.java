@@ -39,15 +39,14 @@ public class SimpleServer extends AbstractServer {
         return query.getResultList();
     }
 
-//    private static List<Task> getAllPatient() throws Exception {
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        System.out.println("List<Task> getAllPatient() throws Exception");
-//        CriteriaQuery<Task> query = builder.createQuery(Task.class);
-//        query.from(Task.class);
-//        List<Task> data = session.createQuery(query).getResultList();
-//        session.close();
-//        return data;
-//    }
+    public List<Task> getAllUnApprovedTasks(Session session) {
+        // Use HQL to retrieve all tasks
+        NativeQuery<Task> query = session.createNativeQuery("SELECT * FROM Tasks WHERE Status = :status", Task.class);
+        query.setParameter("status", "waiting for approval");
+        return query.getResultList();
+    }
+
+
     private static SessionFactory getSessionFactory() throws HibernateException
     {
         Configuration configuration = new Configuration();
@@ -84,38 +83,9 @@ public class SimpleServer extends AbstractServer {
         try {
             if (request.isBlank()) {
                System.out.println("heyyy");
-    /*            message.setMessage("Error! we got an empty message");
-                client.sendToClient(message);*/
+
            }
-                /*
 
-                int entityId = message1.getTask().getId();
-                Configuration configuration = new Configuration().configure();
-                try (SessionFactory sessionFactory = configuration.buildSessionFactory();
-                     Session session = sessionFactory.openSession()) {
-
-                    // Begin a transaction
-                    Transaction transaction = session.beginTransaction();
-
-                    // Load the entity from the database
-                    Task task = session.get(Task.class, entityId);
-
-                    // Check if the entity exists
-                    if (task != null) {
-                        // Modify the properties of the entity
-                        task.setStatus("not performed yet");
-
-                        // Save the changes by committing the transaction
-                        transaction.commit();
-
-                        MessageOfStatus message2 = new MessageOfStatus(task, "the change completed");
-                        // Echo back the received message to the client
-
-                        client.sendToClient(message2);
-                    } else {
-                        System.out.println("Entity not found with id: " + entityId);
-                    }
-                }*/
 
             else if (request.equals("change status")) {
                 System.out.println("in change status");
@@ -156,6 +126,82 @@ public class SimpleServer extends AbstractServer {
                 }
             }
 
+            else if (request.equals("accept")) {
+                System.out.println("in accept");
+                int id= myTask.getId();
+
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                session = sessionFactory.openSession();
+
+                Transaction tx2 = null;
+                try {
+                    tx2 = session.beginTransaction();
+
+                    // Perform operations with the second session
+                    System.out.println("in try accept");
+                    Task task = session.get(Task.class, id);
+
+                    // Check if the entity exists
+                    if (task != null) {
+                        // Modify the properties of the entity
+                        task.setStatus("waiting for volunteer");
+                        System.out.println("looking for volunteer");
+
+                        // Save the changes by committing the transaction
+                        tx2.commit();
+
+                        MessageOfStatus message2 = new MessageOfStatus(task, "task accepted");
+                        // Echo back the received message to the client
+                        client.sendToClient(message2);
+                        tx2.commit();
+                        System.out.println("send to manager client");
+                    }
+                } catch (RuntimeException e) {
+                    if (tx2 != null) tx2.rollback();
+                    throw e;
+                } finally {
+                    session.close(); // Close the second session
+                }
+            }
+
+            else if (request.startsWith("reject")) {
+                System.out.println("in reject");
+                int id= myTask.getId();
+
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                session = sessionFactory.openSession();
+
+                Transaction tx2 = null;
+                try {
+                    tx2 = session.beginTransaction();
+
+                    // Perform operations with the second session
+                    System.out.println("in try reject");
+                    Task task = session.get(Task.class, id);
+
+                    // Check if the entity exists
+                    if (task != null) {
+                        // Modify the properties of the entity
+                        task.setStatus(request);
+                        System.out.println("rejected");
+
+                        // Save the changes by committing the transaction
+                        tx2.commit();
+
+                        MessageOfStatus message2 = new MessageOfStatus(task, "task rejected");
+                        // Echo back the received message to the client
+                        client.sendToClient(message2);
+                        tx2.commit();
+                        System.out.println("send to manager client");
+                    }
+                } catch (RuntimeException e) {
+                    if (tx2 != null) tx2.rollback();
+                    throw e;
+                } finally {
+                    session.close(); // Close the second session
+                }
+            }
+
                 else if (request.equals("display tasks")) {
                 System.out.println("in desplayyyyyyyy");
 
@@ -177,7 +223,6 @@ public class SimpleServer extends AbstractServer {
                     DisplayTasksMassage dis=new DisplayTasksMassage(tasks);
                     System.out.println(dis.getTasks().get(0).getId());
                     client.sendToClient(dis);
-//                    SimpleClient.getClient().sen
                     tx2.commit();
                 } catch (RuntimeException e) {
                     if (tx2 != null) tx2.rollback();
@@ -186,7 +231,38 @@ public class SimpleServer extends AbstractServer {
                     session.close(); // Close the second session
                 }
 
-            } else {
+            }
+
+            else if (request.equals("list view")) {
+                System.out.println("in list view");
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                session = sessionFactory.openSession();
+
+                Transaction tx2 = null;
+                try {
+                    tx2 = session.beginTransaction();
+
+                    // Perform operations with the second session
+                    System.out.println("in desplayyyyyyyy");
+
+                    List<Task> tasks = getAllUnApprovedTasks(session);
+                    for (Task task : tasks) {
+                        System.out.println(task.getType_of_task());
+                    }
+                    DisplayTasksMassage dis=new DisplayTasksMassage(tasks);
+                    System.out.println(dis.getTasks().get(0).getId());
+                    client.sendToClient(dis);
+                    tx2.commit();
+                } catch (RuntimeException e) {
+                    if (tx2 != null) tx2.rollback();
+                    throw e;
+                } finally {
+                    session.close(); // Close the second session
+                }
+
+            }
+
+            else {
                 System.out.println("in else");
             }
         } catch (Exception e) {

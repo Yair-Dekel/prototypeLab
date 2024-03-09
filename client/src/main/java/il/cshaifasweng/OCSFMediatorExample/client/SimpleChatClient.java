@@ -32,6 +32,7 @@ public class SimpleChatClient extends Application {
     private static Scene scene;
     private static Stage appStage;
     private SimpleClient client;
+    private ManagerClient managerClient;
     private static FXMLLoader fxmlLoader;
 
     @Override
