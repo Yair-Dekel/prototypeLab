@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #c4bfa0;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.UserMainController">
+    <children>
+        <AnchorPane fx:id="btn1" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #c4bfa0;">
+            <children>
+                <Label fx:id="welcome_label" layoutX="-2.0" layoutY="6.0" prefHeight="64.0" prefWidth="600.0" style="-fx-background-color: #000000;" text="                      Welcome" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font size="38.0" />
+                    </font>
+                </Label>
+                <Label layoutX="204.0" layoutY="83.0" prefHeight="17.0" prefWidth="202.0">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <VBox layoutX="73.0" layoutY="83.0" prefHeight="389.0" prefWidth="441.0">
+                    <children>
+                        <AnchorPane fx:id="welcom_container" prefHeight="392.0" prefWidth="441.0">
+                            <children>
+                                <Button fx:id="add_new_task_btn" layoutX="100.0" layoutY="160.0" mnemonicParsing="false" onAction="#switchToNewTask" prefHeight="70.0" prefWidth="241.0" text="Add A New Task">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font></Button>
+                            </children>
+                        </AnchorPane>
+                    </children></VBox>
+            </children>
+        </AnchorPane>
+        <Button fx:id="Emergency_btn" mnemonicParsing="false" prefHeight="48.0" prefWidth="560.0" text="Emergency Button">
+            <font>
+                <Font name="System Bold" size="26.0" />
+            </font>
+            <VBox.margin>
+                <Insets left="20.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </Button>
+    </children>
+</VBox>

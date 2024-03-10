@@ -1,21 +1,20 @@
+/*
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.DisplayTasksMassage;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.MessageOfStatus;
-import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 
 import java.io.IOException;
-import java.util.List;
-import javafx.collections.ObservableList;
-
 
 public class SimpleClient extends AbstractClient {
 
 	private static SimpleClient client = null;
+
+
 
 	private SimpleClient(String host, int port) {
 		super(host, port);
@@ -24,7 +23,7 @@ public class SimpleClient extends AbstractClient {
 
 
 	@Override
-	protected void handleMessageFromServer(Object msg) throws IOException {
+	protected ManagerClient handleMessageFromServer(Object msg) throws IOException {
 		System.out.println("got into handleMessageFromServer ");
 
 //		Message message = (Message) msg;
@@ -39,11 +38,21 @@ public class SimpleClient extends AbstractClient {
 		else if (msg instanceof DisplayTasksMassage) {
 			DisplayTasksMassage dis = (DisplayTasksMassage) msg;
 			EventBus.getDefault().post(new TasksMessageEvent(dis));
-			System.out.println("recognized massage as a list of tasks");
+
+		} else if (msg instanceof Message) {
+			System.out.println("in client/handlefrom serverr /in message inst");
+			Message message=(Message)msg;
+			System.out.println(message.getMessage());
+			EventBus.getDefault().post(new NewVerifiedInformationEvent(message));
+		}
+		else if (msg instanceof Message) {
+			System.out.println("in client/handlefrom serverr /in message inst");
+			Message message=(Message)msg;
+			System.out.println(message.getMessage());
+			EventBus.getDefault().post(new NewVerifiedInformationEvent(message));
 		}
 
-
-
+		return null;
 	}
 
 	public static SimpleClient getClient() {
@@ -53,4 +62,4 @@ public class SimpleClient extends AbstractClient {
 		return client;
 	}
 
-}
+}*/

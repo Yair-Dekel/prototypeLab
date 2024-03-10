@@ -10,7 +10,9 @@ public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String Type_of_task;
+
+    private String moredetails;
+    private TaskType Type_of_task;
     private LocalDateTime Creation_time;
     @ManyToOne
     @JoinColumn(name = "registered_user_id", referencedColumnName = "id")
@@ -25,24 +27,22 @@ public class Task implements Serializable {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Constructor
 
-    public Task(String type_of_task, Registered_user user, LocalDateTime time) {
+    public Task(TaskType type_of_task, Registered_user user, LocalDateTime time, String details) {
+        moredetails = details;
         Type_of_task = type_of_task;
         Creation_time = LocalDateTime.now();
         this.registered_user = user;
         Deadline = time;
         Status = "waiting for approval";
     }
-    public Task(Task task) {
-        this.Type_of_task = task.Type_of_task;
-        this.registered_user = task.registered_user;
-        this.id = task.id;
-        this.Creation_time = task.Creation_time;
-        this.Deadline = task.Deadline;
-        this.Status = task.Status;
-        this.Volunteer = task.Volunteer;
+    public Task(TaskType type_of_task, Registered_user user, LocalDateTime time) {
+        Type_of_task = type_of_task;
+        Creation_time = LocalDateTime.now();
+        this.registered_user = user;
+        Deadline = time;
+        Status = "waiting for approval";
     }
-
-    public Task( String type_of_task)
+    public Task(TaskType type_of_task)
     {
         Type_of_task = type_of_task;
         Creation_time = LocalDateTime.now();
@@ -50,10 +50,14 @@ public class Task implements Serializable {
         Status = "A task waiting for a volunteer";
     }
 
-    public Task()
-    {
-       this.Type_of_task="help";
+    public Task() {
+
     }
+
+//    public Task()
+//    {
+//       this.Type_of_task="help";
+//    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Getters and setters
@@ -65,12 +69,17 @@ public class Task implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+    @Override
+    public String toString() {    //add from j&Y
+        // Example with more information:
+        return ("Task ID: " + id + ", Type: " + Type_of_task + ", Status: "+Status);
+}
 
-    public String getType_of_task() {
+    public TaskType getType_of_task() {
         return Type_of_task;
     }
 
-    public void setType_of_task(String type_of_task) {
+    public void setType_of_task(TaskType type_of_task) {
         Type_of_task = type_of_task;
     }
 
@@ -112,12 +121,6 @@ public class Task implements Serializable {
 
     public void setVolunteer(Registered_user volunteer) {
         Volunteer = volunteer;
-    }
-
-    @Override
-    public String toString() {
-        // Example with more information:
-        return "Task ID: " + id + ", Type: " + Type_of_task + ", Status: " + Status;
     }
 
 

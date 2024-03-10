@@ -62,7 +62,7 @@ public class registered_user_Controller {
             TF_deadline.clear();
         //    newTask=new Task(another_info.getText(),deadline);
             Message message = new Message(msgId++,clickedButton.getText());
-            SimpleClient.getClient().sendToServer(message);
+            UserClient.getClient().sendToServer(message);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -81,7 +81,7 @@ public class registered_user_Controller {
         try {
             Message message = new Message(msgId++, another_info.getText());
             //newTask=message.getTask();
-            SimpleClient.getClient().sendToServer(message);
+            UserClient.getClient().sendToServer(message);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

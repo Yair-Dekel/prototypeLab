@@ -3,21 +3,14 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 
 import java.io.IOException;
-import il.cshaifasweng.OCSFMediatorExample.entities.DisplayTasksMassage;
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.MessageOfStatus;
-import il.cshaifasweng.OCSFMediatorExample.entities.Task;
+
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import org.greenrobot.eventbus.EventBus;
-
-import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
-
-import java.io.IOException;
-import java.util.List;
-import javafx.collections.ObservableList;
 
 public class ManagerClient extends AbstractClient {
 
-    private static ManagerClient managerClient = null;
+    private static Registered_user managerClient;
+    private static ManagerClient Client = null;
 
 
     /**
@@ -30,6 +23,7 @@ public class ManagerClient extends AbstractClient {
         super(host, port);
     }
 
+
     @Override
     protected void handleMessageFromServer(Object msg) throws IOException {
 
@@ -37,8 +31,7 @@ public class ManagerClient extends AbstractClient {
             DisplayTasksMassage dis = (DisplayTasksMassage) msg;
             EventBus.getDefault().post(new TasksMessageEvent(dis));
             System.out.println("recognized massage as a list of tasks");
-        }
-        else if (msg instanceof MessageOfStatus) {
+        } else if (msg instanceof MessageOfStatus) {
             MessageOfStatus message1 = (MessageOfStatus) msg;
             if (message1.getChangeStatus().equals("task accepted")) {
                 EventBus.getDefault().post(new NewDetailsEvent(message1));
@@ -47,16 +40,16 @@ public class ManagerClient extends AbstractClient {
             }
         }
 
-
-
-
     }
 
     public static ManagerClient getManagerClient() {
-        if (managerClient == null) {
-            managerClient = new ManagerClient("localhost", 3000);
+        if (Client == null) {
+            Client = new ManagerClient("localhost", 3000);
         }
-        return managerClient;
+        return Client;
     }
 
+    public static void setManagerClient(Registered_user managerClient) {
+        ManagerClient.managerClient = managerClient;
+    }
 }

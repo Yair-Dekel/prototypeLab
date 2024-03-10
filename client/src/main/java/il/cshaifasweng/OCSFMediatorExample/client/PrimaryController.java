@@ -21,7 +21,7 @@ import javafx.util.Duration;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.getClient;
+import static il.cshaifasweng.OCSFMediatorExample.client.UserClient.getClient;
 
 public class PrimaryController {
 
@@ -61,7 +61,7 @@ public class PrimaryController {
 			System.out.println("enter to void changeRequest(Task task)");
 			try {
 				MessageOfStatus message = new MessageOfStatus(task, "change status");
-				SimpleClient.getClient().sendToServer(message);
+				UserClient.getClient().sendToServer(message);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -121,7 +121,7 @@ public class PrimaryController {
 	void displayTasks() {
 		try {
 			System.out.println("get into display controller1");
-			SimpleClient.getClient().sendToServer("display tasks");
+			UserClient.getClient().sendToServer("display tasks");
 			System.out.println("sended to server");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -220,7 +220,7 @@ public class PrimaryController {
 	public void getStarterData(NewSubscriberEvent event) {
 		try {
 			Message message = new Message(msgId, "send Submitters IDs");
-			SimpleClient.getClient().sendToServer(message);
+			UserClient.getClient().sendToServer(message);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -258,7 +258,7 @@ public class PrimaryController {
 
 		try {
 			Message message = new Message(msgId, "add client");
-			SimpleClient.getClient().sendToServer(message);
+			UserClient.getClient().sendToServer(message);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

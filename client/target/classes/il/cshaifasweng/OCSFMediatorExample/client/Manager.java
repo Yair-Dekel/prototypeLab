@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.getClient;
 
 
 
@@ -43,7 +42,10 @@ import javafx.util.Duration;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.getClient;
+import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getManagerClient;
+
+
+
 public class Manager  {
 
     @FXML
@@ -144,23 +146,23 @@ public class Manager  {
 
 
 
-        @FXML
+    @FXML
     void AcceptRequest(ActionEvent event) throws IOException {
         Task task = ListOfTasks.getSelectionModel().getSelectedItem();
-            if (task != null) {
-                MessageOfStatus message = new MessageOfStatus(task, "accept");
-                ManagerClient.getManagerClient().sendToServer(message);
-            }
-            else {
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.ERROR,
-                            String.format("you have not select a task."));
-                    alert.setTitle("ERROR");
-                    alert.setHeaderText("First select a task");
-                    alert.show();
+        if (task != null) {
+            MessageOfStatus message = new MessageOfStatus(task, "accept");
+            getManagerClient().sendToServer(message);
+        }
+        else {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        String.format("you have not select a task."));
+                alert.setTitle("ERROR");
+                alert.setHeaderText("First select a task");
+                alert.show();
 
-                });
-            }
+            });
+        }
     }
 
     @FXML
@@ -198,7 +200,7 @@ public class Manager  {
         if (!reason.equals("")) {
             MessageOfStatus message = new MessageOfStatus(task, "reject: "+reason);
 
-            ManagerClient.getManagerClient().sendToServer(message);
+            getManagerClient().sendToServer(message);
 
             Send.setVisible(false);
             Reason.setVisible(false);
@@ -285,9 +287,9 @@ public class Manager  {
                     // Create ListView to display tasks
                     ListOfTasks.setItems(observableTasks);
                 }
-                 else {
-                     showAlert("Requests Information", "Requests Information", "There is no requests.", Alert.AlertType.INFORMATION);
-                 }
+                else {
+                    showAlert("Requests Information", "Requests Information", "There is no requests.", Alert.AlertType.INFORMATION);
+                }
             }
             else {
                 showAlert("Error", "Error", "Invalid event received.", Alert.AlertType.ERROR);
@@ -297,8 +299,8 @@ public class Manager  {
 
             // Set stage title and scene, then show the stage
             //Manager.setTitle("Tasks Waiting for Approval");
-           // Manager.setScene(scene);
-          //  Manager.show();
+            // Manager.setScene(scene);
+            //  Manager.show();
         });
     }
 
@@ -313,7 +315,7 @@ public class Manager  {
     void initialize() {
         EventBus.getDefault().register(this);
         try {
-            getClient().sendToServer("list view");
+            getManagerClient().sendToServer("list view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -322,16 +324,10 @@ public class Manager  {
 
         try {
             Message message = new Message(msgId, "add client");
-            ManagerClient.getManagerClient().sendToServer(message);
+            getManagerClient().sendToServer(message);
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
         }
-
     }
-
-
-
-
 
 }

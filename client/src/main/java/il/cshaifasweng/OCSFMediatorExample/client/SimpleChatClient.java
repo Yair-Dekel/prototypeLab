@@ -31,19 +31,17 @@ public class SimpleChatClient extends Application {
 
     private static Scene scene;
     private static Stage appStage;
-    private SimpleClient client;
-    private ManagerClient managerClient;
+    private UserClient client;
+    private ManagerClient managerClient;///////////////////????????????????????????????????????????????????????????
     private static FXMLLoader fxmlLoader;
 
     @Override
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
         appStage = stage;
-        client = SimpleClient.getClient();
+        client = UserClient.getClient();
         client.openConnection();
-        managerClient = ManagerClient.getManagerClient();
-        managerClient.openConnection();
-        scene = new Scene(loadFXML("manager"), 600, 600);
+        scene = new Scene(loadFXML("log_in"), 600, 600);
         stage.setScene(scene);
         stage.show();
     }
