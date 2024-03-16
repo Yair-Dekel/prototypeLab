@@ -116,6 +116,9 @@ public class Registered_user implements Serializable { //extends User
 
     private String password;
 
+//    @OneToOne(mappedBy = "registered_user")
+//    private Emergency_call emergency_call;
+
     //    @OneToMany(mappedBy = "user")
 //    private List <Task> volunteered;
     boolean permission; //1 for manager
@@ -124,6 +127,8 @@ public class Registered_user implements Serializable { //extends User
     private String phone_number;
     private String community;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     // Default constructor for JPA
     public Registered_user() {
@@ -207,4 +212,6 @@ public class Registered_user implements Serializable { //extends User
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
 }
+
+
 }

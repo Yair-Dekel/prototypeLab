@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.client.UserClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
@@ -50,6 +51,7 @@ public class SimpleServer extends AbstractServer {
         // Add ALL of your entities here. You can also try adding a whole package.
         configuration.addAnnotatedClass(Registered_user.class);
         configuration.addAnnotatedClass(Task.class);
+        configuration.addAnnotatedClass(Emergency_call.class);
 
 
         ServiceRegistry serviceRegistry = new
@@ -180,7 +182,7 @@ public class SimpleServer extends AbstractServer {
             request = ((MessageOfStatus) msg).getChangeStatus();
             myTask = ((MessageOfStatus) msg).getTask();
 
-        } else if (msg instanceof NewTaskMessage) {
+        } else if (msg instanceof NewTaskMessage) {                                        /////aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             System.out.println("msg recognized instanceof NewTaskMessage");
             NewTaskMessage ntm = (NewTaskMessage) msg;
             try {
@@ -208,6 +210,40 @@ public class SimpleServer extends AbstractServer {
                 throw new RuntimeException(e);
             }
 
+        }
+
+        //-----------------------------------------------------------------------------------------------------
+        else if (msg instanceof  NewEmergencyCall) {
+            NewEmergencyCall ntm= (NewEmergencyCall) msg;
+        System.out.println("we are in emergency call section brooooooo");
+            System.out.println(ntm.getGiven_name());
+            System.out.println(ntm.getPhone_number());
+
+
+            try {
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                session = sessionFactory.openSession();
+                session.beginTransaction();
+                LocalDateTime now = LocalDateTime.now();
+               Emergency_call temp=new Emergency_call(ntm.getGiven_name(), ntm.getPhone_number(), ntm.getOpenby1());
+                session.save(temp);
+                session.getTransaction().commit();
+                System.out.println("successsssssdddddddddddddddddddddddddddddddddddddddddd");
+            } catch (Exception exception) {
+                if (session != null) {
+                    session.getTransaction().rollback();
+                }
+                System.err.println("An error occured, changes have been rolled back. malekkkkkkkk");
+                exception.printStackTrace();
+
+            } finally {
+                session.close();
+            }
+
+
+
+
+            //----------------------------------------------------------------------------------------------
         } else if (msg instanceof Message) {
             System.out.println("in sever /Confirm information ");
 
