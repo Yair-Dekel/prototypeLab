@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Emergency_call;
 import il.cshaifasweng.OCSFMediatorExample.entities.NewEmergencyCall;
+import il.cshaifasweng.OCSFMediatorExample.entities.NewTaskMessage;
 import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -60,7 +62,6 @@ public class EmergencyController {
     }
 
 
-
     @FXML
     private void initialize() throws IOException {
 
@@ -71,7 +72,7 @@ public class EmergencyController {
             Registered_user user = ManagerClient.getManagerClient();
             info_label.setText("Your firstName : " + user.getGivenName() + "\nyour lastName : " + user.getFamilyName()
                     + "\nYour phoneNumber to contact : " + user.getPhone_number() + "\nYour Community : " + user.getCommunity());
-            ManagerClient.getClient().sendToServer(new NewEmergencyCall(user.getGivenName(),user.getPhone_number(),ManagerClient.getManagerClient()));
+            UserClient.getClient().sendToServer(new NewEmergencyCall(user.getGivenName(),user.getPhone_number(),UserClient.getLoggedInUser()));
         } else {
             Registered_user user = UserClient.getLoggedInUser();
             info_label.setText("Your firstName : " + user.getGivenName() + "\nyour lastName : " + user.getFamilyName()
@@ -81,6 +82,4 @@ public class EmergencyController {
         }
 
     }
-
-
 }
