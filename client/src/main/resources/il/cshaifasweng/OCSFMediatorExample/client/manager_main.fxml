@@ -10,6 +10,11 @@
 
 <AnchorPane onMouseClicked="#ShowList" prefHeight="569.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Manager">
     <children>
+      <AnchorPane fx:id="Bar_for_view" layoutX="3.0" layoutY="88.0" prefHeight="415.0" prefWidth="258.0">
+         <children>
+              <ListView fx:id="ListOfTasks" layoutX="8.0" layoutY="45.0" onMouseClicked="#ShowList" prefHeight="356.0" prefWidth="229.0" />
+         </children>
+      </AnchorPane>
         <Label alignment="TOP_CENTER" layoutX="16.0" layoutY="25.0" prefHeight="44.0" prefWidth="649.0" text="Welcome To Atis" textFill="#a3272f">
             <font>
                 <Font name="Calibri Light" size="36.0" />
@@ -19,24 +24,24 @@
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <ListView fx:id="ListOfTasks" layoutX="11.0" layoutY="135.0" onMouseClicked="#ShowList" prefHeight="356.0" prefWidth="229.0" />
-        <Button fx:id="EmergencyCalls" layoutX="557.0" layoutY="87.0" mnemonicParsing="false" onAction="#ShowEmergency" prefHeight="30.0" prefWidth="117.0" text="Emergency calls" textFill="#21b94c" />
-        <Button fx:id="Tasks" layoutX="419.0" layoutY="85.0" mnemonicParsing="false" onAction="#ShowTasks" prefHeight="30.0" prefWidth="111.0" text="Tasks" textFill="#17ae4c" />
-        <Button fx:id="Members" layoutX="281.0" layoutY="84.0" mnemonicParsing="false" onAction="#ShowMembers" prefHeight="30.0" prefWidth="111.0" text="Members" textFill="#20a41e" />
-        <Label layoutX="19.0" layoutY="101.0" prefHeight="22.0" prefWidth="250.0" text="Wait for your approval:" textFill="#25a84c">
+        <Button fx:id="EmergencyCalls" layoutX="557.0" layoutY="104.0" mnemonicParsing="false" onAction="#ShowEmergency" prefHeight="30.0" prefWidth="117.0" text="Emergency calls" textFill="#21b94c" />
+        <Button fx:id="Tasks" layoutX="419.0" layoutY="102.0" mnemonicParsing="false" onAction="#ShowTasks" prefHeight="30.0" prefWidth="111.0" text="Tasks" textFill="#17ae4c" />
+        <Button fx:id="Members" layoutX="281.0" layoutY="101.0" mnemonicParsing="false" onAction="#ShowMembers" prefHeight="30.0" prefWidth="111.0" text="Members" textFill="#20a41e" />
+        <Label layoutX="19.0" layoutY="101.0" prefHeight="25.0" prefWidth="222.0" text="Wait for your approval:" textFill="#25a84c">
             <font>
                 <Font name="Kristen ITC" size="16.0" />
             </font>
         </Label>
-        <Button fx:id="Accept" layoutX="510.0" layoutY="360.0" mnemonicParsing="false" onAction="#AcceptRequest" prefHeight="25.0" prefWidth="99.0" text="Accept" textFill="#23b540" />
-        <Button fx:id="Reject" layoutX="341.0" layoutY="361.0" mnemonicParsing="false" onAction="#RejectRequest" prefHeight="25.0" prefWidth="99.0" text="Reject" textFill="#14a823" />
-        <TextField fx:id="Reason" layoutX="436.0" layoutY="403.0" prefHeight="63.0" prefWidth="189.0" visible="false" />
-        <Label fx:id="WriteReason" layoutX="306.0" layoutY="403.0" prefHeight="23.0" prefWidth="129.0" text="Write the reason:" textFill="#19904b" visible="false">
+        <Button fx:id="Accept" layoutX="510.0" layoutY="377.0" mnemonicParsing="false" onAction="#AcceptRequest" prefHeight="25.0" prefWidth="99.0" text="Accept" textFill="#23b540" />
+        <Button fx:id="Reject" layoutX="341.0" layoutY="378.0" mnemonicParsing="false" onAction="#RejectRequest" prefHeight="25.0" prefWidth="99.0" text="Reject" textFill="#14a823" />
+        <TextField fx:id="Reason" layoutX="436.0" layoutY="445.0" prefHeight="63.0" prefWidth="189.0" visible="false" />
+        <Label fx:id="WriteReason" layoutX="306.0" layoutY="445.0" prefHeight="23.0" prefWidth="129.0" text="Write the reason:" textFill="#19904b" visible="false">
             <font>
                 <Font name="Kristen ITC" size="14.0" />
             </font>
         </Label>
         <Button fx:id="Send" layoutX="583.0" layoutY="479.0" mnemonicParsing="false" onAction="#SendReason" text="Send" textFill="#11ba3e" visible="false" />
-        <TextArea fx:id="Request" layoutX="280.0" layoutY="143.0" prefHeight="200.0" prefWidth="389.0" />
+        <TextArea fx:id="Request" layoutX="280.0" layoutY="160.0" prefHeight="200.0" prefWidth="389.0" />
+      <Button fx:id="refresh_btn" layoutX="616.0" layoutY="28.0" mnemonicParsing="false" onAction="#refresh" prefHeight="54.0" prefWidth="53.0" text="refrsh" />
     </children>
 </AnchorPane>

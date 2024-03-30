@@ -160,5 +160,9 @@ private void showAlert(String title, String content) {
     void initialize() {
         EventBus.getDefault().register(this);
         msgId = 0;
+        // Set initial focus to the Username_TF TextField
+        Username_TF.requestFocus();
     }
+
+
 }

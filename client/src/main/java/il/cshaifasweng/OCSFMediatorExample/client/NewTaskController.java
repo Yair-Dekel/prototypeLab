@@ -63,6 +63,7 @@ public class NewTaskController {
                                 + "\n\n\nPlease note: The task will be published after the approval of the manager"
                                 + "\n\nThe system uploads your task...");
                 UserClient.getClient().sendToServer(new NewTaskMessage(deadline, details, selectedTaskType, UserClient.getLoggedInUser())); //here i want to get to the relevant client - it can be more than one- so we need to change getclient method.
+
             }
         }
     }

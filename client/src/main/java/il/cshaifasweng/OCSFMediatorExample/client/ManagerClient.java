@@ -31,6 +31,9 @@ public class ManagerClient extends AbstractClient {
             DisplayTasksMassage dis = (DisplayTasksMassage) msg;
             EventBus.getDefault().post(new TasksMessageEvent(dis));
             System.out.println("recognized massage as a list of tasks");
+        } else if (msg instanceof DisplayCalls) {
+            EventBus.getDefault().post(new Emergency_Call_Event((DisplayCalls) msg));
+
         } else if (msg instanceof MessageOfStatus) {
             MessageOfStatus message1 = (MessageOfStatus) msg;
             if (message1.getChangeStatus().equals("task accepted")) {

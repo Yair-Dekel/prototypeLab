@@ -25,10 +25,15 @@
                     <children>
                         <AnchorPane fx:id="welcom_container" prefHeight="392.0" prefWidth="441.0">
                             <children>
-                                <Button fx:id="add_new_task_btn" layoutX="100.0" layoutY="160.0" mnemonicParsing="false" onAction="#switchToNewTask" prefHeight="70.0" prefWidth="241.0" text="Add A New Task">
+                                <Button fx:id="add_new_task_btn" layoutX="100.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToNewTask" prefHeight="70.0" prefWidth="241.0" text="Add A New Task">
                                     <font>
                                         <Font size="18.0" />
                                     </font></Button>
+                        <Button fx:id="see_all_task_btn" layoutX="100.0" layoutY="230.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="241.0" text="See All Tasks">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
                             </children>
                         </AnchorPane>
                     </children></VBox>

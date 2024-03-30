@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getClient;
+
 public class UserClient extends AbstractClient {
 
     /*just for the running check*/
@@ -42,12 +44,13 @@ public class UserClient extends AbstractClient {
     @Override
     protected void handleMessageFromServer(Object msg) throws IOException {
         System.out.println("got into handleMessageFromServer ");
-        if (msg instanceof NewTaskMessage) {
+        if (msg instanceof NewTaskMessage) {      //new task info
             NewTaskMessage ntm = (NewTaskMessage) msg;
             EventBus.getDefault().post(new NewTaskEvent(ntm));
 
+
         }
-        else if (msg instanceof Message) {
+        else if (msg instanceof Message) {      ///of login
             System.out.println("in client/handlefrom serverr /in message inst");
             Message message=(Message)msg;
             System.out.println(message.getMessage());
