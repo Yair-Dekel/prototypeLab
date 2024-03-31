@@ -224,6 +224,16 @@ public class Manager  {
     @FXML
     void ShowEmergency(ActionEvent event) {
 
+        System.out.println("in ShowList_Emergency_call");
+        Platform.runLater(() -> {
+            try {
+                setRoot("show_emergencyCall");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+ });
+
+
     }
 
     @FXML
@@ -335,5 +345,7 @@ public class Manager  {
             // TODO Auto-generated catch block
         }
     }
+
+
 
 }
