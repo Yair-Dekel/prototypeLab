@@ -1,5 +1,6 @@
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\AbstractClient.class
 il\cshaifasweng\OCSFMediatorExample\client\TasksMessageEvent.class
+il\cshaifasweng\OCSFMediatorExample\client\VolunteeringPage.class
 il\cshaifasweng\OCSFMediatorExample\client\Main.class
 il\cshaifasweng\OCSFMediatorExample\client\ManagerClient.class
 il\cshaifasweng\OCSFMediatorExample\client\registered_user_Controller.class
@@ -8,7 +9,9 @@ il\cshaifasweng\OCSFMediatorExample\client\NewSubscriberEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\UserMainController.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableClient.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\AdaptableClient.class
+il\cshaifasweng\OCSFMediatorExample\client\PersonVolunteering.class
 il\cshaifasweng\OCSFMediatorExample\client\UserClient.class
+il\cshaifasweng\OCSFMediatorExample\client\VolunteeringEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\show_new_task_Controller.class
 il\cshaifasweng\OCSFMediatorExample\client\PrimaryController.class
 il\cshaifasweng\OCSFMediatorExample\client\TaskRejectEvent.class

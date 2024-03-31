@@ -2,13 +2,18 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.DisplayTasksMassage;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
 import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -48,6 +53,13 @@ public class MainController {
     @FXML
     private Button Emergency_btn;
 
+    private static Scene scene;
+    private static Stage appStage;
+
+
+    public void setAppStage(Stage appStage) {
+        this.appStage = appStage;
+    }
 
 
 private void showAlert(String title, String content) {
@@ -71,12 +83,13 @@ private void showAlert(String title, String content) {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    String saveUserName;
 
     @FXML
     void LogIN_check_info(ActionEvent event) throws IOException {
         String password = password_TF.getText();
         String username = Username_TF.getText();
+        saveUserName=username;
         System.out.println(password + "   " + username);
         password_TF.clear();
         Username_TF.clear();
@@ -141,8 +154,61 @@ private void showAlert(String title, String content) {
         });
     }
 
+
+/*
+    void switchToMainOfManager() {
+        //Registered_user loggedInUser = UserClient.getLoggedInUser();
+        System.out.println(saveUserName+"999999999999999999999999999999999999999999999");
+
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("manager_main.fxml"));
+                Parent root = loader.load();
+                Manager managerMainController = loader.getController();
+                managerMainController.initialize(saveUserName); // Pass the manager user object to initialize method
+                scene = new Scene(root);
+                appStage.setScene(scene);
+                appStage.show();
+                //Scene scene = new Scene(root);
+                //Stage stage = (Stage) (btn1.getScene().getWindow());
+                //Stage primaryStage;
+              //  primaryStage.setScene(scene);
+               // primaryStage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+*/
+//private Stage appStage; // Declare the Stage instance
+
+    // Method to set the appStage
+
+
+    // Method to switch to the main manager screen
+    public void switchToMainOfManager() {
+        System.out.println(saveUserName + "999999999999999999999999999999999999999999999");
+
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("manager_main.fxml"));
+                Parent root = loader.load();
+                Manager managerController = loader.getController();
+                managerController.initialize(saveUserName); // Pass the username to initialize method
+
+                // Show the scene
+                Scene scene = new Scene(root);
+                appStage.setScene(scene);
+                appStage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+/*
     void switchToMainOfManager()
     {
+        Registered_user loggedInUser = UserClient.getLoggedInUser();
         System.out.println("switchToMainOfManager in manager");
 
         Platform.runLater(() -> {
@@ -152,7 +218,11 @@ private void showAlert(String title, String content) {
                 throw new RuntimeException(e);
             }
         });
-    }
+    }*/
+
+
+
+
 
 
 

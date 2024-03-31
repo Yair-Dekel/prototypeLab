@@ -159,12 +159,82 @@ public class SimpleServer extends AbstractServer {
 
 */
 
+    private String getHeadOfCommunity(Session session, String username) {
+        System.out.println("in headofcommunity77777777777777777777777777");
+        Query<Registered_user> query = session.createQuery(
+                "FROM Registered_user WHERE username = :username", Registered_user.class);
+        query.setParameter("username", username);
+        Registered_user user = query.uniqueResult();
+        if (user != null) {
+            System.out.println(user.getHeadOfCommunity()+"6666666666666666666666666666666");
+            return user.getHeadOfCommunity();
+        } else {
+            throw new IllegalArgumentException("User not found: " + username);
+        }
+    }
 
-    public List<Task> getAllUnApprovedTasks(Session session) {
-        // Use HQL to retrieve all tasks
-        NativeQuery<Task> query = session.createNativeQuery("SELECT * FROM Tasks WHERE Status = :status", Task.class);
+
+    public List<Task> getAllUnApprovedTasks(Session session, String username) {
+        // Find the head of the community associated with the provided username
+        String headOfCommunity = getHeadOfCommunity(session, username);
+
+        // Use HQL to retrieve tasks meeting the specified conditions
+        Query<Task> query = session.createQuery(
+                "SELECT t FROM Task t JOIN t.registered_user ru " +
+                        "WHERE ru.username != :username AND ru.community = :community " +
+                        "AND t.Status = :status", Task.class);
+        query.setParameter("username", username);
+        query.setParameter("community", headOfCommunity);
         query.setParameter("status", "waiting for approval");
-        return query.getResultList();
+
+        try {
+            return query.getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        }
+    }
+
+
+
+    public List<Task> getAllWaitingTasks(Session session,String username) {
+        // Use HQL to retrieve all tasks
+        System.out.println(" entered the waiting task");
+        String Community = getCommunity(session, username);
+
+        // Use HQL to retrieve tasks meeting the specified conditions
+        Query<Task> query = session.createQuery(
+                "SELECT t FROM Task t JOIN t.registered_user ru " +
+                        "WHERE ru.username != :username AND ru.community = :community " +
+                        "AND t.Status = :status", Task.class);
+        query.setParameter("username", username);
+        query.setParameter("community", Community);
+        query.setParameter("status", "waiting for volunteer");
+
+        try {
+            return query.getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        }
+
+
+    }
+
+    private String getCommunity(Session session, String username) {
+        System.out.println("in community-----------------------------------------------");
+        Query<Registered_user> query = session.createQuery(
+                "FROM Registered_user WHERE username = :username", Registered_user.class);
+        query.setParameter("username", username);
+        System.out.println("im back hhhhhhhhhhhhhhhhhhh");
+        Registered_user user = query.uniqueResult();
+        System.out.println(user.getCommunity());
+        if (user != null) {
+            System.out.println(user.getCommunity()+"99999999999999999999999999999999999");
+            return user.getCommunity();
+        } else {
+            throw new IllegalArgumentException("User not found: " + username);
+        }
     }
 
 
@@ -208,7 +278,7 @@ public class SimpleServer extends AbstractServer {
                 throw new RuntimeException(e);
             }
 
-        } else if (msg instanceof Message) {
+        } /*else if (msg instanceof Message) {
             System.out.println("in sever /Confirm information ");
 
 
@@ -255,7 +325,132 @@ public class SimpleServer extends AbstractServer {
                 throw new RuntimeException(e);
             }
             //////////////brak
+        }*/
+        else if (msg instanceof Message) {
+            if (((Message) msg).getMessage().equals("Confirm information")) {
+                System.out.println("In server / Confirm information");
+
+                String username = ((Message) msg).getUserName();
+                String password = ((Message) msg).getPassword();
+                System.out.println(username + "    " + password);
+
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                Session session = null; // Declare session variable
+                Transaction tx = null;
+
+                try {
+                    session = sessionFactory.openSession();
+                    tx = session.beginTransaction();
+
+                    System.out.println("Confirm");
+                    List<Registered_user> users = session.createQuery("FROM Registered_user", Registered_user.class).getResultList();
+
+                    Message message = null;
+                    for (Registered_user user : users) {
+                        if (user.getUsername().equals(username)) {
+                            if (user.getPassword().equals(password)) {
+                                message = new Message("correct");
+                                message.setUser(user);
+                                System.out.println("Correct credentials");
+                            } else {
+                                message = new Message("wrongPassword");
+                                System.out.println("Incorrect password");
+                            }
+                            break; // Exit loop once user is found
+                        }
+                    }
+                    if (message == null) {
+                        message = new Message("userNotExist");
+                        System.out.println("User does not exist");
+                    }
+                    client.sendToClient(message);
+                    tx.commit();
+                } catch (IOException e) {
+                    // Handle IO exception
+                    throw new RuntimeException("Error sending message to client", e);
+                } catch (HibernateException e) {
+                    // Handle Hibernate exception
+                    if (tx != null) tx.rollback();
+                    throw new RuntimeException("Error accessing database", e);
+                } finally {
+                    if (session != null) {
+                        session.close(); // Close session in finally block
+                    }
+                }
+            }else if(((Message) msg).getMessage().equals("list view")) {
+                System.out.println("in list view");
+                String username1 = ((Message) msg).getUserName();
+                System.out.println(username1);
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                session = sessionFactory.openSession();
+
+                Transaction tx2 = null;
+                try {
+                    tx2 = session.beginTransaction();
+
+                    // Perform operations with the second session
+
+
+                    List<Task> tasks = getAllUnApprovedTasks(session,username1);
+                    System.out.println("in list view back from function");
+                    if (tasks.isEmpty()) {
+                        System.out.println("nothinggggggggggggggggggggggggggg");
+                    }
+                    DisplayTasksMassage dis = new DisplayTasksMassage(tasks);
+                    System.out.println(dis.getTasks().get(0).getId());
+                    client.sendToClient(dis);
+                    tx2.commit();
+                } catch (RuntimeException e) {
+                    if (tx2 != null) tx2.rollback();
+                    throw e;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    session.close(); // Close the second session
+                }
+            }
+            else if(((Message) msg).getMessage().equals("list view for volunteering")) {
+                System.out.println("in list view volunteer!!");
+                String username2 = ((Message) msg).getUserName();
+                System.out.println(username2);
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                System.out.println("im hereeeeeee");
+                session = sessionFactory.openSession();
+
+                Transaction tx2 = null;
+                try {
+                    tx2 = session.beginTransaction();
+
+                    // Perform operations with the second session
+                    System.out.println("in desplayyyyyyyy volunteer");
+
+                    List<Task> tasks = getAllWaitingTasks(session, username2);
+
+                    if(tasks.isEmpty())
+                    {
+                        System.out.println("empty!!!!!!!");
+                    }
+                    else {
+                        for (Task task : tasks) {
+                            System.out.println("1" + task.getType_of_task());
+                        }
+                    }
+                    DisplayTasksMassage dis = new DisplayTasksMassage(tasks);
+                    client.sendToClient(dis);
+                    tx2.commit();
+                } catch (RuntimeException e) {
+                    if (tx2 != null) tx2.rollback();
+                    throw e;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    session.close(); // Close the second session
+                }
+
+
+            }
         }
+
 
 
         try {
@@ -371,7 +566,44 @@ public class SimpleServer extends AbstractServer {
                 } finally {
                     session.close(); // Close the second session
                 }
-            } else if (request.equals("display tasks")) {
+            } else if (request.equals("volunteering")) {
+                System.out.println("in volunteering =================");
+                int id = myTask.getId();
+
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                session = sessionFactory.openSession();
+
+                Transaction tx2 = null;
+                try {
+                    tx2 = session.beginTransaction();
+
+                    // Perform operations with the second session
+                    System.out.println("in try volunteering");
+                    Task task = session.get(Task.class, id);
+
+                    // Check if the entity exists
+                    if (task != null) {
+                        // Modify the properties of the entity
+                        task.setStatus("in process");
+                        System.out.println("someone has volunteer");
+
+                        // Save the changes by committing the transaction
+                        tx2.commit();
+
+                        MessageOfStatus message2 = new MessageOfStatus(task, "Thanks for volunteering");
+                        // Echo back the received message to the client
+                        client.sendToClient(message2);
+                        tx2.commit();
+                        System.out.println("send to manager client");
+                    }
+                } catch (RuntimeException e) {
+                    if (tx2 != null) tx2.rollback();
+                    throw e;
+                } finally {
+                    session.close(); // Close the second session
+                }
+            }
+            else if (request.equals("display tasks")) {
                 System.out.println("in desplayyyyyyyy");
 
 
@@ -400,9 +632,11 @@ public class SimpleServer extends AbstractServer {
                     session.close(); // Close the second session
                 }
 
-            } else if (request.equals("list view")) {
-                System.out.println("in list view");
+            } /*
+            else if (request.equals("list view for volunteering")) {
+                System.out.println("in list view volunteer!!");
                 SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                System.out.println("im hereeeeeee");
                 session = sessionFactory.openSession();
 
                 Transaction tx2 = null;
@@ -410,11 +644,16 @@ public class SimpleServer extends AbstractServer {
                     tx2 = session.beginTransaction();
 
                     // Perform operations with the second session
-                    System.out.println("in desplayyyyyyyy");
+                    System.out.println("in desplayyyyyyyy volunteer");
 
-                    List<Task> tasks = getAllUnApprovedTasks(session);
+                    List<Task> tasks = getAllWaitingTasks(session);
+
+                    if(tasks.isEmpty())
+                    {
+                        System.out.println("empty!!!!!!!");
+                    }
                     for (Task task : tasks) {
-                        System.out.println(task.getType_of_task());
+                        System.out.println("1"+task.getType_of_task());
                     }
                     DisplayTasksMassage dis = new DisplayTasksMassage(tasks);
                     System.out.println(dis.getTasks().get(0).getId());
@@ -427,7 +666,7 @@ public class SimpleServer extends AbstractServer {
                     session.close(); // Close the second session
                 }
 
-            }
+            }*/
 
         } catch (HibernateException e) {
             throw new RuntimeException(e);

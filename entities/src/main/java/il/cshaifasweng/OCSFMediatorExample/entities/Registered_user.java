@@ -100,7 +100,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class Registered_user implements Serializable { //extends User
 
     @Id
@@ -119,12 +119,14 @@ public class Registered_user implements Serializable { //extends User
     //    @OneToMany(mappedBy = "user")
 //    private List <Task> volunteered;
     boolean permission; //1 for manager
-    //private String SerialNumber;
+    //private String SerialN
+    //
+    // umber;
     @Column(name = "phone_number")
     private String phone_number;
     private String community;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    private String headOfCommunity;
     // Default constructor for JPA
     public Registered_user() {
         // Default constructor required by JPA
@@ -140,6 +142,20 @@ public class Registered_user implements Serializable { //extends User
         this.permission = permission;
         this.phone_number = phoneNumber;
         this.community = community;
+        this.headOfCommunity=null;
+
+    }
+
+    public Registered_user(String givenName, String familyName, String username, String password,
+                           boolean permission, String phoneNumber, String community,String headOfCommunity) {
+        this.givenName = givenName;
+        this.familyName = familyName;
+        this.username = username;
+        this.password = password;
+        this.permission = permission;
+        this.phone_number = phoneNumber;
+        this.community = community;
+        this.headOfCommunity=headOfCommunity;
 
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -207,4 +223,12 @@ public class Registered_user implements Serializable { //extends User
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
 }
+
+    public void setHeadOfCommunity(String headOfCommunity) {
+        this.headOfCommunity = headOfCommunity;
+    }
+
+    public String getHeadOfCommunity() {
+        return headOfCommunity;
+    }
 }

@@ -1,4 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
 import javafx.scene.input.MouseEvent;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
@@ -47,7 +48,7 @@ import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getManage
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 
 
-public class Manager  {
+public class Manager {
 
     @FXML
     private Button Accept;
@@ -119,7 +120,6 @@ public class Manager  {
     }
 
 
-
     @Subscribe
     public void taskRejected(TaskRejectEvent event) {
 
@@ -146,15 +146,13 @@ public class Manager  {
     }
 
 
-
     @FXML
     void AcceptRequest(ActionEvent event) throws IOException {
         Task task = ListOfTasks.getSelectionModel().getSelectedItem();
         if (task != null) {
             MessageOfStatus message = new MessageOfStatus(task, "accept");
             getClient().sendToServer(message);
-        }
-        else {
+        } else {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR,
                         String.format("you have not select a task."));
@@ -178,8 +176,7 @@ public class Manager  {
             Send.setVisible(true);
             Reason.setVisible(true);
             WriteReason.setVisible(true);
-        }
-        else{
+        } else {
 
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR,
@@ -199,16 +196,14 @@ public class Manager  {
         String reason = Reason.getText();
 
         if (!reason.equals("")) {
-            MessageOfStatus message = new MessageOfStatus(task, "reject: "+reason);
+            MessageOfStatus message = new MessageOfStatus(task, "reject: " + reason);
 
             getClient().sendToServer(message);
 
             Send.setVisible(false);
             Reason.setVisible(false);
             WriteReason.setVisible(false);
-        }
-        else
-        {
+        } else {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR,
                         String.format("you have to write a reason."));
@@ -272,7 +267,6 @@ public class Manager  {
     }
 
 
-
     //ObservableList<Task> observableTasks = FXCollections.observableArrayList();
     @Subscribe
     public void ShowListView(TasksMessageEvent event) {////////////////////////////////////////////////////////
@@ -287,12 +281,10 @@ public class Manager  {
 
                     // Create ListView to display tasks
                     ListOfTasks.setItems(observableTasks);
-                }
-                else {
+                } else {
                     showAlert("Requests Information", "Requests Information", "There is no requests.", Alert.AlertType.INFORMATION);
                 }
-            }
-            else {
+            } else {
                 showAlert("Error", "Error", "Invalid event received.", Alert.AlertType.ERROR);
             }
 
@@ -317,23 +309,40 @@ public class Manager  {
         });
     }
 
+
     @FXML
-    void initialize() {
+    void initialize(String username) {
+        //Registered_user user = UserClient.getLoggedInUser();
+        System.out.println(username+"???????????????????????????????????/");
+
         EventBus.getDefault().register(this);
+
+        // Initialize ManagerClient instance
+
+        ManagerClient managerClient = ManagerClient.getClient();
         try {
-            getClient().sendToServer("list view");
+            // Open connection to the server
+            managerClient.openConnection();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            // Handle connection error
+            System.err.println("Error: Unable to connect to the server");
+            e.printStackTrace();
+            return; // Stop initialization if connection fails
         }
 
-        msgId=0;
-
+        // Send message to the server to retrieve task list or perform other initializations
         try {
-            Message message = new Message(msgId, "add client");
-            getClient().sendToServer(message);
+           // System.out.println(managerClient.getGivenName() + " " + managerClient.getFamilyName()); // Print user details for debugging
+            Message message2 = new Message("list view",username);
+
+            managerClient.sendToServer(message2);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            // Handle send error
+            System.err.println("Error: Unable to send message to the server");
+            e.printStackTrace();
+            // Optionally, you may choose to continue initialization or stop here
         }
+
+        // Additional initialization code if needed
     }
-
 }

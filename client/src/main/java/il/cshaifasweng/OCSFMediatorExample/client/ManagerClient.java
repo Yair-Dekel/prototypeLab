@@ -11,6 +11,7 @@ public class ManagerClient extends AbstractClient {
 
     private static Registered_user managerClient=null;
     private static ManagerClient client = null;
+    private static Registered_user loggedInUser=null;
 
 
     /**
@@ -22,6 +23,19 @@ public class ManagerClient extends AbstractClient {
     private ManagerClient(String host, int port) {
         super(host, port);
     }
+
+
+    public static Registered_user getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static void setLoggedInUser(Registered_user user) {
+        if (loggedInUser == null) {
+            System.out.println("client created");
+            loggedInUser = user;
+        }
+    }
+
 
 
     @Override

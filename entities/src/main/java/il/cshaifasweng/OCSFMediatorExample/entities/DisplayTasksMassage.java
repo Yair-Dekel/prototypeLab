@@ -8,8 +8,10 @@ public class DisplayTasksMassage implements Serializable{
     private List<Task> tasks;
 
 
-    public DisplayTasksMassage(List<Task> tasks) {
+
+    public DisplayTasksMassage(List<Task> tasks ) {
         this.tasks = tasks;
+
     }
 
     public List<Task> getTasks()

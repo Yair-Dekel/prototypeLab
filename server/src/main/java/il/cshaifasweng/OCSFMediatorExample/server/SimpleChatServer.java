@@ -181,6 +181,8 @@
 //}
 
 package il.cshaifasweng.OCSFMediatorExample.server;
+import il.cshaifasweng.OCSFMediatorExample.server.SimpleServer;
+
 
 
 
@@ -235,10 +237,10 @@ public class SimpleChatServer {
                 Registered_user user1 = new Registered_user("Rom","Levi","rom_levi1","123",false,"0507773121","Haifa");
                 Registered_user user2 = new Registered_user("Yarin","Rabinobi","yarin_rabinobi2","1234",false,"0524373191","Tel-Aviv");
                 Registered_user user3 = new Registered_user("Dan","Shimoni","dan_shimoni1","1235",false,"0547373199","Haifa");
-                Registered_user user4 = new Registered_user("Linoy","Ohaion","linoyOhaion2","1232",true,"0502213188","Jerusalem");
+                Registered_user user4 = new Registered_user("Linoy","Ohaion","linoyOhaion2","1232",true,"0502213188","Jerusalem","Tel-Aviv");
                 Registered_user user5 = new Registered_user("Roman","Shapira","romanroman","1231",false,"0521153111","Jerusalem");
                 Registered_user user6 = new Registered_user("Shira","Omer","ShiraOmer22","1220",false,"0502479900","Haifa");
-                Registered_user user7 = new Registered_user("Yarden","Mesgav","yarden_yarden3","1230",true,"0532251580","Tel-Aviv");
+                Registered_user user7 = new Registered_user("Yarden","Mesgav","yarden_yarden3","1230",true,"0532251580","Tel-Aviv","Haifa");
 
 
                 session.save(user1);
