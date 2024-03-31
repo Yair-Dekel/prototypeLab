@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onMouseClicked="#ShowList" prefHeight="569.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Manager">
+   <children>
+      <Label alignment="TOP_CENTER" layoutX="16.0" layoutY="25.0" prefHeight="44.0" prefWidth="649.0" text="Welcome To Atis" textFill="#a3272f">
+         <font>
+            <Font name="Calibri Light" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="EmergencyButton" layoutX="3.0" layoutY="513.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="37.0" prefWidth="679.0" text="Emergency Button" textFill="#e10a0a">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <ListView fx:id="ListOfCalls" layoutX="72.0" layoutY="128.0" onMouseClicked="#ShowList" prefHeight="341.0" prefWidth="544.0" />
+      <Button fx:id="back_to_main" layoutX="22.0" layoutY="32.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="64.0" text="back" />
+   </children>
+</AnchorPane>
