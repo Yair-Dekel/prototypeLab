@@ -297,8 +297,13 @@ public class SimpleServer extends AbstractServer {
         try {
             if (request.isBlank()) {
                 System.out.println("heyyy");
+            }
+            else if (request.equals("ShowEmergency")) listOfEmergency(client);
 
-            } else if (request.equals("change status")) {
+
+
+
+             else if (request.equals("change status")) {
                 System.out.println("in change status");
                 int id = myTask.getId();
 
@@ -471,7 +476,45 @@ public class SimpleServer extends AbstractServer {
             throw new RuntimeException(e);
         }
     }
+
+
+
+        private void listOfEmergency(ConnectionToClient client) throws IOException {
+            System.out.println("in listOfEmergency");
+            SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+            session = sessionFactory.openSession();
+            System.out.println("11");
+            Transaction tx2 = null;
+            try {
+                tx2 = session.beginTransaction();
+                System.out.println("22");
+                List<Emergency_call> calls = getAllEmergency(session);
+
+
+                System.out.println("3333");
+                for (Emergency_call call : calls) {
+                    System.out.println(call.getGiven_name());
+                }
+                DisplayCalls dis = new DisplayCalls(null);
+                // System.out.println(dis.getTasks().get(0).getId());
+                client.sendToClient(dis);
+                tx2.commit();
+            } catch (RuntimeException e) {
+                if (tx2 != null) tx2.rollback();
+                throw e;
+            } finally {
+                session.close(); // Close the second session
 }
+}
+
+    private List<Emergency_call> getAllEmergency(Session session) {
+        Query<Emergency_call> query = session.createQuery("FROM Emergency_call ", Emergency_call.class);
+        return query.getResultList();
+    }
+
+
+}
+
 
 
 
