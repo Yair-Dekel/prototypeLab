@@ -264,12 +264,16 @@ public class SimpleServer extends AbstractServer {
         System.out.println("get into handle from client in server class");
         Task myTask = null;
         String request = null;
+        String current_volunteer =null;
         if (msg instanceof String) {
             request = (String) msg;
         } else if (msg instanceof MessageOfStatus) {
             System.out.println("hello00");
             request = ((MessageOfStatus) msg).getChangeStatus();
             myTask = ((MessageOfStatus) msg).getTask();
+            current_volunteer = ((MessageOfStatus) msg).getUserVol();
+            System.out.println(current_volunteer+"0000000000000000000000000000000");
+
 
         } else if (msg instanceof NewTaskMessage) {
             System.out.println("msg recognized instanceof NewTaskMessage");
@@ -625,6 +629,7 @@ public class SimpleServer extends AbstractServer {
                 System.out.println("in volunteering =================");
                 int id = myTask.getId();
 
+
                 SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
                 session = sessionFactory.openSession();
 
@@ -640,7 +645,8 @@ public class SimpleServer extends AbstractServer {
                     if (task != null) {
                         // Modify the properties of the entity
                         task.setStatus("in process");
-                        System.out.println("someone has volunteer");
+                        task.setCurrentVolunteer(current_volunteer);
+                        System.out.println(current_volunteer+"***");
 
                         // Save the changes by committing the transaction
                         tx2.commit();

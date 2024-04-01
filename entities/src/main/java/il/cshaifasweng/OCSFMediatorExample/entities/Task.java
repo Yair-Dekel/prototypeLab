@@ -19,6 +19,9 @@ public class Task implements Serializable {
     private Registered_user registered_user;
     private LocalDateTime Deadline;
     private String Status;
+
+    private  String currentVolunteer;
+
      @ManyToOne
      @JoinColumn(name = "volunteer_id", referencedColumnName = "id")
      private Registered_user Volunteer;
@@ -132,7 +135,13 @@ public class Task implements Serializable {
         Volunteer = volunteer;
     }
 
+    public String getCurrentVolunteer() {
+        return currentVolunteer;
+    }
 
+    public void setCurrentVolunteer(String currentVolunteer1) {
+        currentVolunteer = currentVolunteer1;
+    }
 
 
 }

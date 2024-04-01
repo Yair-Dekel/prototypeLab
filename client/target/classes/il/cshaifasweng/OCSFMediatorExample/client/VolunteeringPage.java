@@ -77,7 +77,7 @@ public class VolunteeringPage {
     void Volunteering(ActionEvent event) throws IOException {
         Task task = VolunteeringList.getSelectionModel().getSelectedItem();
         if (task != null) {
-            MessageOfStatus message = new MessageOfStatus(task, "volunteering");
+            MessageOfStatus message = new MessageOfStatus(task, "volunteering",Saveusername);
             UserClient.getClient().sendToServer(message);
         }
         else {
@@ -168,9 +168,11 @@ public class VolunteeringPage {
         alert.setHeaderText(header);
         alert.show();
     }
+    String Saveusername=null;
     @FXML
     void initialize(String username) throws IOException {
         System.out.println(username+" userclient???????????????????????????????????/");
+        Saveusername=username;
         EventBus.getDefault().register(this);
         UserClient userClient = UserClient.getClient();
         try {

@@ -13,7 +13,7 @@
             <children>
                 <Label fx:id="welcome_label" layoutX="-2.0" layoutY="6.0" prefHeight="64.0" prefWidth="600.0" style="-fx-background-color: #000000;" text="                      Welcome" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font size="38.0" />
+                        <Font name="System Italic" size="38.0" />
                     </font>
                 </Label>
                 <Label layoutX="204.0" layoutY="83.0" prefHeight="17.0" prefWidth="202.0">
@@ -25,16 +25,21 @@
                     <children>
                         <AnchorPane fx:id="welcom_container" prefHeight="392.0" prefWidth="441.0">
                             <children>
-                                <Button fx:id="add_new_task_btn" layoutX="100.0" layoutY="38.0" mnemonicParsing="false" onAction="#switchToNewTask" prefHeight="70.0" prefWidth="268.0" text="Add A New Task">
+                                <Button fx:id="add_new_task_btn" layoutX="100.0" layoutY="38.0" mnemonicParsing="false" onAction="#switchToNewTask" prefHeight="64.0" prefWidth="268.0" text="Add A New Task" textFill="#248415">
                                     <font>
                                         <Font size="18.0" />
                                     </font></Button>
-                        <Button fx:id="volunteering" layoutX="101.0" layoutY="137.0" mnemonicParsing="false" onAction="#turnToVolunteeringPage" prefHeight="70.0" prefWidth="268.0" text="SHOW TASKS FOR VOLUNTEERING" textFill="#126129">
+                        <Button fx:id="volunteering" layoutX="101.0" layoutY="125.0" mnemonicParsing="false" onAction="#turnToVolunteeringPage" prefHeight="70.0" prefWidth="268.0" text="SHOW TASKS FOR VOLUNTEERING" textFill="#126129">
                            <font>
                               <Font name="Imprint MT Shadow" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="MY_REQUSTED_TASKS" layoutX="101.0" layoutY="240.0" mnemonicParsing="false" onAction="#showRequstedTasks" prefHeight="64.0" prefWidth="268.0" text="MY REQUESTED TASKS" textFill="#0d681b">
+                        <Button fx:id="MY_REQUSTED_TASKS" layoutX="100.0" layoutY="215.0" mnemonicParsing="false" onAction="#showRequstedTasks" prefHeight="64.0" prefWidth="268.0" text="MY REQUESTED TASKS" textFill="#0d681b">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="volunteering1" layoutX="101.0" layoutY="300.0" mnemonicParsing="false" onAction="#turnToVolunteeringPage" prefHeight="64.0" prefWidth="268.0" text="MY VOLUNTEERING TASKS" textFill="#126129">
                            <font>
                               <Font name="Imprint MT Shadow" size="12.0" />
                            </font>

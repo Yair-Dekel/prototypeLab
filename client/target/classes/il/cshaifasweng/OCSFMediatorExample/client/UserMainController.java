@@ -116,4 +116,24 @@ public class UserMainController {
 
 
     }
+    @FXML
+    void showMyVolTasks(ActionEvent event) {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("myVol_tasks.fxml"));
+                Parent root = loader.load();
+                ShowRequestedTasksPage RequestController = loader.getController();
+                RequestController.initialize(SaveUserName); // Pass the username to initialize method
+
+                // Show the scene
+                Scene scene = new Scene(root);
+                appStage.setScene(scene);
+                appStage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
 }
