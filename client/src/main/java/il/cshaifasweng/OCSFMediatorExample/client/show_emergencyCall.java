@@ -6,11 +6,14 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Emergency_call;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.greenrobot.eventbus.EventBus;
@@ -20,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -35,6 +39,10 @@ public class show_emergencyCall {
     private Button EmergencyButton;
     @FXML
     private BarChart<?, ?> Calls_chart;
+    @FXML
+    private DatePicker To_date;
+    @FXML
+    private DatePicker From_Date;
 
     // Declare a field to store the previous list of emergency calls
     private List<Emergency_call> previousCalls;
@@ -155,11 +163,9 @@ public class show_emergencyCall {
                         ListOfCalls.setItems(observableTasks);
                     } else {
                         ListOfCalls.getItems().clear();
-                        showAlert("Requests Information", "Requests Information", "There are no requests for the selected community.", Alert.AlertType.INFORMATION);
                     }
                 } else {
                     ListOfCalls.getItems().clear();
-                    showAlert("Error Information", "Error Information", "There are no Calls.", Alert.AlertType.INFORMATION);
                 }
             } else
 
@@ -191,15 +197,14 @@ public class show_emergencyCall {
                         ListOfCalls.setItems(observableTasks);
                     } else {
                         ListOfCalls.getItems().clear();
-                        showAlert("Requests Information", "Requests Information", "There are no requests for the selected community.", Alert.AlertType.INFORMATION);
                     }
                 }  else {
                     ListOfCalls.getItems().clear();
-                    showAlert("Error Information", "Error Information", "There are no Calls.", Alert.AlertType.INFORMATION);
                 }
 
             }
         });
+        initializeCallsChart();
     }
 
 
@@ -213,39 +218,91 @@ public class show_emergencyCall {
     }
 
 
+    private void updateListOfCalls() {
+        // Get the selected start and end dates
+        LocalDate startDate = From_Date.getValue();
+        LocalDate endDate = To_date.getValue();
+
+        // Validate that the start date is before the end date
+        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+            showAlert("Error", "Invalid Date Range", "From date must be before To date", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Get the selected community
+        String selectedCommunity = comunity_choose.getText();
+
+        // Filter the list of emergency calls based on the selected time period and community
+        ObservableList<Emergency_call> filteredCalls = FXCollections.observableArrayList();
+        for (Emergency_call call : previousCalls) {
+            LocalDateTime creationTime = call.getCreation_time();
+            LocalDate callDate = creationTime.toLocalDate();
+            boolean isInDateRange = (startDate == null || callDate.isEqual(startDate) || callDate.isAfter(startDate)) &&
+                    (endDate == null || callDate.isEqual(endDate) || callDate.isBefore(endDate));
+
+            // Add a null check for registered user
+            if (call.getRegistered_user() != null) {
+                boolean isMatchingCommunity = selectedCommunity.equals("All") ||
+                        call.getRegistered_user().getCommunity().toString().equals(selectedCommunity);
+
+                if (isInDateRange && isMatchingCommunity) {
+                    filteredCalls.add(call);
+                }
+            } else {
+                // If the community is "All" and the call falls within the selected date range, add it to the filtered list
+                if (selectedCommunity.equals("All") && isInDateRange) {
+                    filteredCalls.add(call);
+                }
+            }
+        }
+
+        // Update the TableView with the filtered list of emergency calls
+        ListOfCalls.setItems(filteredCalls);
+    }
+
+
+
+
+
+
     private void initializeCallsChart() {
         // Initialize the bar chart
-     /*   Calls_chart.setTitle("Emergency Calls by Day and Month");
+        Calls_chart.setTitle("Emergency Calls by Day and Month");
 
         // Set up the x-axis
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Day/Month");
-        Calls_chart.setCategoryAxis(xAxis);
+        xAxis.setLabel("Creation Time");
 
         // Set up the y-axis
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Number of Calls");
-        Calls_chart.setValueAxis(yAxis);
 
-        // Get the current date
-        LocalDateTime currentDate = LocalDateTime.now();
+        // Create the bar chart with the specified axes
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
-        // Populate the bar chart (dummy data for demonstration)
-        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
-        for (int i = 1; i <= currentDate.getDayOfMonth(); i++) {
-            String day = String.format("%02d", i);
-            data.add(new XYChart.Data<>("Day " + day, (int) (Math.random() * 10))); // Dummy data, replace with your logic
-        }
-        for (int i = 1; i <= currentDate.getMonth().maxLength(); i++) {
-            String month = String.format("%02d", i);
-            data.add(new XYChart.Data<>("Month " + month, (int) (Math.random() * 10))); // Dummy data, replace with your logic
-        }
+        // Create series for the chart
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Emergency Calls");
 
-        XYChart.Series<String, Number> series = new XYChart.Series<>(data);
-        Calls_chart.getData().add(series);*/
+        // Bind the chart's data to the ListOfCalls table's items
+        series.setData(getChartData());
+
+        // Add the series to the chart
+        barChart.getData().add(series);
+
+        // Set the bar chart to your existing Calls_chart property
+        Calls_chart = barChart;
     }
 
-
+    // Method to get chart data from the ListOfCalls table's items
+    private ObservableList<XYChart.Data<String, Number>> getChartData() {
+        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+        for (Emergency_call call : ListOfCalls.getItems()) {
+            // Add data to the series
+            data.add(new XYChart.Data<>(call.getCreation_time().toString(), 1)); // Assuming each call counts as 1
+        }
+        return data;
+    }
 
 
 
@@ -349,6 +406,13 @@ public class show_emergencyCall {
             comunity_choose.getItems().add(menuItem);
 
         }
+
+
+
+        // Register event listeners for the DatePickers
+        From_Date.setOnAction(event -> updateListOfCalls());
+        To_date.setOnAction(event -> updateListOfCalls());
+
 
 
         // Initialize the bar chart
