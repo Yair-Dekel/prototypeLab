@@ -1,28 +1,22 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.client.Emergency_Call_Event;
 import il.cshaifasweng.OCSFMediatorExample.entities.Communities;
 import il.cshaifasweng.OCSFMediatorExample.entities.Emergency_call;
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.greenrobot.eventbus.EventBus;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,6 +31,8 @@ public class show_emergencyCall {
 
     @FXML
     private Button EmergencyButton;
+
+
     @FXML
     private BarChart<?, ?> Calls_chart;
     @FXML
@@ -204,7 +200,7 @@ public class show_emergencyCall {
 
             }
         });
-        initializeCallsChart();
+       // initializeCallsChart();
     }
 
 
@@ -263,14 +259,14 @@ public class show_emergencyCall {
 
 
 
-
-
+//URL url, ResourceBundle resourceBundle
+@FXML
     private void initializeCallsChart() {
         // Initialize the bar chart
         Calls_chart.setTitle("Emergency Calls by Day and Month");
 
         // Set up the x-axis
-        CategoryAxis xAxis = new CategoryAxis();
+       CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Creation Time");
 
         // Set up the y-axis
@@ -280,19 +276,41 @@ public class show_emergencyCall {
         // Create the bar chart with the specified axes
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
+    try {
+        // Set up database connection
+        String url = "jdbc:mysql://localhost:3306/Atis?serverTimezone=UTC";
+        String username = "root";
+        String password = "Sk1llzsh0t10";
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        // Prepare SQL statement
+        String sql = "SELECT DATE_FORMAT(creation_time, '%Y-%m-%d %H:%i:%s') AS creation_time_str, COUNT(*) AS count " +
+                "FROM emergency_calls " +
+                "GROUP BY DATE_FORMAT(creation_time, '%Y-%m-%d %H:%i:%s')";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        // Execute query and process results
+        ResultSet resultSet = statement.executeQuery();
+        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+        while (resultSet.next()) {
+            String creationTimeStr = resultSet.getString("creation_time_str");
+            int count = resultSet.getInt("count");
+            // Add data to the series
+            data.add(new XYChart.Data<>(creationTimeStr, count));
+        }
+
         // Create series for the chart
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        XYChart.Series series = new XYChart.Series<>();
         series.setName("Emergency Calls");
+        series.setData(data);
 
-        // Bind the chart's data to the ListOfCalls table's items
-        series.setData(getChartData());
-
-        // Add the series to the chart
-        barChart.getData().add(series);
-
-        // Set the bar chart to your existing Calls_chart property
-        Calls_chart = barChart;
+        // Add the series to the existing Calls_chart
+        Calls_chart.getData().add(series);
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    Calls_chart= barChart;
+}
 
     // Method to get chart data from the ListOfCalls table's items
     private ObservableList<XYChart.Data<String, Number>> getChartData() {
@@ -416,9 +434,34 @@ public class show_emergencyCall {
 
 
         // Initialize the bar chart
+
         initializeCallsChart();
     }
 
 
 
 }
+
+
+
+
+
+
+
+
+
+//XYChart.Series series = new XYChart.Series<>();
+//        series.setName("Emergency Calls");
+//        series.getData().add(new XYChart.Data<>("january",80));
+//        series.getData().add(new XYChart.Data<>("saturday",60));
+//
+//        // Bind the chart's data to the ListOfCalls table's items
+//        //  series.setData(getChartData());
+//
+//        // Add the series to the chart
+//        barChart.getData().add(series);
+//        Calls_chart.getData().addAll(series);
+//
+//// Set the bar chart to your existing Calls_chart property
+//
+////Calls_chart = barChart;
