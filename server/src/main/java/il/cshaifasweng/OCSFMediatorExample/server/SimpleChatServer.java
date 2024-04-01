@@ -259,7 +259,8 @@ public class SimpleChatServer {
 
                 LocalDateTime now = LocalDateTime.now();
                 LocalDateTime futureDeadline1 = now.plusDays(7);
-                Task t1 = new Task(TaskType.BABYSITTING,user1 , futureDeadline1, "in my house loaction: horev 10");
+                //Task t1 = new Task(TaskType.BABYSITTING,user1 , futureDeadline1, "in my house loaction: horev 10");
+                Task t1 = new Task(TaskType.BABYSITTING,user1 , futureDeadline1, "in my house loaction: horev 10",now.plusDays(1));
                 LocalDateTime futureDeadline2 = now.plusDays(4);
                 Task t2 = new Task(TaskType.CAR_CLEANING,user2 , futureDeadline2);
                 LocalDateTime futureDeadline3 = now.plusDays(12);
@@ -268,6 +269,7 @@ public class SimpleChatServer {
                 Task t4 = new Task(TaskType.RIDE,user4 , futureDeadline4);
                 LocalDateTime futureDeadline5 = now.plusDays(10);
                 Task t5 = new Task(TaskType.YARD_WORK,user5 , futureDeadline5);
+
 
 
 

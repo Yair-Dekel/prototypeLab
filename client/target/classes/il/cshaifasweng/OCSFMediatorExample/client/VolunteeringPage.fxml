@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="118.0" fitWidth="225.0" layoutX="271.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@image-removebg-preview%20(1).png" />
+            <Image url="@image-removebg-preview (1).png" />
          </image>
       </ImageView>
       <ListView fx:id="VolunteeringList" layoutX="46.0" layoutY="126.0" onMouseClicked="#volunteeringTaskShow" prefHeight="339.0" prefWidth="243.0" />

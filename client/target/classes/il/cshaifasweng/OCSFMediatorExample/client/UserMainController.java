@@ -32,6 +32,8 @@ public class UserMainController {
     @FXML
     private Label welcome_label; //after rina and malek do login we'll change it to welcome + user name
 
+    @FXML
+    private Button MY_REQUSTED_TASKS;
     String SaveUserName;
 
     private static Scene scene;
@@ -71,6 +73,27 @@ public class UserMainController {
             }
         });
     }
+
+    @FXML
+    void showRequstedTasks(ActionEvent event) {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("requestedTasksPage.fxml"));
+                Parent root = loader.load();
+                ShowRequestedTasksPage RequestController = loader.getController();
+                RequestController.initialize(SaveUserName); // Pass the username to initialize method
+
+                // Show the scene
+                Scene scene = new Scene(root);
+                appStage.setScene(scene);
+                appStage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
 
 
     @FXML

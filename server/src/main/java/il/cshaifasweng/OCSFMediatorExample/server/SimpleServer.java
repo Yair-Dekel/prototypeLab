@@ -182,7 +182,8 @@ public class SimpleServer extends AbstractServer {
         Query<Task> query = session.createQuery(
                 "SELECT t FROM Task t JOIN t.registered_user ru " +
                         "WHERE ru.username != :username AND ru.community = :community " +
-                        "AND t.Status = :status", Task.class);
+                        "AND t.Status = :status " +
+                        "ORDER BY t.Creation_time ASC", Task.class);
         query.setParameter("username", username);
         query.setParameter("community", headOfCommunity);
         query.setParameter("status", "waiting for approval");
@@ -203,10 +204,15 @@ public class SimpleServer extends AbstractServer {
         String Community = getCommunity(session, username);
 
         // Use HQL to retrieve tasks meeting the specified conditions
+       /* Query<Task> query = session.createQuery(
+                "SELECT t FROM Task t JOIN t.registered_user ru " +
+                        "WHERE ru.username != :username AND ru.community = :community " +
+                        "AND t.Status = :status"+*/
         Query<Task> query = session.createQuery(
                 "SELECT t FROM Task t JOIN t.registered_user ru " +
                         "WHERE ru.username != :username AND ru.community = :community " +
-                        "AND t.Status = :status", Task.class);
+                        "AND t.Status = :status " +
+                        "ORDER BY t.Creation_time ASC", Task.class);
         query.setParameter("username", username);
         query.setParameter("community", Community);
         query.setParameter("status", "waiting for volunteer");
@@ -237,6 +243,21 @@ public class SimpleServer extends AbstractServer {
         }
     }
 
+    public List<Task> getAllMyRequestedTasks(Session session, String username) {
+        // Use HQL to retrieve tasks meeting the specified conditions
+        Query<Task> query = session.createQuery(
+                "SELECT t FROM Task t JOIN t.registered_user ru " +
+                        "WHERE ru.username = :username " +
+                        "ORDER BY t.Creation_time DESC", Task.class);
+        query.setParameter("username", username);
+
+        try {
+            return query.getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        }
+    }
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -377,7 +398,7 @@ public class SimpleServer extends AbstractServer {
                         session.close(); // Close session in finally block
                     }
                 }
-            }else if(((Message) msg).getMessage().equals("list view")) {
+            } else if (((Message) msg).getMessage().equals("list view")) {
                 System.out.println("in list view");
                 String username1 = ((Message) msg).getUserName();
                 System.out.println(username1);
@@ -391,7 +412,7 @@ public class SimpleServer extends AbstractServer {
                     // Perform operations with the second session
 
 
-                    List<Task> tasks = getAllUnApprovedTasks(session,username1);
+                    List<Task> tasks = getAllUnApprovedTasks(session, username1);
                     System.out.println("in list view back from function");
                     if (tasks.isEmpty()) {
                         System.out.println("nothinggggggggggggggggggggggggggg");
@@ -408,8 +429,7 @@ public class SimpleServer extends AbstractServer {
                 } finally {
                     session.close(); // Close the second session
                 }
-            }
-            else if(((Message) msg).getMessage().equals("list view for volunteering")) {
+            } else if (((Message) msg).getMessage().equals("list view for volunteering")) {
                 System.out.println("in list view volunteer!!");
                 String username2 = ((Message) msg).getUserName();
                 System.out.println(username2);
@@ -426,16 +446,51 @@ public class SimpleServer extends AbstractServer {
 
                     List<Task> tasks = getAllWaitingTasks(session, username2);
 
-                    if(tasks.isEmpty())
-                    {
+                    if (tasks.isEmpty()) {
                         System.out.println("empty!!!!!!!");
-                    }
-                    else {
+                    } else {
                         for (Task task : tasks) {
                             System.out.println("1" + task.getType_of_task());
                         }
                     }
                     DisplayTasksMassage dis = new DisplayTasksMassage(tasks);
+                    client.sendToClient(dis);
+                    tx2.commit();
+                } catch (RuntimeException e) {
+                    if (tx2 != null) tx2.rollback();
+                    throw e;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    session.close(); // Close the second session
+                }
+
+
+            } else if (((Message) msg).getMessage().equals("list view for requestedTasks")) {
+                System.out.println("list view for requestedTasks");
+                String username3 = ((Message) msg).getUserName();
+                System.out.println(username3);
+                SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+                System.out.println("im inside requested tasks hereeeeeee");
+                session = sessionFactory.openSession();
+
+                Transaction tx2 = null;
+                try {
+                    tx2 = session.beginTransaction();
+
+                    // Perform operations with the second session
+                    System.out.println("in desplayyyyyyyy requested tasks");
+
+                    List<Task> tasks = getAllMyRequestedTasks(session, username3);
+
+                    if (tasks.isEmpty()) {
+                        System.out.println("empty!!!!!!!");
+                    } else {
+                        for (Task task : tasks) {
+                            System.out.println("1" + task.getType_of_task());
+                        }
+                    }
+                    DisplayTasksMassage dis = new DisplayTasksMassage(tasks, "Requested Tasks");
                     client.sendToClient(dis);
                     tx2.commit();
                 } catch (RuntimeException e) {

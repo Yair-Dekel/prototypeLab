@@ -35,6 +35,15 @@ public class Task implements Serializable {
         Deadline = time;
         Status = "waiting for approval";
     }
+
+    public Task(TaskType type_of_task, Registered_user user, LocalDateTime time, String details,LocalDateTime time1) {
+        moredetails = details;
+        Type_of_task = type_of_task;
+        Creation_time = time1;
+        this.registered_user = user;
+        Deadline = time;
+        Status = "waiting for approval";
+    }
     public Task(TaskType type_of_task, Registered_user user, LocalDateTime time) {
         Type_of_task = type_of_task;
         Creation_time = LocalDateTime.now();

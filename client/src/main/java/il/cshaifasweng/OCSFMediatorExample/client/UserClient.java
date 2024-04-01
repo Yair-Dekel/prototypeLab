@@ -54,14 +54,23 @@ public class UserClient extends AbstractClient {
         } else if (msg instanceof DisplayTasksMassage) {
             System.out.println("userclient dis");
             DisplayTasksMassage dis = (DisplayTasksMassage) msg;
-            EventBus.getDefault().post(new VolunteeringEvent(dis));
-            System.out.println("recognized massage as a list of tasks in userclient");
+            System.out.println("8888888888888888888888888888888888888888888888888");
+            if(dis.getMessage().equals("Requested Tasks"))
+            {
+                EventBus.getDefault().post(new RequestedTasksShowEvent(dis));
+                System.out.println("recognized massage as a list of requested tasks in userclient");
+            }else {
+                System.out.println("correct inside ========");
+                EventBus.getDefault().post(new VolunteeringEvent(dis));
+                System.out.println("recognized massage as a list of tasks in userclient");
+            }
 
         }else if(msg instanceof MessageOfStatus) {
             MessageOfStatus message1 = (MessageOfStatus) msg;
             if (message1.getChangeStatus().equals("Thanks for volunteering")) {
                 EventBus.getDefault().post(new PersonVolunteering(message1));
             }
+
         }
     }
 
