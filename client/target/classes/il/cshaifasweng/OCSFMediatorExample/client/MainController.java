@@ -1,8 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.DisplayTasksMassage;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,11 +12,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
-import static il.cshaifasweng.OCSFMediatorExample.client.UserClient.getClient;
 
 public class MainController {
 

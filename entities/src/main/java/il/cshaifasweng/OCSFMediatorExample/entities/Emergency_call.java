@@ -37,6 +37,14 @@ public class Emergency_call implements Serializable{
 
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreation_time() {
+        return creation_time;
+    }
+
     public String getGiven_name() {
         return given_name;
     }

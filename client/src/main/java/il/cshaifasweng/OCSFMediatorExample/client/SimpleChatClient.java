@@ -15,15 +15,6 @@ import java.time.format.DateTimeFormatter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.net.URI;
-import java.util.concurrent.CountDownLatch;
-
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.concurrent.CountDownLatch;
-
 /**
  * JavaFX App
  */

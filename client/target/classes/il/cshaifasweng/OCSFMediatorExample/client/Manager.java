@@ -1,8 +1,5 @@
-
 package il.cshaifasweng.OCSFMediatorExample.client;
-import il.cshaifasweng.OCSFMediatorExample.entities.Emergency_call;
 import javafx.scene.input.MouseEvent;
-import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import javafx.event.ActionEvent;
@@ -11,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
@@ -19,34 +15,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 
 
 import il.cshaifasweng.OCSFMediatorExample.entities.MessageOfStatus;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getClient;
-import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getManagerClient;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 
 
@@ -54,11 +33,6 @@ public class Manager  {
 
     @FXML
     private Button Accept;
-
-
-    @FXML
-    private AnchorPane Bar_for_view;
-
 
     @FXML
     private Button EmergencyButton;
@@ -68,9 +42,6 @@ public class Manager  {
 
     @FXML
     private ListView<Task> ListOfTasks;
-    @FXML
-    private ListView<Emergency_call> ListOfCalls;
-
 
     @FXML
     private Button Members;
@@ -115,7 +86,7 @@ public class Manager  {
             alert.setHeaderText("Task Accepted:");
             alert.show();
             for (Task task : ListOfTasks.getItems()) {
-                if (((Task)task).getId() == event.getMessage().getTask().getId()) {
+                if (task.getId() == event.getMessage().getTask().getId()) {
                     // Remove the selected item from the ListView
                     ListOfTasks.getItems().remove(task);
 
@@ -143,7 +114,7 @@ public class Manager  {
             alert.setHeaderText("Task rejected:");
             alert.show();
             for (Task task : ListOfTasks.getItems()) {
-                if (((Task)task).getId() == event.getMessage().getTask().getId()) {
+                if (task.getId() == event.getMessage().getTask().getId()) {
                     // Remove the selected item from the ListView
                     ListOfTasks.getItems().remove(task);
 
@@ -160,7 +131,7 @@ public class Manager  {
 
     @FXML
     void AcceptRequest(ActionEvent event) throws IOException {
-        Task task = (Task) ListOfTasks.getSelectionModel().getSelectedItem();
+        Task task = ListOfTasks.getSelectionModel().getSelectedItem();
         if (task != null) {
             MessageOfStatus message = new MessageOfStatus(task, "accept");
             getClient().sendToServer(message);
@@ -177,11 +148,14 @@ public class Manager  {
         }
     }
 
+    @FXML
+    void EmergencyCall(ActionEvent event) {
 
+    }
 
     @FXML
     void RejectRequest(ActionEvent event) throws IOException {
-        Task task = (Task) ListOfTasks.getSelectionModel().getSelectedItem();
+        Task task = ListOfTasks.getSelectionModel().getSelectedItem();
         if (task != null) {
             Send.setVisible(true);
             Reason.setVisible(true);
@@ -202,7 +176,7 @@ public class Manager  {
 
     @FXML
     void SendReason(ActionEvent event) throws IOException {
-        Task task = (Task) ListOfTasks.getSelectionModel().getSelectedItem();
+        Task task = ListOfTasks.getSelectionModel().getSelectedItem();
 
         String reason = Reason.getText();
 
@@ -229,14 +203,27 @@ public class Manager  {
     }
 
 
+    @FXML
+    void ShowEmergency(ActionEvent event) {
 
+        System.out.println("in ShowList_Emergency_call");
+        Platform.runLater(() -> {
+            try {
+                setRoot("show_emergencyCall");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+ });
+
+
+    }
 
     @FXML
     void ShowList(MouseEvent event) {
         Send.setVisible(false);
         Reason.setVisible(false);
         WriteReason.setVisible(false);
-        Task tempTask = (Task) ListOfTasks.getSelectionModel().getSelectedItem();
+        Task tempTask = ListOfTasks.getSelectionModel().getSelectedItem();
         if (tempTask != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDeadline = tempTask.getDeadline().format(formatter);
@@ -278,44 +265,12 @@ public class Manager  {
 
 
 
-    @FXML
-    void EmergencyCall(ActionEvent event) {
-
-    }
-    @FXML
-    void ShowEmergency(ActionEvent event) throws IOException {
-        getClient().sendToServer("ShowEmergency");
-    }
-
-
-    public void ShowList_Emergency_call(Emergency_Call_Event event) {////////////////////////////////////////////////////////
-        System.out.println("in ShowList_Emergency_call");
-        Platform.runLater(() -> {
-            switchListView(false); // Display emergency calls
-            if (event != null) {
-                List<Emergency_call> calls = event.getCalls().getCalls();
-                if (calls != null && !calls.isEmpty()) {
-                    ObservableList<Emergency_call> observableTasks = FXCollections.observableArrayList(calls);
-
-                    // Create ListView to display tasks
-                    ListOfCalls.setItems(observableTasks);
-                }
-                else {
-                    showAlert("Requests Information", "Requests Information", "There is no requests.", Alert.AlertType.INFORMATION);
-                }
-            }
-            else {
-                showAlert("Error", "Error", "Invalid event received.", Alert.AlertType.ERROR);
-            }
-
-        });
-    }
-
+    //ObservableList<Task> observableTasks = FXCollections.observableArrayList();
     @Subscribe
     public void ShowListView(TasksMessageEvent event) {////////////////////////////////////////////////////////
 
         Platform.runLater(() -> {
-            switchListView(true); // Display tasks
+            //tasksContaine.getChildren().clear(); // Clear existing content
 
             if (event != null) {
                 List<Task> tasks = event.getTasksE().getTasks();
@@ -353,46 +308,25 @@ public class Manager  {
             }
         });
     }
-    @FXML
-    void refresh(ActionEvent event) throws IOException {
-        getClient().sendToServer("list view");
-
-
-    }
-
-    // Method to switch between displaying tasks and emergency calls
-    private void switchListView(boolean showTasks) {
-        Platform.runLater(() -> {
-            if (showTasks) {
-                Bar_for_view.getChildren().clear();
-                Bar_for_view.getChildren().add(ListOfTasks);
-            } else {
-                Bar_for_view.getChildren().clear();
-                Bar_for_view.getChildren().add(ListOfCalls);
-            }
-        });
-    }
-
 
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        switchListView(true); // Display tasks
-
         try {
             getClient().sendToServer("list view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        msgId=0;
+
 
         try {
-            Message message = new Message(msgId, "add client");
-            getClient().sendToServer(message);
+            getClient().sendToServer("add manager client");
         } catch (IOException e) {
             // TODO Auto-generated catch block
         }
     }
+
+
 
 }

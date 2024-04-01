@@ -1,6 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
-import il.cshaifasweng.OCSFMediatorExample.client.UserClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
@@ -24,6 +23,7 @@ public class SimpleServer extends AbstractServer {
 
     private static Session session;
     private static ArrayList<SubscribedClient> SubscribersList = new ArrayList<>();
+    private List<ConnectionToClient> managerClients = new ArrayList<>(); // Maintain a list of manager clients
 
     public SimpleServer(int port) {
         super(port);
@@ -36,15 +36,7 @@ public class SimpleServer extends AbstractServer {
         return query.getResultList();
     }
 
-    //    private static List<Task> getAllPatient() throws Exception {
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        System.out.println("List<Task> getAllPatient() throws Exception");
-//        CriteriaQuery<Task> query = builder.createQuery(Task.class);
-//        query.from(Task.class);
-//        List<Task> data = session.createQuery(query).getResultList();
-//        session.close();
-//        return data;
-//    }
+
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
 
@@ -61,105 +53,37 @@ public class SimpleServer extends AbstractServer {
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
-
-
-/*
-
-    @Override
-    protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        System.out.println("get into handle from client in server class");
-*/
-/*                if (msg instanceof NewTaskMessage) {
-                    System.out.println("msg recognized instanceof NewTaskMessage");
-                    NewTaskMessage ntm = (NewTaskMessage) msg;
-                    try {
-                        SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
-                        session = sessionFactory.openSession();
-                        session.beginTransaction();
-                        LocalDateTime now = LocalDateTime.now();
-                        LocalDateTime futureDeadline1 = now.plusDays(7);
-                        Task nt = new Task(ntm.getType(), ntm.getOpenby(), ntm.getDeadline(), ntm.getDetails());
-                        session.save(nt);
-                        session.getTransaction().commit();
-                    } catch (Exception exception) {
-                        if (session != null) {
-                            session.getTransaction().rollback();
-                        }
-                        System.err.println("An error occured, changes have been rolled back.");
-                        exception.printStackTrace();
-
-                    } finally {
-                        session.close();
-                    }
-                    try {
-                        *//*
-     */
-    /**//*
-     */
-/*ntm.setInDataBase(true);
-                        client.sendToClient(ntm);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }*//*
-
-                else if (msg instanceof Message) {
-                    System.out.println("in sever /Confirm information ");
-
-
-                    String username = ((Message) msg).getUserName();
-                    String password = ((Message) msg).getPassword();
-                    System.out.println(username + "    " + password);
-
-
-                    SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
-                    session = sessionFactory.openSession();
-                    Transaction tx2 = null;
-
-                    try {
-                        tx2 = session.beginTransaction();
-
-                        // Perform operations with the second session
-                        System.out.println("Confirm");
-                        // Use a query to get all users
-                        List<Registered_user> users = session.createQuery("FROM Registered_user", Registered_user.class).getResultList();
-                        // Check if the entity exists
-                        if (users != null) {
-
-                            Message message2 = null;
-                            for (Registered_user user : users) {
-
-                                if (user.getUsername().equals(username)) {
-                                    if (user.getPassword().equals(password)) {
-                                        message2 = new Message("correct");
-                                        message2.setUser(user);
-                                        System.out.println("correct");
-
-                                    } else {
-                                        message2 = new Message("wrongPassword");
-                                        System.out.println("wrongPassword");
-
-                                    }
-                                }
-                            }
-                            if (message2 == null)
-                                message2 = new Message("user is not exist");
-                            client.sendToClient(message2);
-                        }
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                else {
-                System.out.println("in else");
-            }
-
-
+    public void addManagerClient(ConnectionToClient managerClient) {
+        if (!managerClients.contains(managerClient)) {
+            System.out.println("Adding a new manager to the list in the server");
+            managerClients.add(managerClient);
+        }
     }
-}
 
+    private void listviewFromUser() throws IOException {
 
-*/
+        System.out.println("in the listview func ");
+        SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+
+        Transaction tx2 = null;
+        try {
+            tx2 = session.beginTransaction();
+
+            // Perform operations with the second session
+            System.out.println("in desplayyyyyyyy");
+            List<Task> tasks = getAllUnApprovedTasks(session);
+            DisplayTasksMassage dis = new DisplayTasksMassage(tasks);
+            for (ConnectionToClient manager : managerClients)
+                manager.sendToClient(dis);
+            tx2.commit();
+        } catch (RuntimeException e) {
+            if (tx2 != null) tx2.rollback();
+            throw e;
+        } finally {
+            session.close(); // Close the second session
+        }
+    }
 
 
     public List<Task> getAllUnApprovedTasks(Session session) {
@@ -194,6 +118,8 @@ public class SimpleServer extends AbstractServer {
                 Task nt = new Task(ntm.getType(), ntm.getOpenby(), ntm.getDeadline(), ntm.getDetails());
                 session.save(nt);
                 session.getTransaction().commit();
+                System.out.println("in new task");
+                listviewFromUser();
             } catch (Exception exception) {
                 if (session != null) {
                     session.getTransaction().rollback();
@@ -299,10 +225,10 @@ public class SimpleServer extends AbstractServer {
                 System.out.println("heyyy");
             }
             else if (request.equals("ShowEmergency")) listOfEmergency(client);
-
-
-
-
+            else if (request.equals("add manager client")) {
+                System.out.println("enter here in request.equals(\"add manager client\"))");
+                addManagerClient(client);
+            }
              else if (request.equals("change status")) {
                 System.out.println("in change status");
                 int id = myTask.getId();
@@ -495,7 +421,7 @@ public class SimpleServer extends AbstractServer {
                 for (Emergency_call call : calls) {
                     System.out.println(call.getGiven_name());
                 }
-                DisplayCalls dis = new DisplayCalls(null);
+                DisplayCalls dis = new DisplayCalls(calls);
                 // System.out.println(dis.getTasks().get(0).getId());
                 client.sendToClient(dis);
                 tx2.commit();

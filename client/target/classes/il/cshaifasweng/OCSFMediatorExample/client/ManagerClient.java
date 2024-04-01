@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 
 import java.io.IOException;
+import java.util.List;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import org.greenrobot.eventbus.EventBus;
@@ -32,7 +33,10 @@ public class ManagerClient extends AbstractClient {
             EventBus.getDefault().post(new TasksMessageEvent(dis));
             System.out.println("recognized massage as a list of tasks");
         } else if (msg instanceof DisplayCalls) {
-            System.out.println("in display calls");
+            List <Emergency_call> calls=((DisplayCalls) msg).getCalls();
+            for (Emergency_call call : calls) {
+                System.out.println(call.getGiven_name());
+            }
             EventBus.getDefault().post(new Emergency_Call_Event((DisplayCalls) msg));
 
         } else if (msg instanceof MessageOfStatus) {

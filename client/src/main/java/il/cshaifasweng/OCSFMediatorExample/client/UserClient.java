@@ -4,11 +4,8 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import org.greenrobot.eventbus.EventBus;
-import org.hibernate.SessionFactory;
 
 import java.io.IOException;
-
-import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getClient;
 
 public class UserClient extends AbstractClient {
 
