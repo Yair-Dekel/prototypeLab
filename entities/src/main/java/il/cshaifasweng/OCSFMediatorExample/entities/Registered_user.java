@@ -125,7 +125,7 @@ public class Registered_user implements Serializable { //extends User
     //private String SerialNumber;
     @Column(name = "phone_number")
     private String phone_number;
-    private String community;
+    private Communities community;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -137,7 +137,7 @@ public class Registered_user implements Serializable { //extends User
 
     // Constructor with parameters
     public Registered_user(String givenName, String familyName, String username, String password,
-                           boolean permission, String phoneNumber, String community) {
+                           boolean permission, String phoneNumber, Communities community) {
         this.givenName = givenName;
         this.familyName = familyName;
         this.username = username;
@@ -155,7 +155,13 @@ public class Registered_user implements Serializable { //extends User
         return id;
     }
 
+    public boolean isPermission() {
+        return permission;
+    }
 
+    public Communities getCommunity() {
+        return community;
+    }
 
     public String getGivenName() {
         return givenName;
@@ -197,13 +203,7 @@ public class Registered_user implements Serializable { //extends User
         this.permission = permission;
     }
 
-    public String getCommunity() {
-        return community;
-    }
 
-    public void setCommunity(String community) {
-        this.community = community;
-    }
 
     public String getPhone_number() {
         return phone_number;

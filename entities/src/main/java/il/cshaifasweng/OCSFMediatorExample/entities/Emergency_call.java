@@ -35,6 +35,11 @@ public class Emergency_call implements Serializable{
 
     public Emergency_call() {
 
+
+    }
+
+    public Registered_user getRegistered_user() {
+        return registered_user;
     }
 
     public int getId() {
