@@ -2,6 +2,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.DisplayTasksMassage;
+import il.cshaifasweng.OCSFMediatorExample.entities.MessageOfStatus;
 import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -51,6 +52,13 @@ public class UserMainController {
         // Set the text of the welcome_label to the username
         welcome_label.setText("Welcome " + username);
         welcome_label.setAlignment(Pos.CENTER);
+
+        try {
+            MessageOfStatus message=new MessageOfStatus("add user client",SaveUserName);
+            getClient().sendToServer(message);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+        }
     }
     @FXML
     void switchToemergency(ActionEvent event) {

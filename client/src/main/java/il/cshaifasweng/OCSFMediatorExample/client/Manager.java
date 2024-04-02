@@ -334,8 +334,11 @@ public class Manager {
         try {
            // System.out.println(managerClient.getGivenName() + " " + managerClient.getFamilyName()); // Print user details for debugging
             Message message2 = new Message("list view",username);
-
+            Message message3 = new Message("add manager client",username);
             managerClient.sendToServer(message2);
+
+           managerClient.sendToServer(message3);
+
         } catch (IOException e) {
             // Handle send error
             System.err.println("Error: Unable to send message to the server");
@@ -346,3 +349,5 @@ public class Manager {
         // Additional initialization code if needed
     }
 }
+
+

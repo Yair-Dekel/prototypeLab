@@ -45,6 +45,8 @@ public class VolunteeringPage {
     // Create a Font object with the desired font size and family
     Font font = Font.font(fontFamily, fontSize);
 
+    String Saveuser;
+
 
     @FXML
     void volunteeringTaskShow(MouseEvent event) {
@@ -77,7 +79,7 @@ public class VolunteeringPage {
     void Volunteering(ActionEvent event) throws IOException {
         Task task = VolunteeringList.getSelectionModel().getSelectedItem();
         if (task != null) {
-            MessageOfStatus message = new MessageOfStatus(task, "volunteering");
+            MessageOfStatus message = new MessageOfStatus(task, "volunteering",Saveuser);
             UserClient.getClient().sendToServer(message);
         }
         else {
@@ -172,6 +174,7 @@ public class VolunteeringPage {
     void initialize(String username) throws IOException {
         System.out.println(username+" userclient???????????????????????????????????/");
         EventBus.getDefault().register(this);
+        Saveuser=username;
         UserClient userClient = UserClient.getClient();
         try {
             // Open connection to the server

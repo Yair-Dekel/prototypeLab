@@ -52,6 +52,7 @@ public class ShowRequestedTasksPage {
 
     @FXML
     void displayRequest(MouseEvent event) {
+        RequestedTaskDetails.setText("");
         Task tempTask = requestedTaskList.getSelectionModel().getSelectedItem();
         if (tempTask != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -82,6 +83,8 @@ public class ShowRequestedTasksPage {
     public void ShowListViewRequestedTasks(RequestedTasksShowEvent event) {
         System.out.println("firstttttttttttttttttttttttttttttttttt");
         Platform.runLater(() -> {
+            RequestedTaskDetails.setText("");
+
             //tasksContaine.getChildren().clear(); // Clear existing content
 
 
