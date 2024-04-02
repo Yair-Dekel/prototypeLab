@@ -95,11 +95,19 @@ public class show_emergencyCall {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    @Subscribe
+    public void New_Emergency_call(Emergency_Call_Event event)
+
+    {
+        previousCalls=event.getCalls().getCalls();
+        updateListOfCalls();
 
     }
 
 
-    @Subscribe
+  /*  @Subscribe
     public void ShowList_Emergency_call(Emergency_Call_Event event) {
         System.out.println("in ShowList_Emergency_call*************");
         Platform.runLater(() -> {
@@ -171,10 +179,10 @@ public class show_emergencyCall {
 
             }
         });
-   //     updateListOfCalls();
+   //     updateListOfCalls();*************************************
 
     }
-
+*/
 
 
 

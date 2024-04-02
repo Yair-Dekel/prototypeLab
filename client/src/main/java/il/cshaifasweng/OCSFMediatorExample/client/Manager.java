@@ -314,6 +314,7 @@ public class Manager  {
         EventBus.getDefault().register(this);
         try {
             getClient().sendToServer("list view");
+            System.out.println( ManagerClient.getManagerClient().getCommunity());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

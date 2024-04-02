@@ -142,9 +142,6 @@ public class SimpleServer extends AbstractServer {
         else if (msg instanceof  NewEmergencyCall) {
             NewEmergencyCall ntm= (NewEmergencyCall) msg;
         System.out.println("we are in emergency call section brooooooo");
-            System.out.println(ntm.getGiven_name());
-            System.out.println(ntm.getPhone_number());
-
 
             try {
                 SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
@@ -154,6 +151,8 @@ public class SimpleServer extends AbstractServer {
                Emergency_call temp=new Emergency_call(ntm.getGiven_name(), ntm.getPhone_number(), ntm.getOpenby1());
                 session.save(temp);
                 session.getTransaction().commit();
+                for (ConnectionToClient manager :managerClients)
+                    listOfEmergency(manager);
                 System.out.println("successsssssdddddddddddddddddddddddddddddddddddddddddd");
             } catch (Exception exception) {
                 if (session != null) {
@@ -165,9 +164,6 @@ public class SimpleServer extends AbstractServer {
             } finally {
                 session.close();
             }
-
-
-
 
             //----------------------------------------------------------------------------------------------
         } else if (msg instanceof Message) {
@@ -405,7 +401,8 @@ public class SimpleServer extends AbstractServer {
 
 
 
-        private void listOfEmergency(ConnectionToClient client) throws IOException {
+
+    private void listOfEmergency(ConnectionToClient client) throws IOException {
             System.out.println("in listOfEmergency");
             SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
             session = sessionFactory.openSession();
@@ -415,12 +412,6 @@ public class SimpleServer extends AbstractServer {
                 tx2 = session.beginTransaction();
                 System.out.println("22");
                 List<Emergency_call> calls = getAllEmergency(session);
-
-
-                System.out.println("3333");
-                for (Emergency_call call : calls) {
-                    System.out.println(call.getGiven_name());
-                }
                 DisplayCalls dis = new DisplayCalls(calls);
                 // System.out.println(dis.getTasks().get(0).getId());
                 client.sendToClient(dis);
