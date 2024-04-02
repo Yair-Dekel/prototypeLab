@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="578.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="TasksDone" layoutX="458.0" layoutY="117.0" prefHeight="411.0" prefWidth="387.0">
+        <columns>
+          <TableColumn fx:id="idTaskd" prefWidth="61.333343505859375" text="Task ID" />
+          <TableColumn fx:id="Type_of_taskd" prefWidth="44.0" text="Type" />
+            <TableColumn fx:id="creationtimed" prefWidth="90.0" text="Creation Date" />
+            <TableColumn fx:id="completiontimed" minWidth="0.0" prefWidth="114.0" text="Completion Date" />
+            <TableColumn fx:id="moredetailsd" prefWidth="76.0" text="Details" />
+        </columns>
+      </TableView>
+      <TableView fx:id="Tasksuploded" layoutX="8.0" layoutY="117.0" prefHeight="411.0" prefWidth="447.0">
+        <columns>
+          <TableColumn fx:id="idTasku" prefWidth="52.0" text="Task ID" />
+          <TableColumn fx:id="Type_of_tasku" prefWidth="83.33330917358398" text="Type" />
+            <TableColumn fx:id="creationtimeu" minWidth="0.0" prefWidth="91.33334350585938" text="Creation Date" />
+            <TableColumn fx:id="deadlineu" prefWidth="80.00001525878906" text="Deadline" />
+            <TableColumn fx:id="statusu" prefWidth="55.33331298828125" text="Status" />
+            <TableColumn fx:id="moredetailsu" prefWidth="80.66667683919269" text="Details" />
+        </columns>
+      </TableView>
+      <Label fx:id="communityM" alignment="TOP_CENTER" layoutX="471.0" layoutY="80.0" prefHeight="44.0" prefWidth="373.0" text="Tasks she preformed" textFill="#a3272f">
+         <font>
+            <Font name="Calibri Light" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="communityM1" alignment="TOP_CENTER" layoutX="45.0" layoutY="80.0" prefHeight="44.0" prefWidth="373.0" text="Tasks she uploaded" textFill="#a3272f">
+         <font>
+            <Font name="Calibri Light" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="donenotdone" alignment="TOP_CENTER" layoutX="130.0" layoutY="14.0" prefHeight="44.0" prefWidth="649.0" text="Maria's Tasks" textFill="#a3272f">
+         <font>
+            <Font name="Calibri Light" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

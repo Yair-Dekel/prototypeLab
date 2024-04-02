@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #90cb68;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.EmergencyController">
+   <children>
+      <AnchorPane fx:id="btn1" prefHeight="607.0" prefWidth="600.0" style="-fx-background-color: #e77c7c;">
+         <children>
+            <Label layoutX="204.0" layoutY="83.0" prefHeight="17.0" prefWidth="202.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="94.0" text="your emergency request was sent successfully." textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="210.0" fitWidth="202.0" layoutX="189.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@emergency-call.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackToTheMain" prefHeight="39.0" prefWidth="83.0" text="back">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="info_label" layoutX="42.0" layoutY="147.0" prefHeight="184.0" prefWidth="517.0" textFill="WHITE">
+               <font>
+                  <Font size="18" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewTaskController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewTaskController">
    <children>
       <AnchorPane fx:id="btn1" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #c4bfa0;">
          <children>
@@ -28,7 +33,7 @@
             <Button fx:id="confirm_and_displayBtn" layoutX="277.0" layoutY="443.0" mnemonicParsing="false" onAction="#check_confirm_display_task" text="confirm" />
          </children>
       </AnchorPane>
-      <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="560.0" text="Emergency Button" textFill="#0ca9c7">
+      <Button mnemonicParsing="false" onAction="#switchToemergency" prefHeight="48.0" prefWidth="560.0" text="Emergency Button" textFill="#0ca9c7">
          <VBox.margin>
             <Insets left="20.0" right="20.0" top="20.0" />
          </VBox.margin>

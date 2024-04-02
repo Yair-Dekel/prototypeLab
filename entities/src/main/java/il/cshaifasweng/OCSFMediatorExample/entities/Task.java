@@ -1,19 +1,21 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
-@Table(name="Tasks")
+@Table (name="Tasks")
 public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    public int id;
 
     private String moredetails;
     private TaskType Type_of_task;
     private LocalDateTime Creation_time;
+    private LocalDateTime completiontime;
     @ManyToOne
     @JoinColumn(name = "registered_user_id", referencedColumnName = "id")
     private Registered_user registered_user;
@@ -97,6 +99,14 @@ public class Task implements Serializable {
 
     public void setRegistered_user(Registered_user registered_user) {
         this.registered_user = registered_user;
+    }
+
+    public String getMoredetails() {
+        return moredetails;
+    }
+
+    public void setMoredetails(String moredetails) {
+        this.moredetails = moredetails;
     }
 
     public LocalDateTime getDeadline() {

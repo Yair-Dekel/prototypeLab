@@ -35,6 +35,10 @@ public class SimpleChatClient extends Application {
     private ManagerClient managerClient;///////////////////????????????????????????????????????????????????????????
     private static FXMLLoader fxmlLoader;
 
+    public static Stage getAppStage() {
+        return appStage;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         EventBus.getDefault().register(this);
@@ -44,7 +48,10 @@ public class SimpleChatClient extends Application {
         scene = new Scene(loadFXML("log_in"), 600, 600);
         stage.setScene(scene);
         stage.show();
+
     }
+
+
 
     static void setRoot(String fxml) throws IOException {
         Parent root = loadFXML(fxml);
@@ -55,7 +62,23 @@ public class SimpleChatClient extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SimpleChatClient.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+        Parent root= fxmlLoader.load();
+        Object controller=fxmlLoader.getController();
+        if (controller instanceof MainController) {
+            MainController mainController = (MainController) controller;
+            mainController.setAppStage(appStage);
+        }
+        else if(controller instanceof UserMainController){
+            UserMainController UserController = (UserMainController) controller;
+            UserController.setAppStage(appStage);
+        }
+        else if(controller instanceof EmergencyController) {
+            EmergencyController emergebcyController = (EmergencyController) controller;
+            emergebcyController.setAppStage(appStage);
+        }
+        return root;
+
+
     }
 
     public static FXMLLoader getLoader() {

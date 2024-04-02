@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
+import il.cshaifasweng.OCSFMediatorExample.client.NewDetailsEvent;
+import il.cshaifasweng.OCSFMediatorExample.client.TaskRejectEvent;
+import il.cshaifasweng.OCSFMediatorExample.client.TasksMessageEvent;
 import javafx.scene.input.MouseEvent;
-import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import javafx.event.ActionEvent;
@@ -16,34 +18,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 
 
 import il.cshaifasweng.OCSFMediatorExample.entities.MessageOfStatus;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getManagerClient;
-
+import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getClient;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 
 
 public class Manager  {
@@ -151,7 +137,7 @@ public class Manager  {
         Task task = ListOfTasks.getSelectionModel().getSelectedItem();
         if (task != null) {
             MessageOfStatus message = new MessageOfStatus(task, "accept");
-            getManagerClient().sendToServer(message);
+            getClient().sendToServer(message);
         }
         else {
             Platform.runLater(() -> {
@@ -200,7 +186,7 @@ public class Manager  {
         if (!reason.equals("")) {
             MessageOfStatus message = new MessageOfStatus(task, "reject: "+reason);
 
-            getManagerClient().sendToServer(message);
+            getClient().sendToServer(message);
 
             Send.setVisible(false);
             Reason.setVisible(false);
@@ -222,6 +208,16 @@ public class Manager  {
 
     @FXML
     void ShowEmergency(ActionEvent event) {
+
+        System.out.println("in ShowList_Emergency_call");
+        Platform.runLater(() -> {
+            try {
+                setRoot("show_emergencyCall");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+ });
+
 
     }
 
@@ -257,9 +253,15 @@ public class Manager  {
 
     @FXML
     void ShowMembers(ActionEvent event) {
+        Platform.runLater(() -> {
+            try {
+                setRoot("members");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
 
-    }
-
+                }
+            });
+        }
     @FXML
     void ShowTasks(ActionEvent event) {
 
@@ -274,7 +276,7 @@ public class Manager  {
 
     //ObservableList<Task> observableTasks = FXCollections.observableArrayList();
     @Subscribe
-    public void ShowListView(TasksMessageEvent event) {
+    public void ShowListView(TasksMessageEvent event) {////////////////////////////////////////////////////////
 
         Platform.runLater(() -> {
             //tasksContaine.getChildren().clear(); // Clear existing content
@@ -295,12 +297,6 @@ public class Manager  {
                 showAlert("Error", "Error", "Invalid event received.", Alert.AlertType.ERROR);
             }
 
-            //Scene scene = new Scene(ListOfTasks, 300, 250);
-
-            // Set stage title and scene, then show the stage
-            //Manager.setTitle("Tasks Waiting for Approval");
-            // Manager.setScene(scene);
-            //  Manager.show();
         });
     }
 
@@ -312,10 +308,28 @@ public class Manager  {
     }
 
     @FXML
-    void initialize() {
+    void switchToemergency(ActionEvent event) {
+        Platform.runLater(() -> {
+            try {
+                setRoot("Emergency");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    @FXML
+    void initialize(String username) {
         EventBus.getDefault().register(this);
+
+        // Initialize ManagerClient instance
+
+        ManagerClient managerClient = ManagerClient.getClient();
         try {
-            getManagerClient().sendToServer("list view");
+//            TasksOb.getInstance();
+//            getClient().sendToServer("get tasks");
+            managerClient.openConnection();
+//            getClient().sendToServer("list view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -323,10 +337,18 @@ public class Manager  {
         msgId=0;
 
         try {
-            Message message = new Message(msgId, "add client");
-            getManagerClient().sendToServer(message);
+            //getClient().sendToServer("add manager client");
+            Message message2 = new Message("list view",username);
+            Message message3 = new Message("add manager client",username);
+            managerClient.sendToServer(message2);
+
+           managerClient.sendToServer(message3);
+
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            // Handle send error
+            System.err.println("Error: Unable to send message to the server");
+            e.printStackTrace();
+            // Optionally, you may choose to continue initialization or stop here
         }
     }
 

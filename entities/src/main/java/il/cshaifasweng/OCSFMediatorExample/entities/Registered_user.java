@@ -98,15 +98,25 @@ public class Registered_user
 package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
 public class Registered_user implements Serializable { //extends User
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isPermission() {
+        return permission;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @OneToMany(mappedBy = "registered_user")
+    private List<Task> tasks_uploaded;
     @Column(name = "given_name")
     private String givenName;
     @Column(name = "family_name")
@@ -122,9 +132,8 @@ public class Registered_user implements Serializable { //extends User
     //private String SerialNumber;
     @Column(name = "phone_number")
     private String phone_number;
-    private String community;
+    private Communities community;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     // Default constructor for JPA
     public Registered_user() {
         // Default constructor required by JPA
@@ -132,7 +141,7 @@ public class Registered_user implements Serializable { //extends User
 
     // Constructor with parameters
     public Registered_user(String givenName, String familyName, String username, String password,
-                           boolean permission, String phoneNumber, String community) {
+                           boolean permission, String phoneNumber, Communities community) {
         this.givenName = givenName;
         this.familyName = familyName;
         this.username = username;
@@ -192,11 +201,11 @@ public class Registered_user implements Serializable { //extends User
         this.permission = permission;
     }
 
-    public String getCommunity() {
+    public Communities getCommunity() {
         return community;
     }
 
-    public void setCommunity(String community) {
+    public void setCommunity(Communities community) {
         this.community = community;
     }
 

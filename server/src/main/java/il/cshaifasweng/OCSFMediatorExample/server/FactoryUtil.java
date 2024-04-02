@@ -1,4 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
+import il.cshaifasweng.OCSFMediatorExample.entities.Emergency_call;
 import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
 import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import org.hibernate.Session;
@@ -22,6 +23,7 @@ public class FactoryUtil {
 
                 configuration.addAnnotatedClass(Registered_user.class);
                 configuration.addAnnotatedClass(Task.class);
+                configuration.addAnnotatedClass(Emergency_call.class);
                 // Create a ServiceRegistry from hibernate configuration
 
                 ServiceRegistry serviceRegistry = new

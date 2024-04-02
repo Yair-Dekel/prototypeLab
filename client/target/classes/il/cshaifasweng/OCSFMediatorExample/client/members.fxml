@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.MembersController">
+   <children>
+      <Label fx:id="communityM" alignment="TOP_CENTER" layoutX="26.0" prefHeight="44.0" prefWidth="649.0" text="Community Members" textFill="#a3272f">
+         <font>
+            <Font name="Calibri Light" size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="10.0" layoutY="78.0" prefHeight="282.0" prefWidth="656.0">
+        <columns>
+            <TableColumn fx:id="id" prefWidth="87.33334636688232" text="ID" />
+            <TableColumn fx:id="usernameColumn" prefWidth="133.99996185302734" text="User Name" />
+            <TableColumn fx:id="givenName" minWidth="3.3333740234375" prefWidth="134.0000762939453" text="Given Name" />
+            <TableColumn fx:id="familyName" minWidth="0.0" prefWidth="149.33328247070312" text="Family Name" />
+            <TableColumn fx:id="phoneNumber" prefWidth="142.66668701171875" text="Phone Number" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

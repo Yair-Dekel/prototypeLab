@@ -5,11 +5,29 @@ public class MessageOfStatus implements Serializable{
     private Task task;
     private String changeStatus;
 
+    private String username;
+
 
     public MessageOfStatus(Task task, String changeStatus)
     {
         this.task = task;
         this.changeStatus = changeStatus;
+        this.username="";
+
+    }
+    public MessageOfStatus(String changeStatus,String username)
+    {
+        this.task = null;
+        this.changeStatus = changeStatus;
+        this.username=username;
+
+    }
+
+    public MessageOfStatus(Task task, String changeStatus,String username)
+    {
+        this.task = task;
+        this.changeStatus = changeStatus;
+        this.username=username;
 
     }
     public MessageOfStatus(Task task)
@@ -22,6 +40,15 @@ public class MessageOfStatus implements Serializable{
 //        this.changeStatus = changeStatus;
 //
 //    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getChangeStatus(){
         return changeStatus;

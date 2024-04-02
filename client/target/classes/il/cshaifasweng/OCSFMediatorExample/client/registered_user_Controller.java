@@ -10,18 +10,9 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.util.Duration;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 import javafx.scene.layout.AnchorPane;
-import java.io.IOException;
-import javafx.scene.control.TextArea;
-
-
 
 
 public class registered_user_Controller {
