@@ -8,10 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.text.Font;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,7 +31,15 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
+
 public class ShowRequestedTasksPage {
+
+    @FXML
+    private Button BACK;
+
+    @FXML
+    private Label welcome;
 
     @FXML
     private TextArea RequestedTaskDetails;
@@ -130,9 +136,24 @@ public class ShowRequestedTasksPage {
         alert.setHeaderText(header);
         alert.show();
     }
+
+    @FXML
+    void Back(ActionEvent event) {
+
+        Platform.runLater(() -> {
+            try {
+                setRoot("user_main");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
     @FXML
     void initialize(String username) throws IOException {
         System.out.println(username+" userclient???????????????????????????????????/");
+        welcome.setText("REQUESTED TASKS OF " + username);
+        welcome.setAlignment(Pos.TOP_LEFT);
         EventBus.getDefault().register(this);
         UserClient userClient = UserClient.getClient();
         try {

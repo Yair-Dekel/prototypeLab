@@ -51,6 +51,9 @@ import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoo
 public class Manager {
 
     @FXML
+    private Button Log_Out;
+
+    @FXML
     private Button Accept;
 
     @FXML
@@ -167,6 +170,18 @@ public class Manager {
     @FXML
     void EmergencyCall(ActionEvent event) {
 
+    }
+
+    @FXML
+    void LOG_OUT(ActionEvent event) throws IOException {
+        ManagerClient.getClient().closeConnection();
+        Platform.runLater(() -> {
+            try {
+                setRoot("log_in");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @FXML

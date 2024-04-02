@@ -72,6 +72,10 @@ public class SimpleChatClient extends Application {
             UserMainController UserController = (UserMainController) controller;
             UserController.setAppStage(appStage);
         }
+        else if(controller instanceof Manager) {
+            Manager managerController = (Manager) controller;
+            managerController.setAppStage(appStage);
+        }
         return root;
 
 

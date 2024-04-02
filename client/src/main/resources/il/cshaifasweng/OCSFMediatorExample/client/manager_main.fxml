@@ -38,5 +38,6 @@
         </Label>
         <Button fx:id="Send" layoutX="583.0" layoutY="479.0" mnemonicParsing="false" onAction="#SendReason" text="Send" textFill="#11ba3e" visible="false" />
         <TextArea fx:id="Request" layoutX="280.0" layoutY="143.0" prefHeight="200.0" prefWidth="389.0" />
+      <Button fx:id="Log_Out" layoutX="585.0" layoutY="25.0" mnemonicParsing="false" onAction="#LOG_OUT" prefHeight="25.0" prefWidth="76.0" text="LOG OUT" textFill="#52ab70" />
     </children>
 </AnchorPane>
