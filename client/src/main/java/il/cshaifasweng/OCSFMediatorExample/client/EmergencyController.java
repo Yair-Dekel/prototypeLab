@@ -47,15 +47,15 @@ public class EmergencyController {
        }
        else if((UserClient.getLoggedInUser()== null))
        {
-//           UserClient.getLoggedInUser().getUsername();
-//               Platform.runLater(() -> {
-//                   try {
-//                       setRoot("manager_main");
-//                   } catch (IOException e) {
-//                       throw new RuntimeException(e);
-//                   }
-//               });
-           Platform.runLater(() -> {
+          UserClient.getLoggedInUser().getUsername();
+              Platform.runLater(() -> {
+                try {
+                      setRoot("manager_main");
+                 } catch (IOException e) {
+                      throw new RuntimeException(e);
+                 }
+              });
+           /*Platform.runLater(() -> {
                try {
                    FXMLLoader loader = new FXMLLoader(getClass().getResource("manager_main.fxml"));
                    Parent root = loader.load();
@@ -70,12 +70,15 @@ public class EmergencyController {
 
                    appStage.setScene(scene);
                    appStage.show();
+
                } catch (IOException e) {
                    throw new RuntimeException(e);
                }
            });
 
-       }else
+*/
+       }
+      else
        {
            Platform.runLater(() -> {
                try {

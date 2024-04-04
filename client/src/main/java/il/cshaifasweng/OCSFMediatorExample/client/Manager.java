@@ -29,10 +29,14 @@ import javafx.scene.text.Font;
 import org.greenrobot.eventbus.Subscribe;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getClient;
+import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getManagerClient;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 
 
 public class Manager  {
+
+    @FXML
+    private Button Log_Out;
 
     @FXML
     private Button Accept;
@@ -67,7 +71,8 @@ public class Manager  {
     @FXML
     private Label WriteReason;
 
-
+    @FXML
+    private Label welcome;
     private int msgId;
 
     // Define the font size and family you want to use
@@ -157,6 +162,73 @@ public class Manager  {
     }
 
     @FXML
+    void LOG_OUT(ActionEvent event) throws IOException {
+        System.out.println("Logging out user: " + ManagerClient.getManagerClient().getUsername());
+
+        // Create a logout message
+        Message message = new Message("log out manager", ManagerClient.getManagerClient().getUsername());
+
+        // Get the ManagerClient instance
+        ManagerClient managerClient = ManagerClient.getClient();
+        System.out.println("i will enter");
+
+/*
+        // Set up a callback to handle the close connection after sending the message
+        managerClient.setCloseConnectionCallback(() -> {
+            try {
+                // Close the connection after the message is sent
+                System.out.println("inside try to close conction");
+               ManagerClient.getClient().closeConnection();
+                System.out.println("Connection closed successfully");
+            } catch (IOException e) {
+                // Handle exception if connection closure fails
+                System.out.println("error catch");
+                e.printStackTrace();
+            }
+
+            // Change the UI after the connection is closed
+            Platform.runLater(() -> {
+                try {
+                    setRoot("log_in");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+        });*/
+
+        // Send the message
+        managerClient.sendToServer(message);
+        System.out.println("Logout message sent to server");
+        Platform.runLater(() -> {
+            try {
+                setRoot("log_in");
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        System.out.println("back from platfrom");
+        managerClient.closeConnection();
+        cleanup();
+
+    }
+
+/*
+    @FXML
+    void LOG_OUT(ActionEvent event) throws IOException {
+        ManagerClient.getClient().closeConnection();
+
+        Platform.runLater(() -> {
+            try {
+                setRoot("log_in");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        cleanup();
+    }*/
+    @FXML
     void RejectRequest(ActionEvent event) throws IOException {
         Task task = ListOfTasks.getSelectionModel().getSelectedItem();
         if (task != null) {
@@ -208,6 +280,7 @@ public class Manager  {
 
     @FXML
     void ShowEmergency(ActionEvent event) {
+
 
         System.out.println("in ShowList_Emergency_call");
         Platform.runLater(() -> {
@@ -317,39 +390,87 @@ public class Manager  {
             }
         });
     }
-
+/*
     @FXML
     void initialize(String username) {
-        EventBus.getDefault().register(this);
+        System.out.println("initiza;ies with"+ManagerClient.getManagerClient().getUsername());
+            welcome.setText("Hi " + ManagerClient.getManagerClient().getGivenName() + " these tasks wait for your approval:");
+            EventBus.getDefault().register(this);
 
-        // Initialize ManagerClient instance
 
-        ManagerClient managerClient = ManagerClient.getClient();
-        try {
+            // Initialize ManagerClient instance
+
+            ManagerClient managerClient = ManagerClient.getClient();
+            try {
 //            TasksOb.getInstance();
 //            getClient().sendToServer("get tasks");
-            managerClient.openConnection();
+                managerClient.openConnection();
+                System.out.println("openned " + ManagerClient.getManagerClient().getUsername());
 //            getClient().sendToServer("list view");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-        msgId=0;
+            msgId = 0;
 
-        try {
-            //getClient().sendToServer("add manager client");
-            Message message2 = new Message("list view",username);
-            Message message3 = new Message("add manager client",username);
-            managerClient.sendToServer(message2);
+            try {
+                //getClient().sendToServer("add manager client");
+                Message message2 = new Message("list view", username);
+                Message message3 = new Message("add manager client", username);
+                managerClient.sendToServer(message3);
 
-           managerClient.sendToServer(message3);
+                managerClient.sendToServer(message2);
 
-        } catch (IOException e) {
-            // Handle send error
-            System.err.println("Error: Unable to send message to the server");
-            e.printStackTrace();
-            // Optionally, you may choose to continue initialization or stop here
-        }
+            } catch (IOException e) {
+                // Handle send error
+                System.err.println("Error: Unable to send message to the server");
+                e.printStackTrace();
+                // Optionally, you may choose to continue initialization or stop here
+            }
+    }*/
+@FXML
+void initialize() {
+    System.out.println("initiza;ies with"+ManagerClient.getManagerClient().getUsername());
+    welcome.setText("Hi " + ManagerClient.getManagerClient().getGivenName() + " these tasks wait for your approval:");
+    EventBus.getDefault().register(this);
+
+
+    // Initialize ManagerClient instance
+
+    ManagerClient managerClient = ManagerClient.getClient();
+    try {
+//            TasksOb.getInstance();
+//            getClient().sendToServer("get tasks");
+        managerClient.openConnection();
+        System.out.println("openned " + ManagerClient.getManagerClient().getUsername());
+//            getClient().sendToServer("list view");
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+
+    msgId = 0;
+
+    try {
+        //getClient().sendToServer("add manager client");
+        Message message2 = new Message("list view", ManagerClient.getManagerClient().getUsername());
+        Message message3 = new Message("add manager client", ManagerClient.getManagerClient().getUsername());
+        managerClient.sendToServer(message3);
+
+        managerClient.sendToServer(message2);
+
+    } catch (IOException e) {
+        // Handle send error
+        System.err.println("Error: Unable to send message to the server");
+        e.printStackTrace();
+        // Optionally, you may choose to continue initialization or stop here
+    }
+}
+
+    public void cleanup() {
+        // Unregister from the event bus during cleanup
+        System.out.println("cleaned");
+        EventBus.getDefault().unregister(this);
+        System.out.println("999999999999999999999999999");
     }
 
 }

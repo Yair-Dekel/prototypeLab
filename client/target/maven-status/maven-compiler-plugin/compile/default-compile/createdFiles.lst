@@ -4,11 +4,13 @@ il\cshaifasweng\OCSFMediatorExample\client\CompletedEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\TasksMessageEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\VolunteeringPage.class
 il\cshaifasweng\OCSFMediatorExample\client\Main.class
+il\cshaifasweng\OCSFMediatorExample\client\MainController$1.class
 il\cshaifasweng\OCSFMediatorExample\client\RequestedTasksShowEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\Manager.class
 il\cshaifasweng\OCSFMediatorExample\client\NewSubscriberEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\UserMainController.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\AdaptableClient.class
+il\cshaifasweng\OCSFMediatorExample\client\VolunteeredTasksShowEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\show_new_task_Controller.class
 il\cshaifasweng\OCSFMediatorExample\client\ShowRequestedTasksPage.class
 il\cshaifasweng\OCSFMediatorExample\client\UserTasksController.class
@@ -29,6 +31,7 @@ il\cshaifasweng\OCSFMediatorExample\client\registered_user_Controller.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableClient.class
 il\cshaifasweng\OCSFMediatorExample\client\show_emergencyCall$3.class
 il\cshaifasweng\OCSFMediatorExample\client\PersonVolunteering.class
+il\cshaifasweng\OCSFMediatorExample\client\VolunteeringDone.class
 il\cshaifasweng\OCSFMediatorExample\client\UserClient.class
 il\cshaifasweng\OCSFMediatorExample\client\VolunteeringEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\TaskRejectEvent.class
@@ -36,5 +39,6 @@ il\cshaifasweng\OCSFMediatorExample\client\show_emergencyCall$4.class
 il\cshaifasweng\OCSFMediatorExample\client\SimpleChatClient.class
 il\cshaifasweng\OCSFMediatorExample\client\TasksUpdateEvent.class
 il\cshaifasweng\OCSFMediatorExample\client\NewTaskEvent.class
+il\cshaifasweng\OCSFMediatorExample\client\ShowMyVolunteeredTasks.class
 il\cshaifasweng\OCSFMediatorExample\client\Emergency_Call_Event.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableSWRClient.class

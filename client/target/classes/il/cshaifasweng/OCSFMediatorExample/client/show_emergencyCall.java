@@ -81,7 +81,8 @@ public class show_emergencyCall {
 
     @FXML
     void Back_to_main(ActionEvent event) throws IOException {
-//        SimpleChatClient.setRoot("manager_main");
+        /*
+//       SimpleChatClient.setRoot("manager_main");
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("manager_main.fxml"));
@@ -95,13 +96,21 @@ public class show_emergencyCall {
                     appStage = new Stage();
                 }
 
+
                 appStage.setScene(scene);
                 appStage.show();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-
+*/
+        Platform.runLater(() -> {
+            try {
+                setRoot("manager_main");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
 

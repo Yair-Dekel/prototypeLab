@@ -27,6 +27,23 @@ public class ManagerClient extends AbstractClient {
         super(host, port);
     }
 
+
+    private Runnable closeConnectionCallback;
+
+    public void setCloseConnectionCallback(Runnable callback) {
+        System.out.println("roll back***********");
+        this.closeConnectionCallback = callback;
+    }
+
+    // Method to call the close connection callback
+    private void callCloseConnectionCallback() {
+        System.out.println("call rollllllll backkkkkkk");
+        if (closeConnectionCallback != null) {
+            System.out.println("iffffffffffffffffffffffffff");
+            closeConnectionCallback.run();
+        }
+    }
+
     @Override
     protected void handleMessageFromServer(Object msg) throws IOException {
 
@@ -86,6 +103,7 @@ public class ManagerClient extends AbstractClient {
 
     public static ManagerClient getClient() {
         if (client == null) {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             client = new ManagerClient("localhost", 3000);
         }
         return client;

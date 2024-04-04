@@ -133,7 +133,11 @@ public class Task implements Serializable {
         Volunteer = volunteer;
     }
 
+    public LocalDateTime getCompletiontime() {
+        return completiontime;
+    }
 
-
-
+    public void setCompletiontime(LocalDateTime completiontime) {
+        this.completiontime = completiontime;
+    }
 }

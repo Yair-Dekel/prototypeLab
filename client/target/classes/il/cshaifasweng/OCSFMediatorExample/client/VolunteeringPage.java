@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -16,12 +17,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import javafx.scene.control.Label;
 
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 
 
 public class VolunteeringPage {
@@ -35,6 +39,17 @@ public class VolunteeringPage {
 
     @FXML
     private Button volunteer;
+
+    @FXML
+    private Button back_button;
+
+    @FXML
+    private Button emergency;
+
+    @FXML
+    private Label welcome;
+
+
 
     private int msgId;
 
@@ -171,8 +186,34 @@ public class VolunteeringPage {
         alert.show();
     }
     @FXML
-    void initialize(String username) throws IOException {
-        System.out.println(username+" userclient???????????????????????????????????/");
+    void back(ActionEvent event) {
+        Platform.runLater(() -> {
+            try {
+                setRoot("user_main");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
+    @FXML
+    void switch_to_emergency(ActionEvent event) {
+        Platform.runLater(() -> {
+            try {
+                setRoot("Emergency");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+    @FXML
+    void initialize() throws IOException {
+        System.out.println(UserClient.getLoggedInUser().getUsername()+" userclient???????????????????????????????????/");
+        String username=UserClient.getLoggedInUser().getUsername();
+        welcome.setText("Tasks waiting for " + UserClient.getLoggedInUser().getGivenName() +" volunteering:");
+        welcome.setAlignment(Pos.TOP_LEFT);
         EventBus.getDefault().register(this);
         Saveuser=username;
         UserClient userClient = UserClient.getClient();

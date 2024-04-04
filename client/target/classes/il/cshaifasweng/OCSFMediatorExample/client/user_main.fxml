@@ -23,11 +23,11 @@
                 </Label>
                 <VBox layoutX="73.0" layoutY="83.0" prefHeight="389.0" prefWidth="441.0">
                     <children>
-                        <AnchorPane fx:id="welcom_container" prefHeight="392.0" prefWidth="441.0">
+                        <AnchorPane fx:id="welcom_container" prefHeight="422.0" prefWidth="441.0">
                             <children>
-                                <Button fx:id="add_new_task_btn" layoutX="100.0" layoutY="38.0" mnemonicParsing="false" onAction="#switchToNewTask" prefHeight="70.0" prefWidth="268.0" text="Add A New Task">
+                                <Button fx:id="add_new_task_btn" layoutX="100.0" layoutY="38.0" mnemonicParsing="false" onAction="#switchToNewTask" prefHeight="64.0" prefWidth="268.0" text="Add A New Task" textFill="#1d6b3e">
                                     <font>
-                                        <Font size="18.0" />
+                                        <Font name="Imprint MT Shadow" size="13.0" />
                                     </font></Button>
                         <Button fx:id="volunteering" layoutX="101.0" layoutY="137.0" mnemonicParsing="false" onAction="#turnToVolunteeringPage" prefHeight="70.0" prefWidth="268.0" text="SHOW TASKS FOR VOLUNTEERING" textFill="#126129">
                            <font>
@@ -35,6 +35,11 @@
                            </font>
                         </Button>
                         <Button fx:id="MY_REQUSTED_TASKS" layoutX="101.0" layoutY="240.0" mnemonicParsing="false" onAction="#showRequstedTasks" prefHeight="64.0" prefWidth="268.0" text="MY REQUESTED TASKS" textFill="#0d681b">
+                           <font>
+                              <Font name="Imprint MT Shadow" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="volunteer_taks" layoutX="100.0" layoutY="333.0" mnemonicParsing="false" onAction="#switchToVolunteer" prefHeight="70.0" prefWidth="268.0" text="VOLUNTEERING TASKS" textFill="#1a5b2b">
                            <font>
                               <Font name="Imprint MT Shadow" size="12.0" />
                            </font>

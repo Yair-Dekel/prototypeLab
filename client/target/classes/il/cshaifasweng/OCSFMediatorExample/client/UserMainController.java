@@ -82,15 +82,7 @@ public class UserMainController {
     void showRequstedTasks(ActionEvent event) {
         Platform.runLater(() -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("requestedTasksPage.fxml"));
-                Parent root = loader.load();
-                ShowRequestedTasksPage RequestController = loader.getController();
-                RequestController.initialize(SaveUserName); // Pass the username to initialize method
-
-                // Show the scene
-                Scene scene = new Scene(root);
-                appStage.setScene(scene);
-                appStage.show();
+                setRoot("requestedTasksPage");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -98,25 +90,27 @@ public class UserMainController {
 
     }
 
-
+    @FXML
+    void switchToVolunteer(ActionEvent event){
+        Platform.runLater(() -> {
+            try {
+                setRoot("showMyVolunteeredTasks");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 
     @FXML
     void turnToVolunteeringPage(ActionEvent event) {
         Platform.runLater(() -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("VolunteeringPage.fxml"));
-                Parent root = loader.load();
-                VolunteeringPage VolunteerController = loader.getController();
-               VolunteerController.initialize(SaveUserName); // Pass the username to initialize method
-
-                // Show the scene
-                Scene scene = new Scene(root);
-                appStage.setScene(scene);
-                appStage.show();
+                setRoot("VolunteeringPage");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+
 
 
     }

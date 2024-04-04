@@ -233,7 +233,7 @@ public class SimpleChatServer {
                 session.beginTransaction();
                 System.out.println("1");
 
-                Registered_user user1 = new Registered_user("Rom","Levi","rom_levi1","123",false,"0507773121", Communities.AHUZA);
+                Registered_user user1 = new Registered_user("Rom","Levi","rom_levi1","123",true,"0507773121", Communities.AHUZA);
                 Registered_user user2 = new Registered_user("Yarin","Rabinobi","yarin_rabinobi2","1234",false,"0524373191",Communities.BAT_GALIM);
                 Registered_user user3 = new Registered_user("Dan","Shimoni","dan_shimoni1","1235",false,"0547373199",Communities.ROMEMA);
                 Registered_user user4 = new Registered_user("Linoy","Ohaion","linoyOhaion2","111",true,"0502213188",Communities.ROMEMA);

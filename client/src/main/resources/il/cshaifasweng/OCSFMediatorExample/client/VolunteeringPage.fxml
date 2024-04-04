@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -10,17 +11,32 @@
 
 <AnchorPane prefHeight="516.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.VolunteeringPage">
    <children>
-      <ImageView fitHeight="118.0" fitWidth="225.0" layoutX="271.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="118.0" fitWidth="225.0" layoutX="453.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image-removebg-preview (1).png" />
          </image>
       </ImageView>
-      <ListView fx:id="VolunteeringList" layoutX="46.0" layoutY="126.0" onMouseClicked="#volunteeringTaskShow" prefHeight="339.0" prefWidth="243.0" />
+      <ListView fx:id="VolunteeringList" layoutX="46.0" layoutY="116.0" onMouseClicked="#volunteeringTaskShow" prefHeight="328.0" prefWidth="243.0" />
       <TextArea fx:id="VolunteeringTaskDetails" layoutX="366.0" layoutY="143.0" prefHeight="200.0" prefWidth="363.0" />
       <Button fx:id="volunteer" layoutX="491.0" layoutY="360.0" mnemonicParsing="false" onAction="#Volunteering" prefHeight="36.0" prefWidth="114.0" text="Volunteer" textFill="#09852a">
          <font>
             <Font name="Elephant" size="12.0" />
          </font>
       </Button>
+      <Button fx:id="back_button" layoutX="674.0" layoutY="27.0" mnemonicParsing="false" onAction="#back" prefHeight="36.0" prefWidth="81.0" text="BACK" textFill="#108a32">
+         <font>
+            <Font name="Kristen ITC" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="emergency" layoutX="15.0" layoutY="462.0" mnemonicParsing="false" onAction="#switch_to_emergency" prefHeight="36.0" prefWidth="749.0" text="Emergency Button" textFill="#d71010">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="welcome" layoutX="40.0" layoutY="55.0" prefHeight="50.0" prefWidth="408.0" text="welcome" textFill="#23904a">
+         <font>
+            <Font name="Kristen ITC" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

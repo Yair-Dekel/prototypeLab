@@ -63,7 +63,7 @@ public class SimpleChatClient extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SimpleChatClient.class.getResource(fxml + ".fxml"));
         Parent root= fxmlLoader.load();
-        Object controller=fxmlLoader.getController();
+       /* Object controller=fxmlLoader.getController();
         if (controller instanceof MainController) {
             MainController mainController = (MainController) controller;
             mainController.setAppStage(appStage);
@@ -75,7 +75,7 @@ public class SimpleChatClient extends Application {
         else if(controller instanceof EmergencyController) {
             EmergencyController emergebcyController = (EmergencyController) controller;
             emergebcyController.setAppStage(appStage);
-        }
+        }*/
         return root;
 
 
