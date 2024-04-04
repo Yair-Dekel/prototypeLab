@@ -47,7 +47,7 @@ public class EmergencyController {
        }
        else if((UserClient.getLoggedInUser()== null))
        {
-          UserClient.getLoggedInUser().getUsername();
+          //ManagerClient.getManagerClient().getUsername();
               Platform.runLater(() -> {
                 try {
                       setRoot("manager_main");

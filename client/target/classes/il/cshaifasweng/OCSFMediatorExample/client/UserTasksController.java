@@ -111,7 +111,6 @@ public class UserTasksController {
         Platform.runLater(() -> {
             try {
                 if (!event.getDis().getTasks().isEmpty()){
-                    System.out.println(event.getDis().getTasks().getFirst().getId());
                     System.out.println("eventrecognized");
                     ObservableList<Task> observableTasks = FXCollections.observableArrayList(event.getDis().getTasks());
                     if (!observableTasks.isEmpty()) {
@@ -129,7 +128,7 @@ public class UserTasksController {
         Platform.runLater(() -> {
             try {
                 if (!event.getDis().getTasks().isEmpty())
-                {System.out.println(event.getDis().getTasks().getFirst().getId());
+                {
                 System.out.println("eventrecognizedC");
                 ObservableList<Task> observableTasks = FXCollections.observableArrayList(event.getDis().getTasks());
                     Tasksuploded.setItems(observableTasks);
