@@ -397,6 +397,13 @@ public class SimpleServer extends AbstractServer {
 
             }
 
+
+            else if (request.equals("Log_Out")){
+
+                client.sendToClient("Log_Out");
+
+            }
+
         } catch (HibernateException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

@@ -54,6 +54,14 @@ public class UserClient extends AbstractClient {
             EventBus.getDefault().post(new NewVerifiedInformationEvent(message));
         }
 
+
+        else if (msg.equals("Log_Out")){
+            System.out.println("we are in the UserClient Log_Out section ");
+            loggedInUser=null;
+            System.out.println("we are in the UserClient Log_Out section and we succeed to disconnect the user from the server");
+
+        }
+
     }
 
     public static UserClient getClient() {

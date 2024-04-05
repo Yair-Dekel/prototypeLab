@@ -4,9 +4,11 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -16,6 +18,9 @@ import java.io.IOException;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 
 public class MainController {
+
+    @FXML
+    private Stage loginStage;
 
     @FXML
     private AnchorPane btn1;
@@ -84,8 +89,12 @@ private void showAlert(String title, String content) {
     @Subscribe
     public void result_user_input(NewVerifiedInformationEvent event) throws IOException {
         System.out.println("in client/after event/result_user_input");
+
+        Stage loginStage = (Stage) login_btn.getScene().getWindow();
+
         if (event.getMessage().getMessage().equals("correct"))
         {
+
             if(event.getMessage().getUser().getPermission())//1 for manager
             {
                 ManagerClient.getClient().openConnection();
@@ -112,7 +121,14 @@ private void showAlert(String title, String content) {
     void switchToMainOfUser() {
         Platform.runLater(() -> {
             try {
+
+                Stage stage = (Stage) login_btn.getScene().getWindow();
+                if (stage!=null)
+                stage.close();
                 setRoot("user_main");
+
+
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
