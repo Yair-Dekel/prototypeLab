@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -161,11 +162,122 @@ public class show_emergencyCall {
 
         // Update the TableView with the filtered list of emergency calls
         ListOfCalls.setItems(filteredCalls);
+
+
         // Update the last selected community and date range
         lastSelectedCommunity = comunity_choose.getText();
         lastStartDate = startDate;
         lastEndDate = endDate;
     }
+
+
+
+    private ObservableList<XYChart.Data<String, Number>> getChartData(ObservableList<Emergency_call> calls) {
+        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+        for (Emergency_call call : calls) {
+            LocalDateTime creationTime = call.getCreation_time();
+            String creationTimeStr = creationTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Format creation time as needed
+            // You can retrieve other properties of the Emergency_call object as needed
+            int count = 1; // Assuming each call counts as 1
+            // Add data to the series
+            data.add(new XYChart.Data<>(creationTimeStr, count));
+        }
+        return data;
+    }
+
+
+
+
+    private void initializeCallsChart() {
+        // Initialize the bar chart
+        Calls_chart.setTitle("Emergency Calls by Day and Month");
+
+        // Set up the x-axis
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Creation Time");
+
+        // Set up the y-axis
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Number of Calls");
+
+        // Create the bar chart with the specified axes
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+
+        try {
+            // Set up database connection
+            String url = "jdbc:mysql://localhost:3306/Atis?serverTimezone=UTC";
+            String username = "root";
+            String password = "Rina.1234";
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            // Prepare SQL statement
+            String sql = "SELECT DATE_FORMAT(creation_time, '%Y-%m-%d') AS day, COUNT(*) AS count " +
+                    "FROM emergency_calls " +
+                    "GROUP BY DATE_FORMAT(creation_time, '%Y-%m-%d')";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+
+            // Execute query and process results
+            // Execute query and process results
+            ResultSet resultSet = statement.executeQuery();
+            ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+            while (resultSet.next()) {
+                String day = resultSet.getString("day"); // Retrieve the correct column name "day" instead of "creation_time_str"
+                int count = resultSet.getInt("count");
+                // Add data to the series
+                data.add(new XYChart.Data<>(day, count));
+            }
+
+            // Create series for the chart
+            XYChart.Series series = new XYChart.Series<>();
+            series.setName("Emergency Calls");
+            series.setData(data);
+
+            // Add the series to the existing Calls_chart
+            Calls_chart.getData().add(series);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Calls_chart= barChart;
+    }
+
+    // Method to get chart data from the ListOfCalls table's items
+/*    private ObservableList<XYChart.Data<String, Number>> getChartData() {
+        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+        for (Emergency_call call : ListOfCalls.getItems()) {
+            // Add data to the series
+            data.add(new XYChart.Data<>(call.getCreation_time().toString(), 1)); // Assuming each call counts as 1
+        }
+        return data;
+    }*/
+    private ObservableList<XYChart.Data<String, Number>> getChartData() {
+        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+        for (Emergency_call call : ListOfCalls.getItems()) {
+            LocalDateTime creationTime = call.getCreation_time();
+            String creationTimeStr = creationTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Format creation time as needed
+            // You can retrieve other properties of the Emergency_call object as needed
+            int count = 1; // Assuming each call counts as 1
+            // Add data to the series
+            data.add(new XYChart.Data<>(creationTimeStr, count));
+        }
+        return data;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -281,6 +393,8 @@ public class show_emergencyCall {
             lastEndDate = To_date.getValue();
             updateListOfCalls();
         });
+
+        initializeCallsChart();
 
 
     }

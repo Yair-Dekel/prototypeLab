@@ -13,7 +13,7 @@
 
 <VBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #ccff00;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.MainController">
     <children>
-        <AnchorPane fx:id="maincontanier" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #ccff00;">
+        <AnchorPane fx:id="maincontanier" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #b2ffff;">
 
             <children>
                 <Label layoutX="204.0" layoutY="83.0" prefHeight="17.0" prefWidth="202.0">
@@ -54,9 +54,9 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-        <Button fx:id="Emergency_btn" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="0.0" prefWidth="850.0" text="Emergency Button">
+        <Button fx:id="Emergency_btn" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="37.0" prefWidth="850.0" text="Emergency Button">
             <font>
-                <Font name="Leelawadee UI Semilight" size="21.0" />
+                <Font name="Leelawadee UI Semilight" size="17.0" />
             </font>
             <VBox.margin>
                 <Insets />
