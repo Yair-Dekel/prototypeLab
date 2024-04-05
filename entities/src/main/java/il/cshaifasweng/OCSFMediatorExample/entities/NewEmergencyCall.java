@@ -10,15 +10,29 @@ public class NewEmergencyCall implements  Serializable{
     private String given_name;
     private String phone_number;
 
+    private  String host;
     private boolean inDataBase;
 
 
-    public NewEmergencyCall(String given_name , String phone_number, Registered_user openby1){
+    public void setOpenby1(Registered_user openby1) {
+        this.openby1 = openby1;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public NewEmergencyCall(String given_name , String phone_number, Registered_user openby1, String host){
 
         this.phone_number=phone_number;
         this.given_name= given_name;
         this.openby1=openby1;
         this.inDataBase=false;
+        this.host=host;
 
     }
 

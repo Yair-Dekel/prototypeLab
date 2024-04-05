@@ -1,6 +1,12 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registered_user;
+import il.cshaifasweng.OCSFMediatorExample.entities.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +18,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 
 import java.io.IOException;
+import java.util.TimerTask;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 
@@ -80,31 +87,74 @@ private void showAlert(String title, String content) {
 
     }
 
+    public static int loginAttempts = 1;
+    public static final int MAX_LOGIN_ATTEMPTS = 3;
+    public static final long LOCKOUT_DURATION = 60000; // 1 minute in milliseconds
+    private static boolean loginButtonEnabled = true;
+
+    private void disableLoginButtonForDuration(long duration) {
+        System.out.println("inside disable#####################3");
+        loginButtonEnabled = false;
+        login_btn.setDisable(true);
+
+        // Schedule a task to enable the login button after the specified duration
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                loginButtonEnabled = true;
+                loginAttempts = 0; // Reset login attempts after lockout duration
+                Platform.runLater(() -> {
+                    login_btn.setDisable(false);
+                });
+            }
+        }, duration);
+    }
 
     @Subscribe
     public void result_user_input(NewVerifiedInformationEvent event) throws IOException {
         System.out.println("in client/after event/result_user_input");
-        if (event.getMessage().getMessage().equals("correct"))
-        {
-            if(event.getMessage().getUser().getPermission())//1 for manager
-            {
-                ManagerClient.getClient().openConnection();
-                 ManagerClient.setManagerClient(event.getMessage().getUser());
-                switchToMainOfManager();
-            }else {
-                UserClient.setLoggedInUser(event.getMessage().getUser());
-                switchToMainOfUser();
+        System.out.println("counter" + loginAttempts);
+        if (loginAttempts == MAX_LOGIN_ATTEMPTS) {
+            System.out.println("inside attemps if");
+            //disableLoginButtonForDuration(LOCKOUT_DURATION);
+            Platform.runLater(() -> {
+                showErrorDialog("please try again after 1 minute.");
+            });
+            disableLoginButtonForDuration(LOCKOUT_DURATION);
+            return;
+        } else {
+            if (event.getMessage().getMessage().equals("correct")) {
+                /************UnknownUserClient.getClient().closeConnection();*/
+                if (event.getMessage().getUser().getPermission())//1 for manager
+                {
+                    ManagerClient.getClient().openConnection();
+                    ManagerClient.setManagerClient(event.getMessage().getUser());
+                    switchToMainOfManager();
+                } else {
+                    UserClient.setLoggedInUser(event.getMessage().getUser());
+                    switchToMainOfUser();
+                }
+
+            } else if (event.getMessage().getMessage().equals("wrongPassword")) {
+                loginAttempts++;
+                System.out.println(loginAttempts);
+
+                Platform.runLater(() -> {
+                    showErrorDialog("Wrong Password \n you try to write a wrong password, please try again");
+                });
+            } else if (event.getMessage().getMessage().equals("userNotExist")) {
+                loginAttempts++;
+                System.out.println(loginAttempts);
+                System.out.println("inside wrong wrong");
+                Platform.runLater(() -> {
+                    showErrorDialog("wrong User Name and password \n you try to write a wrong username and password, please try again");
+                });
+            } else if (event.getMessage().getMessage().equals("exists")) {
+                Platform.runLater(() -> {
+                    showErrorDialog("you are already connected.");
+                });
             }
-
-        } else if (event.getMessage().getMessage().equals("wrongPassword")) {
-
-            Platform.runLater(() -> {
-            showErrorDialog("Wrong Password \n you try to write a wrong password, please try again");
-            });
-        } else if (event.getMessage().getMessage().equals("user is not exist")) {
-            Platform.runLater(() -> {
-            showErrorDialog("wrong User Name \n you try to write a wrong username, please try again");
-            });
         }
     }
 
@@ -155,6 +205,12 @@ private void showAlert(String title, String content) {
     void initialize() {
         EventBus.getDefault().register(this);
         msgId = 0;
+        try {
+            UserClient.getClient().sendToServer("deadline check");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         // Set initial focus to the Username_TF TextField
         Username_TF.requestFocus();
     }

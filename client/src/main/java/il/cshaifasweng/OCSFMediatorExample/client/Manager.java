@@ -32,6 +32,9 @@ import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoo
 public class Manager  {
 
     @FXML
+    private Button Log_Out;
+
+    @FXML
     private Button Accept;
 
     @FXML
@@ -64,7 +67,8 @@ public class Manager  {
     @FXML
     private Label WriteReason;
 
-
+    @FXML
+    private Label welcome;
     private int msgId;
 
     // Define the font size and family you want to use
@@ -131,6 +135,7 @@ public class Manager  {
 
     @FXML
     void AcceptRequest(ActionEvent event) throws IOException {
+        System.out.println("in AcceptRequest");
         Task task = ListOfTasks.getSelectionModel().getSelectedItem();
         if (task != null) {
             MessageOfStatus message = new MessageOfStatus(task, "accept");
@@ -150,6 +155,28 @@ public class Manager  {
 
     @FXML
     void EmergencyCall(ActionEvent event) {
+
+    }
+
+    @FXML
+    void LOG_OUT(ActionEvent event) throws IOException {
+
+
+        Message message = new Message("log out manager", ManagerClient.getManagerClient().getUsername());
+        ManagerClient managerClient = ManagerClient.getClient();
+        System.out.println("i will enter");
+        managerClient.sendToServer(message);
+        System.out.println("Logout message sent to server");
+        ManagerClient.setManagerClient(null);
+        UserClient.setLoggedInUser(null);
+        Platform.runLater(() -> {
+            try {
+                setRoot("log_in");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        System.out.println("back from platfrom");
 
     }
 
@@ -250,7 +277,14 @@ public class Manager  {
 
     @FXML
     void ShowMembers(ActionEvent event) {
+        Platform.runLater(() -> {
+            try {
+                setRoot("members");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
 
+                }
+            });
     }
 
     @FXML
@@ -311,23 +345,44 @@ public class Manager  {
 
     @FXML
     void initialize() {
+        System.out.println("initiza;ies with"+ManagerClient.getManagerClient().getUsername());
+        welcome.setText("Hi " + ManagerClient.getManagerClient().getGivenName() + " these tasks wait for your approval:");
         EventBus.getDefault().register(this);
+
+
+        // Initialize ManagerClient instance
+
+        ManagerClient managerClient = ManagerClient.getClient();
         try {
-            getClient().sendToServer("list view");
-            System.out.println( ManagerClient.getManagerClient().getCommunity());
+            managerClient.openConnection();
+            System.out.println("openned " + ManagerClient.getManagerClient().getUsername());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
+        msgId = 0;
 
         try {
-            getClient().sendToServer("add manager client");
+            //getClient().sendToServer("add manager client");
+            Message message2 = new Message("list view", ManagerClient.getManagerClient().getUsername());
+            Message message3 = new Message("add manager client", ManagerClient.getManagerClient().getUsername());
+            managerClient.sendToServer(message3);
+
+            managerClient.sendToServer(message2);
+
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            // Handle send error
+            System.err.println("Error: Unable to send message to the server");
+            e.printStackTrace();
+            // Optionally, you may choose to continue initialization or stop here
         }
     }
 
-
+    public void cleanup() {
+        // Unregister from the event bus during cleanup
+        System.out.println("cleaned");
+        EventBus.getDefault().unregister(this);
+        System.out.println("999999999999999999999999999");
+    }
 
 }

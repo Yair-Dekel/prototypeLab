@@ -60,21 +60,22 @@ public class EmergencyController {
 
     @FXML
     private void initialize() throws IOException {
-
         if ((UserClient.getLoggedInUser() == null) && (ManagerClient.getManagerClient() == null)) {
-            info_label.setText("To make it easier for us to identify you,\nplease log in and press the emergency button again");
-            UserClient.getClient().sendToServer(new NewEmergencyCall("Unknown User",null,null));
+//        if (UnknownUserClient.getClient().isConnected())
+        String host= UserClient.getClient().getHost();
+            info_label.setText("To make it easier for us to identify you,\nplease log in and press the emergency button again\n Your IP Address: "+host);
+            UserClient.getClient().sendToServer(new NewEmergencyCall("Unknown User",null,null, host));
         } else if ((UserClient.getLoggedInUser() == null)) {
             Registered_user user = ManagerClient.getManagerClient();
             info_label.setText("Your firstName : " + user.getGivenName() + "\nyour lastName : " + user.getFamilyName()
                     + "\nYour phoneNumber to contact : " + user.getPhone_number() + "\nYour Community : " + user.getCommunity());
-            ManagerClient.getClient().sendToServer(new NewEmergencyCall(user.getGivenName(),user.getPhone_number(),ManagerClient.getManagerClient()));
+            ManagerClient.getClient().sendToServer(new NewEmergencyCall(user.getGivenName(),user.getPhone_number(),ManagerClient.getManagerClient(), null));
         } else {
             Registered_user user = UserClient.getLoggedInUser();
             info_label.setText("Your firstName : " + user.getGivenName() + "\nyour lastName : " + user.getFamilyName()
                     + "\nYour phoneNumber to contact : " + user.getPhone_number() + "\nYour Community : " + user.getCommunity());
 
-            UserClient.getClient().sendToServer(new NewEmergencyCall(user.getGivenName(),user.getPhone_number(),UserClient.getLoggedInUser()));
+            UserClient.getClient().sendToServer(new NewEmergencyCall(user.getGivenName(),user.getPhone_number(),UserClient.getLoggedInUser(), null));
         }
 
     }

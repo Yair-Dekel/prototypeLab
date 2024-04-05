@@ -20,10 +20,10 @@
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <Button fx:id="EmergencyCalls" layoutX="557.0" layoutY="104.0" mnemonicParsing="false" onAction="#ShowEmergency" prefHeight="30.0" prefWidth="117.0" text="Emergency calls" textFill="#21b94c" />
-        <Button fx:id="Tasks" layoutX="419.0" layoutY="102.0" mnemonicParsing="false" onAction="#ShowTasks" prefHeight="30.0" prefWidth="111.0" text="Tasks" textFill="#17ae4c" />
-        <Button fx:id="Members" layoutX="281.0" layoutY="101.0" mnemonicParsing="false" onAction="#ShowMembers" prefHeight="30.0" prefWidth="111.0" text="Members" textFill="#20a41e" />
-        <Label layoutX="19.0" layoutY="101.0" prefHeight="25.0" prefWidth="222.0" text="Wait for your approval:" textFill="#25a84c">
+        <Button fx:id="EmergencyCalls" layoutX="543.0" layoutY="112.0" mnemonicParsing="false" onAction="#ShowEmergency" prefHeight="30.0" prefWidth="117.0" text="Emergency calls" textFill="#21b94c" />
+        <Button fx:id="Tasks" layoutX="407.0" layoutY="113.0" mnemonicParsing="false" onAction="#ShowTasks" prefHeight="30.0" prefWidth="111.0" text="Tasks" textFill="#17ae4c" />
+        <Button fx:id="Members" layoutX="280.0" layoutY="113.0" mnemonicParsing="false" onAction="#ShowMembers" prefHeight="30.0" prefWidth="111.0" text="Members" textFill="#20a41e" />
+        <Label fx:id="welcome" layoutX="4.0" layoutY="101.0" prefHeight="27.0" prefWidth="258.0" text="Wait for your approval:" textFill="#25a84c">
             <font>
                 <Font name="Kristen ITC" size="16.0" />
             </font>

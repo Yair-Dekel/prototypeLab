@@ -11,6 +11,7 @@ public class NewTaskMessage implements Serializable{
     private  Registered_user openby;
     private boolean inDataBase;
 
+    private Task newTask;
     public Registered_user getOpenby() {
         return openby;
     }
@@ -21,6 +22,14 @@ public class NewTaskMessage implements Serializable{
 
     public boolean isInDataBase() {
         return inDataBase;
+    }
+
+    public Task getNewTask() {
+        return newTask;
+    }
+
+    public void setNewTask(Task newTask) {
+        this.newTask = newTask;
     }
 
     public void setInDataBase(boolean inDataBase) {

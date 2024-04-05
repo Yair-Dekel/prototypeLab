@@ -17,10 +17,7 @@ public List<Emergency_call> getCalls()
     return calls;
 
 }
-
-
-
-    public void setCalls(List<Emergency_call> calls){
+public void setCalls(List<Emergency_call> calls){
     this.calls = calls;
 }
 

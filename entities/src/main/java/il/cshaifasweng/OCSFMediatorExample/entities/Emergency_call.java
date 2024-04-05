@@ -23,13 +23,16 @@ public class Emergency_call implements Serializable{
     @JoinColumn(name="registered_user_id", referencedColumnName = "id")
     private  Registered_user registered_user;
 
+    @Column(name="host")
+    private  String host;
 
 
-    public Emergency_call (String given_name , String phone_number ,Registered_user user){
+    public Emergency_call (String given_name , String phone_number ,Registered_user user, String host){
         this.creation_time=LocalDateTime.now();
         this.phone_number= phone_number;
         this.given_name=given_name;
         this.registered_user=user;
+        this.host=host;
     }
 
 

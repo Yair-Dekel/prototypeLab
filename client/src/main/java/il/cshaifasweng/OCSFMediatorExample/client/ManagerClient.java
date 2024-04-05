@@ -27,12 +27,32 @@ public class ManagerClient extends AbstractClient {
 
     @Override
     protected void handleMessageFromServer(Object msg) throws IOException {
+        System.out.println("in handle from server");
+        if (msg instanceof DisplayDataMessage) {
+            DisplayDataMessage dis = (DisplayDataMessage) msg;
+            if (dis.getDataType().equals("tasks")) {
+                System.out.println("in tasks");
+                EventBus.getDefault().post(new TasksMessageEvent(dis));
+//            } else if (dis.getDataType().equals("all tasks")) {
+//                ObservableList<Task> ALLTask_ = FXCollections.observableArrayList(dis.getTasks());
+//                TasksOb.getInstance().setObservableTasks(ALLTask_);
+            } else if (dis.getDataType().equals("members")) {
+                System.out.println("c");
+                EventBus.getDefault().post(new MembersDisplayEvent(dis));
+            } else if (dis.getDataType().equals("uploaded")) {
+                System.out.println("client");
+                EventBus.getDefault().post(new UserTasksDisplayEvent(dis));
+            } else if (dis.getDataType().equals("performed")) {
+                System.out.println("clientp");
+                EventBus.getDefault().post(new CompletedEvent(dis));
+            }
 
-        if (msg instanceof DisplayTasksMassage) {
-            DisplayTasksMassage dis = (DisplayTasksMassage) msg;
-            EventBus.getDefault().post(new TasksMessageEvent(dis));
-            System.out.println("recognized massage as a list of tasks");
-        } else if (msg instanceof DisplayCalls) {
+        }
+//        else if (msg instanceof ) {
+////            List <Emergency_call> calls=((DisplayCalls) msg).getCalls();
+//            UserTasksController.class.
+//        }
+        else if (msg instanceof DisplayCalls) {
             List <Emergency_call> calls=((DisplayCalls) msg).getCalls();
             for (Emergency_call call : calls) {
                 System.out.println(call.getGiven_name());

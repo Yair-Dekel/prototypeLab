@@ -5,15 +5,16 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
-@Table(name="Tasks")
+@Table (name="Tasks")
 public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    public int id;
 
     private String moredetails;
     private TaskType Type_of_task;
     private LocalDateTime Creation_time;
+    private LocalDateTime completiontime;
     @ManyToOne
     @JoinColumn(name = "registered_user_id", referencedColumnName = "id")
     private Registered_user registered_user;
@@ -99,6 +100,14 @@ public class Task implements Serializable {
         this.registered_user = registered_user;
     }
 
+    public String getMoredetails() {
+        return moredetails;
+    }
+
+    public void setMoredetails(String moredetails) {
+        this.moredetails = moredetails;
+    }
+
     public LocalDateTime getDeadline() {
         return Deadline;
     }
@@ -123,7 +132,11 @@ public class Task implements Serializable {
         Volunteer = volunteer;
     }
 
+    public LocalDateTime getCompletiontime() {
+        return completiontime;
+    }
 
-
-
+    public void setCompletiontime(LocalDateTime completiontime) {
+        this.completiontime = completiontime;
+    }
 }

@@ -34,14 +34,16 @@ public class NewTaskController {
     private ComboBox<TaskType> taskTypeComboBox;
 
 
-
+    @Subscribe
+    public void TaskNotification(UsersNotificationEvent event)
+    {
+        PostNotifications.getInstance().TaskNotification(event);
+    }
     @FXML
     private void check_confirm_display_task() throws IOException {
         LocalDateTime deadline = deadlineDp.getValue() == null ? null : deadlineDp.getValue().atStartOfDay();
         TaskType selectedTaskType = taskTypeComboBox.getValue();
         String details = detailsTxt.getText();
-
-        // Check if deadline is null or not
         if (selectedTaskType == null) {
             showErrorDialog("Please select a task type.");
         } else if (deadline == null) {
@@ -63,7 +65,6 @@ public class NewTaskController {
                                 + "\n\n\nPlease note: The task will be published after the approval of the manager"
                                 + "\n\nThe system uploads your task...");
                 UserClient.getClient().sendToServer(new NewTaskMessage(deadline, details, selectedTaskType, UserClient.getLoggedInUser())); //here i want to get to the relevant client - it can be more than one- so we need to change getclient method.
-
             }
         }
     }
@@ -140,7 +141,14 @@ public class NewTaskController {
     // Helper method to show an error dialog
     @FXML
     void back(ActionEvent event) throws IOException {
-        SimpleChatClient.setRoot("show_tasks");
+        Platform.runLater(() -> {
+            try {
+                setRoot("user_main");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
 
     }
 

@@ -75,8 +75,13 @@ public class show_emergencyCall {
 
     @FXML
     void Back_to_main(ActionEvent event) throws IOException {
-        SimpleChatClient.setRoot("manager_main");
-
+        Platform.runLater(() -> {
+            try {
+                setRoot("manager_main");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
 
@@ -107,84 +112,6 @@ public class show_emergencyCall {
     }
 
 
-  /*  @Subscribe
-    public void ShowList_Emergency_call(Emergency_Call_Event event) {
-        System.out.println("in ShowList_Emergency_call*************");
-        Platform.runLater(() -> {
-            if (event != null) {
-                List<Emergency_call> allCalls = event.getCalls().getCalls();
-                previousCalls=allCalls;
-                System.out.println(" (event != null)");
-                if (allCalls != null && !allCalls.isEmpty()) {
-                    // Get the selected community from the MenuButton
-                    List<Emergency_call> filteredCalls=allCalls;
-                    if(!comunity_choose.getText().equals("All"))
-                    {
-
-                        Communities selectedCommunity = Communities.valueOf(comunity_choose.getText());
-
-                        // Filter calls based on the selected community
-                         filteredCalls = allCalls.stream()
-                                 .filter(call -> call.getRegistered_user() != null && call.getRegistered_user().getCommunity() == selectedCommunity)
-                                 .collect(Collectors.toList());
-                    }
-
-                    // Check if there are any filtered calls
-                    if (!filteredCalls.isEmpty()) {
-                        for (Emergency_call call : filteredCalls) {
-                            System.out.println(call.getGiven_name());
-                        }
-                        ObservableList<Emergency_call> observableTasks = FXCollections.observableArrayList(filteredCalls);
-                        ListOfCalls.setItems(observableTasks);
-                    } else {
-                        ListOfCalls.getItems().clear();
-                    }
-                } else {
-                    ListOfCalls.getItems().clear();
-                }
-            } else
-
-            {
-
-
-                System.out.println(" (event == null)");
-                List<Emergency_call> allCalls = previousCalls;
-                if (allCalls != null && !allCalls.isEmpty()) {
-                    // Get the selected community from the MenuButton
-                    List<Emergency_call> filteredCalls=allCalls;
-                    if(!comunity_choose.getText().equals("All"))
-                    {
-
-                        Communities selectedCommunity = Communities.valueOf(comunity_choose.getText());
-
-                        // Filter calls based on the selected community
-                        filteredCalls = allCalls.stream()
-                                .filter(call -> call.getRegistered_user() != null && call.getRegistered_user().getCommunity() == selectedCommunity)
-                                .collect(Collectors.toList());
-                    }
-
-                    // Check if there are any filtered calls
-                    if (!filteredCalls.isEmpty()) {
-                        for (Emergency_call call : filteredCalls) {
-                            System.out.println(call.getGiven_name());
-                        }
-                        ObservableList<Emergency_call> observableTasks = FXCollections.observableArrayList(filteredCalls);
-                        ListOfCalls.setItems(observableTasks);
-                    } else {
-                        ListOfCalls.getItems().clear();
-                    }
-                }  else {
-                    ListOfCalls.getItems().clear();
-                }
-
-            }
-        });
-   //     updateListOfCalls();*************************************
-
-    }
-*/
-
-
 
     private void showAlert(String title, String header, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType, content);
@@ -192,55 +119,6 @@ public class show_emergencyCall {
         alert.setHeaderText(header);
         alert.show();
     }
-
-/*
-
-    private void updateListOfCalls() {
-        // Get the selected start and end dates
-        LocalDate startDate = lastStartDate != null ? lastStartDate : From_Date.getValue();
-        LocalDate endDate = lastEndDate != null ? lastEndDate : To_date.getValue();
-
-        // Validate that the start date is before the end date
-        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-            showAlert("Error", "Invalid Date Range", "From date must be before To date", Alert.AlertType.ERROR);
-            return;
-        }
-
-        // Get the selected community
-        String selectedCommunity = comunity_choose.getText();
-
-        // Filter the list of emergency calls based on the selected time period and community
-        ObservableList<Emergency_call> filteredCalls = FXCollections.observableArrayList();
-        for (Emergency_call call : previousCalls) {
-            LocalDateTime creationTime = call.getCreation_time();
-            LocalDate callDate = creationTime.toLocalDate();
-            boolean isInDateRange = (startDate == null || callDate.isEqual(startDate) || callDate.isAfter(startDate)) &&
-                    (endDate == null || callDate.isEqual(endDate) || callDate.isBefore(endDate));
-
-            // Add a null check for registered user
-            if (call.getRegistered_user() != null) {
-                boolean isMatchingCommunity = selectedCommunity.equals("All") ||
-                        call.getRegistered_user().getCommunity().toString().equals(selectedCommunity);
-
-                if (isInDateRange && isMatchingCommunity) {
-                    filteredCalls.add(call);
-                }
-            } else {
-                // If the community is "All" and the call falls within the selected date range, add it to the filtered list
-                if (selectedCommunity.equals("All") && isInDateRange) {
-                    filteredCalls.add(call);
-                }
-            }
-        }
-
-        // Update the TableView with the filtered list of emergency calls
-        ListOfCalls.setItems(filteredCalls);
-        // Update the last selected community and date range
-        lastSelectedCommunity = comunity_choose.getText();
-        lastStartDate = startDate;
-        lastEndDate = endDate;
-    }
-*/
 
 
     private void updateListOfCalls() {

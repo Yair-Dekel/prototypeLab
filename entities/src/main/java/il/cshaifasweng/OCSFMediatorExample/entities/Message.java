@@ -30,6 +30,13 @@ public class Message implements Serializable {
         Password=password;
 
     }
+
+    public Message(String message,String userName)
+    {
+        this.message=message;
+        this.userName=userName;
+
+    }
     public Message(String message)
     {
         this.message=message;
