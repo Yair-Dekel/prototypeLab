@@ -27,6 +27,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.io.IOException;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.getManagerClient;
+import static il.cshaifasweng.OCSFMediatorExample.client.ManagerClient.setManagerClient;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleChatClient.setRoot;
 import static il.cshaifasweng.OCSFMediatorExample.client.UserClient.getClient;
 import static il.cshaifasweng.OCSFMediatorExample.client.UserClient.getLoggedInUser;
@@ -52,21 +53,26 @@ public class UserMainController {
 
     @FXML
     void LOG_OUT(ActionEvent event) throws IOException {
-
         Message message = new Message("log out user", UserClient.getLoggedInUser().getUsername());
         UserClient userClient = UserClient.getClient();
         System.out.println("i will enter");
         userClient.sendToServer(message);
         System.out.println("Logout message sent to server");
         UserClient.setLoggedInUser(null);
+        ManagerClient.setManagerClient(null);
+
         Platform.runLater(() -> {
             try {
-                setRoot("log_in");
+               setRoot("log_in");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
         System.out.println("back from platfrom");
+
+
+
+
     }
 
     @Subscribe

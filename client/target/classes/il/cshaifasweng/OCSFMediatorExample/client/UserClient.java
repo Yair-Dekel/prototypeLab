@@ -23,10 +23,9 @@ public class UserClient extends AbstractClient {
     }
 
     public static void setLoggedInUser(Registered_user user) {
-        if (loggedInUser == null) {
-            System.out.println("client created");
+
             loggedInUser = user;
-        }
+
     }
 
     @Override
@@ -45,7 +44,6 @@ public class UserClient extends AbstractClient {
         } else if (msg instanceof DisplayDataMessage) {
             System.out.println("userclient dis");
             DisplayDataMessage dis = (DisplayDataMessage) msg;
-            System.out.println("8888888888888888888888888888888888888888888888888");
             if(dis.getDataType().equals("Requested Tasks"))
             {
                 System.out.println("**********************************************");

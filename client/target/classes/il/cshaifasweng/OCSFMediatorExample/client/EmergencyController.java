@@ -61,16 +61,18 @@ public class EmergencyController {
     @FXML
     private void initialize() throws IOException {
         if ((UserClient.getLoggedInUser() == null) && (ManagerClient.getManagerClient() == null)) {
-//        if (UnknownUserClient.getClient().isConnected())
+            System.out.println("1");
         String host= UserClient.getClient().getHost();
             info_label.setText("To make it easier for us to identify you,\nplease log in and press the emergency button again\n Your IP Address: "+host);
             UserClient.getClient().sendToServer(new NewEmergencyCall("Unknown User",null,null, host));
         } else if ((UserClient.getLoggedInUser() == null)) {
+            System.out.println("2");
             Registered_user user = ManagerClient.getManagerClient();
             info_label.setText("Your firstName : " + user.getGivenName() + "\nyour lastName : " + user.getFamilyName()
                     + "\nYour phoneNumber to contact : " + user.getPhone_number() + "\nYour Community : " + user.getCommunity());
             ManagerClient.getClient().sendToServer(new NewEmergencyCall(user.getGivenName(),user.getPhone_number(),ManagerClient.getManagerClient(), null));
         } else {
+            System.out.println("3");
             Registered_user user = UserClient.getLoggedInUser();
             info_label.setText("Your firstName : " + user.getGivenName() + "\nyour lastName : " + user.getFamilyName()
                     + "\nYour phoneNumber to contact : " + user.getPhone_number() + "\nYour Community : " + user.getCommunity());
