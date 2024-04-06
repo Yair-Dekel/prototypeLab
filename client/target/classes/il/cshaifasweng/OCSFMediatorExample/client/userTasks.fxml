@@ -50,7 +50,7 @@
             <Font name="Andalus" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="Backbtn" layoutX="2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="70.0" text="BACK">
+      <Button fx:id="Backbtn" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="84.0" text="BACK">
          <font>
             <Font name="Kristen ITC" size="14.0" />
          </font>

@@ -6,6 +6,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Emergency_call;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -62,6 +63,8 @@ public class show_emergencyCall {
     private List<Emergency_call> previousCalls;
     @FXML
     private TableColumn<Emergency_call, String> nameColumn;
+    @FXML
+    private TableColumn<Emergency_call, String> ipColumn;
 
     @FXML
     private TableColumn<Emergency_call, String> phoneColumn;
@@ -100,9 +103,9 @@ public class show_emergencyCall {
 
     @FXML
     void switchToemergency(ActionEvent event) {
-        System.out.println("here");
         Platform.runLater(() -> {
             try {
+                ManagerClient.setLast_fxml("show_emergencyCall");
                 setRoot("Emergency");
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -132,192 +135,6 @@ public class show_emergencyCall {
     }
 
 
-    /*private void updateListOfCalls() {
-        // Get the selected start and end dates
-        LocalDate startDate = lastStartDate != null ? lastStartDate : From_Date.getValue();
-        LocalDate endDate = lastEndDate != null ? lastEndDate : To_date.getValue();
-
-        // Validate that the start date is before the end date
-        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-            showAlert("Error", "Invalid Date Range", "From date must be before To date", Alert.AlertType.ERROR);
-            return;
-        }
-
-        // Get the selected community
-        String selectedCommunity = comunity_choose.getText();
-
-        // Filter the list of emergency calls based on the selected time period and community
-        ObservableList<Emergency_call> filteredCalls = FXCollections.observableArrayList();
-        for (Emergency_call call : previousCalls) {
-            LocalDateTime creationTime = call.getCreation_time();
-            LocalDate callDate = creationTime.toLocalDate();
-            boolean isInDateRange = (startDate == null || callDate.isEqual(startDate) || callDate.isAfter(startDate)) &&
-                    (endDate == null || callDate.isEqual(endDate) || callDate.isBefore(endDate));
-
-            // Add a null check for registered user
-            if (call.getRegistered_user() != null) {
-                boolean isMatchingCommunity = selectedCommunity.equals("All") ||
-                        call.getRegistered_user().getCommunity().toString().equals(selectedCommunity);
-
-                if (isInDateRange && isMatchingCommunity) {
-                    filteredCalls.add(call);
-                }
-            } else {
-                // If the community is "All" and the call falls within the selected date range, add it to the filtered list
-                if (selectedCommunity.equals("All") && isInDateRange) {
-                    filteredCalls.add(call);
-                }
-            }
-        }
-
-        // Update the TableView with the filtered list of emergency calls
-        ListOfCalls.setItems(filteredCalls);
-
-
-        // Update the last selected community and date range
-        lastSelectedCommunity = comunity_choose.getText();
-        lastStartDate = startDate;
-        lastEndDate = endDate;
-    }
-*/
-/*
-
-    private void updateListOfCalls() {
-        Platform.runLater(() -> {
-            // Get the selected start and end dates
-            LocalDate startDate = lastStartDate != null ? lastStartDate : From_Date.getValue();
-            LocalDate endDate = lastEndDate != null ? lastEndDate : To_date.getValue();
-
-            // Validate that the start date is before the end date
-            if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-                showAlert("Error", "Invalid Date Range", "From date must be before To date", Alert.AlertType.ERROR);
-                return;
-            }
-
-            // Get the selected community
-            String selectedCommunity = comunity_choose.getText();
-
-            // Filter the list of emergency calls based on the selected time period and community
-            //ObservableList<Emergency_call> filteredCalls = FXCollections.observableArrayList();
-            for (Emergency_call call : previousCalls) {
-                LocalDateTime creationTime = call.getCreation_time();
-                LocalDate callDate = creationTime.toLocalDate();
-                boolean isInDateRange = (startDate == null || callDate.isEqual(startDate) || callDate.isAfter(startDate)) &&
-                        (endDate == null || callDate.isEqual(endDate) || callDate.isBefore(endDate));
-
-                // Add a null check for registered user
-                if (call.getRegistered_user() != null) {
-                    boolean isMatchingCommunity = selectedCommunity.equals("All") ||
-                            call.getRegistered_user().getCommunity().toString().equals(selectedCommunity);
-
-                    if (isInDateRange && isMatchingCommunity) {
-                        filteredCalls.add(call);
-                    }
-                } else {
-                    // If the community is "All" and the call falls within the selected date range, add it to the filtered list
-                    if (selectedCommunity.equals("All") && isInDateRange) {
-                        filteredCalls.add(call);
-                    }
-                }
-            }
-
-            // Update the TableView with the filtered list of emergency calls
-            ListOfCalls.setItems(filteredCalls);
-
-            // Update the chart data
-            Calls_chart.getData().clear(); // Clear existing data in the chart
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            for (Emergency_call call : filteredCalls) {
-                LocalDateTime creationTime = call.getCreation_time();
-                String creationTimeStr = creationTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Format creation time as needed
-                // You can retrieve other properties of the Emergency_call object as needed
-                int count = 1; // Assuming each call counts as 1
-                // Add data to the series
-                series.getData().add(new XYChart.Data<>(creationTimeStr, count));
-            }
-            Calls_chart.getData().add(series);
-
-            // Update the last selected community and date range
-            lastSelectedCommunity = comunity_choose.getText();
-            lastStartDate = startDate;
-            lastEndDate = endDate;
-        });
-    }
-*/
-
-
-
-    /* private void updateListOfCalls() {
-         Platform.runLater(() -> {
-             // Get the selected start and end dates
-             LocalDate startDate = lastStartDate != null ? lastStartDate : From_Date.getValue();
-             LocalDate endDate = lastEndDate != null ? lastEndDate : To_date.getValue();
-
-             // Validate that the start date is before the end date
-             if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-                 showAlert("Error", "Invalid Date Range", "From date must be before To date", Alert.AlertType.ERROR);
-                 return;
-             }
-
-             // Get the selected community
-             String selectedCommunity = comunity_choose.getText();
-
-             // Clear the previous filtered list of emergency calls
-             filteredCalls.clear();
-
-             // Filter the list of emergency calls based on the selected time period and community
-             for (Emergency_call call : previousCalls) {
-                 LocalDateTime creationTime = call.getCreation_time();
-                 LocalDate callDate = creationTime.toLocalDate();
-                 boolean isInDateRange = (startDate == null || callDate.isEqual(startDate) || callDate.isAfter(startDate)) &&
-                         (endDate == null || callDate.isEqual(endDate) || callDate.isBefore(endDate));
-
-                 // Add a null check for registered user
-                 if (call.getRegistered_user() != null) {
-                     boolean isMatchingCommunity = selectedCommunity.equals("All") ||
-                             call.getRegistered_user().getCommunity().toString().equals(selectedCommunity);
-
-                     if (isInDateRange && isMatchingCommunity) {
-                         filteredCalls.add(call);
-                     }
-                 } else {
-                     // If the community is "All" and the call falls within the selected date range, add it to the filtered list
-                     if (selectedCommunity.equals("All") && isInDateRange) {
-                         filteredCalls.add(call);
-                     }
-                 }
-             }
-
-             // Update the TableView with the filtered list of emergency calls
-             ListOfCalls.setItems(filteredCalls);
-
-             // Update the chart data
-             Calls_chart.getData().clear(); // Clear existing data in the chart
-             XYChart.Series<String, Number> series = new XYChart.Series<>();
-
-             // Count the number of calls for each date
-             Map<String, Integer> callCountMap = new HashMap<>();
-             for (Emergency_call call : filteredCalls) {
-                 LocalDateTime creationTime = call.getCreation_time();
-                 String creationTimeStr = creationTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Format creation time as needed
-                 // Increment the call count for the corresponding date
-                 callCountMap.put(creationTimeStr, callCountMap.getOrDefault(creationTimeStr, 0) + 1);
-             }
-
-             // Add data to the series
-             for (Map.Entry<String, Integer> entry : callCountMap.entrySet()) {
-                 series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
-             }
-
-             Calls_chart.getData().add(series);
-
-             // Update the last selected community and date range
-             lastSelectedCommunity = comunity_choose.getText();
-             lastStartDate = startDate;
-             lastEndDate = endDate;
-         });
-     }
- */
     private void updateListOfCalls() {
         Platform.runLater(() -> {
             // Get the selected start and end dates
@@ -380,21 +197,6 @@ public class show_emergencyCall {
 
 
 
-/*
-
-    private ObservableList<XYChart.Data<String, Number>> getChartData() {
-        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
-        for (Emergency_call call : ListOfCalls.getItems()) {
-            LocalDateTime creationTime = call.getCreation_time();
-            String creationTimeStr = creationTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Format creation time as needed
-            // You can retrieve other properties of the Emergency_call object as needed
-            int count = 1; // Assuming each call counts as 1
-            // Add data to the series
-            data.add(new XYChart.Data<>(creationTimeStr, count));
-        }
-        return data;
-    }
-*/
 
 
 
@@ -422,6 +224,7 @@ public class show_emergencyCall {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
         creationtimeColumn.setCellValueFactory(new PropertyValueFactory<>("creation_time"));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ipColumn.setCellValueFactory(new PropertyValueFactory<>("Host"));
 
         // Set cell factory to center-align values
         nameColumn.setCellFactory(tc -> new TableCell<>() {
@@ -477,6 +280,20 @@ public class show_emergencyCall {
                 }
             }
         });
+        // Set cell value factory for ipColumn to include the host value
+        ipColumn.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item);
+                    setAlignment(Pos.CENTER);
+                }
+            }
+        });
+
 
         // Configure X-axis (category axis)
         CategoryAxis xAxis = new CategoryAxis();

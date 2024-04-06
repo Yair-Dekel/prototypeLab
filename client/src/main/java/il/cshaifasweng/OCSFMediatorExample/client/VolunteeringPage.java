@@ -197,23 +197,10 @@ public class VolunteeringPage {
 
     }
 
-    @FXML
-    void switch_to_emergency(ActionEvent event) {
-        Platform.runLater(() -> {
-            try {
-                setRoot("Emergency");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
 
-    }
     @FXML
     void initialize() throws IOException {
-        System.out.println(UserClient.getLoggedInUser().getUsername()+" userclient???????????????????????????????????/");
         String username=UserClient.getLoggedInUser().getUsername();
-        welcome.setText("Tasks waiting for " + UserClient.getLoggedInUser().getGivenName() +" volunteering:");
-        welcome.setAlignment(Pos.TOP_LEFT);
         EventBus.getDefault().register(this);
         Saveuser=username;
         UserClient userClient = UserClient.getClient();
@@ -248,6 +235,7 @@ public class VolunteeringPage {
     {
         Platform.runLater(() -> {
             try {
+                UserClient.setLast_fxml("VolunteeringPage");
                 setRoot("Emergency");
             } catch (IOException e) {
                 throw new RuntimeException(e);

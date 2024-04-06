@@ -34,6 +34,7 @@ il\cshaifasweng\OCSFMediatorExample\client\ocsf\AbstractClient.class
 il\cshaifasweng\OCSFMediatorExample\client\ManagerClient.class
 il\cshaifasweng\OCSFMediatorExample\client\MembersController.class
 il\cshaifasweng\OCSFMediatorExample\client\registered_user_Controller.class
+il\cshaifasweng\OCSFMediatorExample\client\show_emergencyCall$6.class
 il\cshaifasweng\OCSFMediatorExample\client\ocsf\ObservableClient.class
 il\cshaifasweng\OCSFMediatorExample\client\show_emergencyCall$3.class
 il\cshaifasweng\OCSFMediatorExample\client\PersonVolunteering.class

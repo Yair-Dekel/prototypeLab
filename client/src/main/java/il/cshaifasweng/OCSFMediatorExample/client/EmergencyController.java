@@ -38,7 +38,19 @@ public class EmergencyController {
 
                Platform.runLater(() -> {
                    try {
-                       setRoot("manager_main");
+                       if(ManagerClient.getLast_fxml().equals("show_emergencyCall"))
+                       {
+                           System.out.println("in fxml show");
+                           setRoot("show_emergencyCall");
+                       } else if (ManagerClient.getLast_fxml().equals("members")) {
+                           setRoot("members");
+
+                       } else if (ManagerClient.getLast_fxml().equals("UserTasks")) {
+                           setRoot("members");
+                       } else {
+
+                           setRoot("manager_main");
+                       }
                    } catch (IOException e) {
                        throw new RuntimeException(e);
                    }
@@ -48,7 +60,20 @@ public class EmergencyController {
        {
            Platform.runLater(() -> {
                try {
-                   setRoot("user_main");
+                   if(UserClient.getLast_fxml().equals("new_task"))
+                   {
+                       setRoot("new_task");
+                   } else if (UserClient.getLast_fxml().equals("VolunteeringPage")) {
+                       setRoot("VolunteeringPage");
+                   } else if (UserClient.getLast_fxml().equals("showMyVolunteeredTasks")) {
+                       setRoot("showMyVolunteeredTasks");
+                   } else if (UserClient.getLast_fxml().equals("requestedTasksPage")) {
+                       setRoot("requestedTasksPage");
+                   } else
+                   {
+
+                       setRoot("user_main");
+                   }
                } catch (IOException e) {
                    throw new RuntimeException(e);
                }

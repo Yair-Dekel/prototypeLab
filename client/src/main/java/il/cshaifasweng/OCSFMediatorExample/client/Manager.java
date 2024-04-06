@@ -330,6 +330,7 @@ public class Manager  {
     void switchToemergency(ActionEvent event) {
         Platform.runLater(() -> {
             try {
+                ManagerClient.setLast_fxml("manager_main");
                 setRoot("Emergency");
             } catch (IOException e) {
                 throw new RuntimeException(e);

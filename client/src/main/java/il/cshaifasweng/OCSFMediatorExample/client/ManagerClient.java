@@ -13,6 +13,16 @@ public class ManagerClient extends AbstractClient {
     private static Registered_user managerClient=null;
     private static ManagerClient client = null;
 
+    private static String last_fxml="";
+
+    public static String getLast_fxml() {
+        return last_fxml;
+    }
+
+    public static void setLast_fxml(String last_fxml) {
+        ManagerClient.last_fxml = last_fxml;
+    }
+
 
     /**
      * Constructs the client.

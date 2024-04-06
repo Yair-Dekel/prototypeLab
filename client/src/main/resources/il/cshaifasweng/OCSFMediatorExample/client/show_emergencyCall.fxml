@@ -7,7 +7,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -15,14 +14,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane  prefHeight="885.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.show_emergencyCall">
+<AnchorPane prefHeight="539.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.show_emergencyCall">
    <children>
-      <ImageView fitHeight="885.0" fitWidth="700.0" layoutX="-5.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="616.0" fitWidth="1075.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@graphic-2d-colorful-wallpaper-with-grainy-gradients3355.jpg" />
+            <Image url="@graphic-2d-colorful-wallpaper-with-grainy-gradients11458.jpg" />
          </image>
       </ImageView>
-      <Label alignment="TOP_CENTER" layoutX="21.0" layoutY="14.0" prefHeight="44.0" prefWidth="649.0" text="Welcome To Atis">
+      <Label alignment="TOP_CENTER" layoutX="210.0" layoutY="15.0" prefHeight="44.0" prefWidth="649.0" text="Welcome To Atis">
          <font>
             <Font name="Calibri Light" size="36.0" />
          </font>
@@ -31,20 +30,21 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <TableView fx:id="ListOfCalls" layoutX="65.0" layoutY="151.0" prefHeight="200.0" prefWidth="581.0">
+      <TableView fx:id="ListOfCalls" layoutX="21.0" layoutY="184.0" prefHeight="281.0" prefWidth="489.0">
         <columns>
-          <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
-          <TableColumn fx:id="creationtimeColumn" minWidth="0.0" prefWidth="211.0" text="creation time" />
-            <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="129.0" text="given_name" />
-            <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="137.0" text="phone_number" />
+          <TableColumn fx:id="idColumn" prefWidth="72.0" text="ID" />
+          <TableColumn fx:id="creationtimeColumn" minWidth="0.0" prefWidth="130.0" text="creation time" />
+            <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="109.0" text="given name" />
+            <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="112.0" text="phone number" />
+            <TableColumn fx:id="ipColumn" minWidth="0.0" prefWidth="65.0" text="ip" />
         </columns>
       </TableView>
-      <MenuButton fx:id="comunity_choose" layoutX="518.0" layoutY="78.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="All">
+      <MenuButton fx:id="comunity_choose" layoutX="707.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="All">
          <font>
             <Font size="15.0" />
          </font>
       </MenuButton>
-       <LineChart fx:id="Calls_chart" layoutX="8.0" layoutY="377.0" prefHeight="448.0" prefWidth="662.0" xmlns:lineChart="http://javafx.com/javafx/21">
+       <LineChart fx:id="Calls_chart" layoutX="518.0" layoutY="140.0" prefHeight="384.0" prefWidth="546.0" xmlns:lineChart="http://javafx.com/javafx/21">
            <xAxis>
                <CategoryAxis label="Creation Time" side="BOTTOM" fx:id="xAxis" />
            </xAxis>
@@ -53,19 +53,19 @@
            </yAxis>
        </LineChart>
 
-      <DatePicker fx:id="From_Date" layoutX="111.0" layoutY="83.0" />
-      <DatePicker fx:id="To_date" layoutX="316.0" layoutY="83.0" />
-      <Label layoutX="72.0" layoutY="87.0" text="From">
+      <DatePicker fx:id="From_Date" layoutX="300.0" layoutY="84.0" />
+      <DatePicker fx:id="To_date" layoutX="505.0" layoutY="84.0" />
+      <Label layoutX="261.0" layoutY="88.0" text="From">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="295.0" layoutY="85.0" text="To">
+      <Label layoutX="484.0" layoutY="86.0" text="To">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="Emergency_btn" layoutY="841.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="44.0" prefWidth="695.0" text="Emergency Button">
+      <Button fx:id="Emergency_btn" layoutY="561.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="44.0" prefWidth="1070.0" text="Emergency Button">
          <font>
             <Font name="Leelawadee UI Semilight" size="17.0" />
          </font>

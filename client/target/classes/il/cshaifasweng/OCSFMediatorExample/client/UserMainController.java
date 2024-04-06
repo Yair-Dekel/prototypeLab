@@ -146,6 +146,7 @@ public class UserMainController {
     void switchToemergency(ActionEvent event) {
         Platform.runLater(() -> {
             try {
+                UserClient.setLast_fxml("user_main");
                 setRoot("Emergency");
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -164,10 +165,6 @@ public class UserMainController {
         });
     }
 
-//    @Subscribe
-//    void TaskAcceptedNotifiction(UsersNotificationEvent event) {
-//
-//    }
 
     @FXML
     void showRequstedTasks(ActionEvent event) {

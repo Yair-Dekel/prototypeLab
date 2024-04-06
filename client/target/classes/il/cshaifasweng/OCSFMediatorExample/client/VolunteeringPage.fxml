@@ -35,7 +35,7 @@
       </Button>
       <Label fx:id="welcome" layoutX="34.0" layoutY="60.0" prefHeight="83.0" prefWidth="472.0" text="choose which task you like to valunter" textFill="WHITE">
          <font>
-            <Font name="Leelawadee UI Semilight" size="24.0" />
+            <Font name="Comic Sans MS" size="24.0" />
          </font>
       </Label>
       <Button fx:id="Emergency_btn" layoutX="-3.0" layoutY="472.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="39.0" prefWidth="879.0" text="Emergency Button">

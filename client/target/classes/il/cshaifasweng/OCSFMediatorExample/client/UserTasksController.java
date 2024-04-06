@@ -115,6 +115,7 @@ public class UserTasksController {
     void switchToemergency(ActionEvent event) {
         Platform.runLater(() -> {
             try {
+                ManagerClient.setLast_fxml("UserTasks");
                 setRoot("Emergency");
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.close();

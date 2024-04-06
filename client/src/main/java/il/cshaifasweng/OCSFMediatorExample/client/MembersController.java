@@ -58,6 +58,7 @@ public class MembersController {
     void switchToemergency(ActionEvent event) {
         Platform.runLater(() -> {
             try {
+                ManagerClient.setLast_fxml("members");
                 setRoot("Emergency");
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -129,6 +130,8 @@ public class MembersController {
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
+       Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -41,6 +41,10 @@ public class Emergency_call implements Serializable{
 
     }
 
+    public String getHost() {
+        return host;
+    }
+
     public Registered_user getRegistered_user() {
         return registered_user;
     }

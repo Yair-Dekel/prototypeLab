@@ -152,24 +152,13 @@ public class ShowRequestedTasksPage {
         });
 
     }
-    @FXML
-    void switch_to_emergency(ActionEvent event) {
-        Platform.runLater(() -> {
-            try {
-                setRoot("Emergency");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
 
-    }
     @FXML
     void initialize() throws IOException {
         String username=UserClient.getLoggedInUser().getUsername();
         System.out.println(username+" userclient???????????????????????????????????/");
 
         welcome.setText( UserClient.getLoggedInUser().getGivenName()+"'s Tasks");
-        welcome.setAlignment(Pos.TOP_LEFT);
         EventBus.getDefault().register(this);
         UserClient userClient = UserClient.getClient();
         try {
@@ -207,9 +196,10 @@ public class ShowRequestedTasksPage {
 
     public void switchToemergency(ActionEvent actionEvent)
     {
-        System.out.println("here");
+
         Platform.runLater(() -> {
             try {
+                UserClient.setLast_fxml("requestedTasksPage");
                 setRoot("Emergency");
             } catch (IOException e) {
                 throw new RuntimeException(e);

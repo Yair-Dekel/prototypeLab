@@ -134,6 +134,7 @@ public class NewTaskController {
     void switchToemergency(ActionEvent event) {
         Platform.runLater(() -> {
             try {
+                UserClient.setLast_fxml("new_task");
                 setRoot("Emergency");
             } catch (IOException e) {
                 throw new RuntimeException(e);
