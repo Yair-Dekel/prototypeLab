@@ -82,7 +82,6 @@ public class MembersController {
         ManagerClient.getClient().sendToServer(new DisplayDataMessage(community, "members"));
     }
 
-
     @Subscribe
     public void displayMembers(MembersDisplayEvent event) {
         ObservableList<Registered_user> observableMembers = FXCollections.observableArrayList(event.getDis().getMembers());

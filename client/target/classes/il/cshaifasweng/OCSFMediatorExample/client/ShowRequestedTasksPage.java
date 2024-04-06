@@ -168,7 +168,7 @@ public class ShowRequestedTasksPage {
         String username=UserClient.getLoggedInUser().getUsername();
         System.out.println(username+" userclient???????????????????????????????????/");
 
-        welcome.setText("REQUESTED TASKS OF " + UserClient.getLoggedInUser().getGivenName());
+        welcome.setText( UserClient.getLoggedInUser().getGivenName()+"'s Tasks");
         welcome.setAlignment(Pos.TOP_LEFT);
         EventBus.getDefault().register(this);
         UserClient userClient = UserClient.getClient();
@@ -205,4 +205,16 @@ public class ShowRequestedTasksPage {
         PostNotifications.getInstance().TaskNotification(event);
     }
 
+    public void switchToemergency(ActionEvent actionEvent)
+    {
+        System.out.println("here");
+        Platform.runLater(() -> {
+            try {
+                setRoot("Emergency");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
 }

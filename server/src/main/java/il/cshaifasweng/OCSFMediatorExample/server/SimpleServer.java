@@ -728,6 +728,8 @@ public class SimpleServer extends AbstractServer {
                 listviewFromUser();
                 DisplayDataMessage datarequest = new DisplayDataMessage(ntm.getOpenby(), "uploaded");
                 updateUserTasks(datarequest);
+                System.out.println("leen");
+                client.sendToClient(ntm);
                 findManagerConnectionbyCommunity(ntm.getOpenby().getCommunity()).sendToClient(datarequest);
             } catch (Exception exception) {
                 if (session != null) {
@@ -737,11 +739,6 @@ public class SimpleServer extends AbstractServer {
 
             } finally {
                 session.close();
-            }
-            try {
-                client.sendToClient(ntm);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
 
         }
@@ -1086,10 +1083,11 @@ public class SimpleServer extends AbstractServer {
 
                         // Save the changes by committing the transaction
                         tx2.commit();
-                        Registered_user openedBy = myTask.getRegistered_user();
+/*                        Registered_user openedBy = myTask.getRegistered_user();
                         ConnectionToClient addressee = findUserConnectionbyUser(openedBy);
-                        addressee.sendToClient(new Notification("Task Rejected", openedBy));
-                        listviewForUserRequestedTasks();
+                        addressee.sendToClient(new Notification("Task Rejected", openedBy));*/
+                        listviewForUserRequestedTasks(task.getRegistered_user().getUsername());
+                      //  listviewForUserRequestedTasks();
                         MessageOfStatus message2 = new MessageOfStatus(task, "task rejected");
                         // Echo back the received message to the client
                         client.sendToClient(message2);

@@ -241,4 +241,16 @@ public class ShowMyVolunteeredTasks {
 
     }
 
+    public void switchToemergency(ActionEvent actionEvent)
+    {
+        System.out.println("here");
+        Platform.runLater(() -> {
+            try {
+                setRoot("Emergency");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
 }

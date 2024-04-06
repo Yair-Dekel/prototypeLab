@@ -153,10 +153,7 @@ public class Manager  {
         }
     }
 
-    @FXML
-    void EmergencyCall(ActionEvent event) {
 
-    }
 
     @FXML
     void LOG_OUT(ActionEvent event) throws IOException {
@@ -287,10 +284,7 @@ public class Manager  {
             });
     }
 
-    @FXML
-    void ShowTasks(ActionEvent event) {
 
-    }
 
     @FXML
     void WriteReason(ActionEvent event) {

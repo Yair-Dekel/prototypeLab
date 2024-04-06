@@ -244,4 +244,15 @@ public class VolunteeringPage {
 
     }
 
+    public void switchToemergency(ActionEvent actionEvent)
+    {
+        Platform.runLater(() -> {
+            try {
+                setRoot("Emergency");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
 }

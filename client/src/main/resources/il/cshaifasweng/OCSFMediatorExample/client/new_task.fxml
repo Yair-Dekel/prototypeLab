@@ -1,52 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="860.0" style="-fx-background-color: #ffdab9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewTaskController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="817.0" style="-fx-background-color: #ffdab9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NewTaskController">
    <children>
-      <AnchorPane fx:id="btn1" prefHeight="437.0" prefWidth="860.0" style="-fx-background-color: #ffdab9;">
+      <AnchorPane fx:id="btn1" prefHeight="463.0" prefWidth="817.0" style="-fx-background-color: #ffdab9;">
          <children>
-            <Label layoutX="211.0" layoutY="17.0" prefHeight="56.0" prefWidth="481.0" text="Fill The New Task Form" textAlignment="CENTER">
+            <ImageView fitHeight="480.0" fitWidth="817.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@OAK40C01.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="194.0" layoutY="30.0" prefHeight="56.0" prefWidth="529.0" text="Fill The New Task Form" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold Italic" size="38.0" />
+                  <Font name="Simplified Arabic Fixed" size="31.0" />
                </font>
             </Label>
-            <Label layoutX="180.0" layoutY="135.0" prefHeight="44.0" prefWidth="613.0" text="Write here the details about the task, such as exact location or special requests.">
+            <Label layoutX="152.0" layoutY="178.0" prefHeight="44.0" prefWidth="613.0" text="Write here the details about the task, such as exact location or special requests.">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="detailsTxt" layoutX="96.0" layoutY="179.0" prefHeight="180.0" prefWidth="712.0" promptText="e.g:  &quot;I prefer manual car wash technology&quot;, &quot;Ride destination: Haifa Center&quot; ">
+            <TextArea fx:id="detailsTxt" layoutX="53.0" layoutY="222.0" prefHeight="180.0" prefWidth="712.0" promptText="e.g:  &quot;I prefer manual car wash technology&quot;, &quot;Ride destination: Haifa Center&quot; ">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font></TextArea>
-            <ComboBox fx:id="taskTypeComboBox" layoutX="192.0" layoutY="92.0" prefHeight="38.0" prefWidth="217.0" promptText="select type" />
-            <DatePicker fx:id="deadlineDp" layoutX="473.0" layoutY="92.0" prefHeight="38.0" prefWidth="217.0" promptText="select deadline" />
-            <Button fx:id="confirm_and_displayBtn" layoutX="377.0" layoutY="366.0" mnemonicParsing="false" onAction="#check_confirm_display_task" prefHeight="44.0" prefWidth="136.0" text="confirm">
+            <ComboBox fx:id="taskTypeComboBox" layoutX="158.0" layoutY="135.0" prefHeight="38.0" prefWidth="217.0" promptText="select type" />
+            <DatePicker fx:id="deadlineDp" layoutX="445.0" layoutY="135.0" prefHeight="38.0" prefWidth="217.0" promptText="select deadline" />
+            <Button fx:id="confirm_and_displayBtn" layoutX="321.0" layoutY="410.0" mnemonicParsing="false" onAction="#check_confirm_display_task" prefHeight="27.0" prefWidth="177.0" text="confirm">
                <font>
-                  <Font size="17.0" />
+                  <Font name="Traditional Arabic" size="17.0" />
                </font></Button>
-            <Button fx:id="back_button" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="77.0" text="BACK">
+            <Button fx:id="back_button" layoutY="-1.0" mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="85.0" text="BACK">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
+            <ImageView fitHeight="110.0" fitWidth="190.0" layoutX="626.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image-removebg-preview%20(1).png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <Button mnemonicParsing="false" onAction="#switchToemergency" prefHeight="15.0" prefWidth="906.0" text="Emergency Button">
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
+      <Button fx:id="Emergency_btn" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="38.0" prefWidth="822.0" text="Emergency Button">
          <font>
-            <Font name="System Bold" size="22.0" />
+            <Font name="Leelawadee UI Semilight" size="17.0" />
          </font>
       </Button>
    </children>

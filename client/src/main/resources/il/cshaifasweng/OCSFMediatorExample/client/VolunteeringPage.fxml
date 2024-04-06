@@ -9,34 +9,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="860.0" style="-fx-background-color: #ffa343;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.VolunteeringPage">
+<AnchorPane prefHeight="500.0" prefWidth="860.0" style="-fx-background-color: #dda0dd;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.VolunteeringPage">
    <children>
+      <ImageView fitHeight="511.0" fitWidth="879.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@OAK40C0988.jpg" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="118.0" fitWidth="225.0" layoutX="622.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image-removebg-preview%20(1).png" />
          </image>
       </ImageView>
-      <ListView fx:id="VolunteeringList" layoutX="34.0" layoutY="147.0" onMouseClicked="#volunteeringTaskShow" prefHeight="305.0" prefWidth="404.0" />
-      <TextArea fx:id="VolunteeringTaskDetails" layoutX="486.0" layoutY="147.0" prefHeight="255.0" prefWidth="302.0" />
-      <Button fx:id="volunteer" layoutX="486.0" layoutY="416.0" mnemonicParsing="false" onAction="#Volunteering" prefHeight="36.0" prefWidth="302.0" text="Volunteer">
+      <ListView fx:id="VolunteeringList" layoutX="34.0" layoutY="147.0" onMouseClicked="#volunteeringTaskShow" prefHeight="305.0" prefWidth="424.0" />
+      <TextArea fx:id="VolunteeringTaskDetails" layoutX="506.0" layoutY="147.0" prefHeight="255.0" prefWidth="327.0" />
+      <Button fx:id="volunteer" layoutX="511.0" layoutY="416.0" mnemonicParsing="false" onAction="#Volunteering" prefHeight="36.0" prefWidth="321.0" text="Volunteer">
          <font>
             <Font name="Leelawadee UI Semilight" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="back_button" mnemonicParsing="false" onAction="#back" prefHeight="36.0" prefWidth="81.0" text="BACK">
+      <Button fx:id="back_button" mnemonicParsing="false" onAction="#back" prefHeight="36.0" prefWidth="87.0" text="BACK">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="emergency" layoutY="471.0" mnemonicParsing="false" onAction="#switch_to_emergency" prefHeight="47.0" prefWidth="860.0" text="Emergency Button">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Label fx:id="welcome" layoutX="34.0" layoutY="60.0" prefHeight="83.0" prefWidth="472.0" text="choose which task you like to valunter">
+      <Label fx:id="welcome" layoutX="34.0" layoutY="60.0" prefHeight="83.0" prefWidth="472.0" text="choose which task you like to valunter" textFill="WHITE">
          <font>
             <Font name="Leelawadee UI Semilight" size="24.0" />
          </font>
       </Label>
+      <Button fx:id="Emergency_btn" layoutX="-3.0" layoutY="472.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="39.0" prefWidth="879.0" text="Emergency Button">
+         <font>
+            <Font name="Leelawadee UI Semilight" size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

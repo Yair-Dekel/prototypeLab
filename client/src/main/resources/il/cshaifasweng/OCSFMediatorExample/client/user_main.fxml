@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -9,10 +8,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="860.0" style="-fx-background-color: #c08081;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.UserMainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="853.0" style="-fx-background-color: #c08081;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.UserMainController">
     <children>
         <AnchorPane fx:id="btn1" prefHeight="442.0" prefWidth="860.0" style="-fx-background-color: #c08081;">
             <children>
+            <ImageView fitHeight="479.0" fitWidth="860.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@graphic-2d-colorful-wallpaper-with-grainy-gradients33.jpg" />
+               </image>
+            </ImageView>
                 <Label fx:id="welcome_label" layoutX="31.0" layoutY="7.0" prefHeight="56.0" prefWidth="772.0" text="                                 Welcome" textFill="WHITE">
                     <font>
                         <Font size="38.0" />
@@ -44,6 +48,11 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
+              <Button fx:id="Emergency_btn" layoutX="1.0" layoutY="444.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="56.0" prefWidth="852.0" text="Emergency Button">
+                  <font>
+                      <Font name="System Bold" size="26.0" />
+                  </font>
+              </Button>
             <ImageView fitHeight="102.0" fitWidth="202.0" layoutX="682.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image-removebg-preview%20(1).png" />
@@ -51,13 +60,5 @@
             </ImageView>
             </children>
         </AnchorPane>
-        <Button fx:id="Emergency_btn" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="59.0" prefWidth="860.0" text="Emergency Button">
-            <font>
-                <Font name="System Bold" size="26.0" />
-            </font>
-            <VBox.margin>
-                <Insets top="20.0" />
-            </VBox.margin>
-        </Button>
     </children>
 </VBox>

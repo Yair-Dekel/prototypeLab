@@ -9,33 +9,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="545.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShowMyVolunteeredTasks">
+<AnchorPane prefHeight="525.0" prefWidth="873.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShowMyVolunteeredTasks">
    <children>
-      <Button fx:id="back" layoutX="516.0" layoutY="22.0" mnemonicParsing="false" onAction="#back_to_mainUser" prefHeight="35.0" prefWidth="70.0" text="BACK" textFill="#0f8a29">
+      <ImageView fitHeight="492.0" fitWidth="886.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@OAK40C0988.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="back" layoutY="-3.0" mnemonicParsing="false" onAction="#back_to_mainUser" prefHeight="37.0" prefWidth="81.0" text="BACK">
          <font>
             <Font name="Kristen ITC" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="emergency" layoutX="15.0" layoutY="486.0" mnemonicParsing="false" onAction="#switch_to_emergency" prefHeight="42.0" prefWidth="567.0" text="Emergency Button" textFill="#ab1414">
+      <ListView fx:id="listviewInProcess" layoutX="17.0" layoutY="131.0" onMouseClicked="#display" prefHeight="314.0" prefWidth="385.0" />
+      <TextArea fx:id="show" layoutX="430.0" layoutY="141.0" prefHeight="211.0" prefWidth="351.0" />
+      <Label fx:id="welcome" layoutX="23.0" layoutY="83.0" prefHeight="37.0" prefWidth="583.0" text=" good job on completing your volunteer task! " textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <ListView fx:id="listviewInProcess" layoutX="17.0" layoutY="90.0" onMouseClicked="#display" prefHeight="355.0" prefWidth="242.0" />
-      <TextArea fx:id="show" layoutX="281.0" layoutY="118.0" prefHeight="211.0" prefWidth="301.0" />
-      <Label fx:id="welcome" layoutX="25.0" layoutY="45.0" prefHeight="35.0" prefWidth="291.0" text="Welcome (i valanter)" textFill="#0c8d0e">
-         <font>
-            <Font name="Kristen ITC" size="13.0" />
+            <Font name="Andalus" size="23.0" />
          </font>
       </Label>
-      <ImageView fitHeight="112.0" fitWidth="161.0" layoutX="325.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="158.0" fitWidth="193.0" layoutX="606.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image-removebg-preview%20(1).png" />
          </image>
       </ImageView>
-      <Button fx:id="done" layoutX="371.0" layoutY="359.0" mnemonicParsing="false" onAction="#task_completed" prefHeight="25.0" prefWidth="98.0" text="Done" textFill="#119016">
+      <Button fx:id="done" layoutX="430.0" layoutY="370.0" mnemonicParsing="false" onAction="#task_completed" prefHeight="37.0" prefWidth="351.0" text="Done">
          <font>
-            <Font name="Kristen ITC" size="12.0" />
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label fx:id="welcome1" layoutX="23.0" layoutY="48.0" prefHeight="46.0" prefWidth="522.0" text="Wow" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="32.0" />
+         </font>
+      </Label>
+      <Button fx:id="Emergency_btn" layoutX="-2.0" layoutY="479.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="46.0" prefWidth="886.0" text="Emergency Button">
+         <font>
+            <Font name="Leelawadee UI Semilight" size="17.0" />
          </font>
       </Button>
    </children>

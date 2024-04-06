@@ -9,28 +9,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="507.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShowRequestedTasksPage">
+<AnchorPane prefHeight="504.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShowRequestedTasksPage">
    <children>
-      <ImageView fitHeight="118.0" fitWidth="225.0" layoutX="386.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="504.0" fitWidth="870.0" layoutX="-8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@graphic-2d-colorful-wallpaper-with-grainy-22.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="118.0" fitWidth="225.0" layoutX="668.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image-removebg-preview (1).png" />
          </image>
       </ImageView>
-      <ListView fx:id="requestedTaskList" layoutX="35.0" layoutY="132.0" onMouseClicked="#displayRequest" prefHeight="313.0" prefWidth="240.0" />
-      <TextArea fx:id="RequestedTaskDetails" layoutX="305.0" layoutY="138.0" prefHeight="198.0" prefWidth="337.0" />
-      <Label fx:id="welcome" layoutX="35.0" layoutY="75.0" prefHeight="63.0" prefWidth="211.0" text="REQUESTED TASKS OF" textFill="#2d6f42">
+      <ListView fx:id="requestedTaskList" layoutX="35.0" layoutY="145.0" onMouseClicked="#displayRequest" prefHeight="296.0" prefWidth="408.0" />
+      <TextArea fx:id="RequestedTaskDetails" layoutX="469.0" layoutY="145.0" prefHeight="296.0" prefWidth="337.0" />
+      <Label fx:id="welcome" layoutX="303.0" layoutY="44.0" prefHeight="63.0" prefWidth="345.0" text="My Tasks ">
          <font>
-            <Font name="Kristen ITC" size="14.0" />
+            <Font name="Simplified Arabic Fixed" size="37.0" />
          </font>
       </Label>
-      <Button fx:id="BACK" layoutX="8.0" layoutY="4.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="70.0" text="BACK" textFill="#196f2a">
+      <Button fx:id="BACK" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="70.0" text="BACK">
          <font>
-            <Font name="Kristen ITC" size="14.0" />
+            <Font name="Leelawadee UI Semilight" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="emergency_button" layoutX="16.0" layoutY="458.0" mnemonicParsing="false" onAction="#switch_to_emergency" prefHeight="39.0" prefWidth="657.0" text="Emergency Button" textFill="#b51a1a">
+      <Button fx:id="Emergency_btn" layoutY="462.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="39.0" prefWidth="862.0" text="Emergency Button">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Leelawadee UI Semilight" size="17.0" />
          </font>
       </Button>
    </children>

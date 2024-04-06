@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #ccff00;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.MainController">
+<VBox fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="817.0" style="-fx-background-color: #ccff00;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.MainController">
     <children>
-        <AnchorPane fx:id="maincontanier" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #b2ffff;">
+        <AnchorPane fx:id="maincontanier" prefHeight="462.0" prefWidth="825.0" style="-fx-background-color: #b2ffff;">
 
             <children>
                 <Label layoutX="204.0" layoutY="83.0" prefHeight="17.0" prefWidth="202.0">
@@ -21,8 +21,13 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <AnchorPane layoutX="8.0" layoutY="3.0" prefHeight="449.0" prefWidth="835.0">
+                <AnchorPane layoutX="8.0" layoutY="3.0" prefHeight="459.0" prefWidth="806.0">
                     <children>
+                  <ImageView fitHeight="461.0" fitWidth="824.0" layoutX="-8.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@graphic-2d-colorful-wallpaper-with-grainy-gradients11.jpg" />
+                     </image>
+                  </ImageView>
                         <Label layoutX="223.0" layoutY="152.0" prefHeight="91.0" prefWidth="440.0" text="Together, we can make a difference">
                             <font>
                                 <Font name="System Italic" size="24.0" />
@@ -30,7 +35,7 @@
                         </Label>
                         <PasswordField fx:id="password_TF" layoutX="275.0" layoutY="280.0" prefHeight="39.0" prefWidth="267.0" promptText="password" />
                         <TextField fx:id="Username_TF" layoutX="275.0" layoutY="224.0" prefHeight="39.0" prefWidth="267.0" promptText="username" />
-                        <Button fx:id="login_btn" layoutX="275.0" layoutY="341.0" mnemonicParsing="false" onAction="#LogIN_check_info" prefHeight="39.0" prefWidth="267.0" style="-fx-background-color: black;" text="Log in" textFill="WHITE">
+                        <Button fx:id="login_btn" layoutX="275.0" layoutY="336.0" mnemonicParsing="false" onAction="#LogIN_check_info" prefHeight="39.0" prefWidth="267.0" style="-fx-background-color: black;" text="Log in" textFill="WHITE">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -54,7 +59,7 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-        <Button fx:id="Emergency_btn" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="37.0" prefWidth="850.0" text="Emergency Button">
+        <Button fx:id="Emergency_btn" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="45.0" prefWidth="820.0" text="Emergency Button">
             <font>
                 <Font name="Leelawadee UI Semilight" size="17.0" />
             </font>

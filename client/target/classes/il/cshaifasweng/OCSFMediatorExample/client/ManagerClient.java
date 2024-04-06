@@ -64,6 +64,7 @@ public class ManagerClient extends AbstractClient {
             if (message1.getChangeStatus().equals("task accepted")) {
                 EventBus.getDefault().post(new NewDetailsEvent(message1));
             } else if (message1.getChangeStatus().equals("task rejected")) {
+                System.out.println("rejected");
                 EventBus.getDefault().post(new TaskRejectEvent(message1));
             }
         }

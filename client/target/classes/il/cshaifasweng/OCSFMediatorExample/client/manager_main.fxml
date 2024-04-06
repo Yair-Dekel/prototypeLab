@@ -5,43 +5,57 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#ShowList" prefHeight="569.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Manager">
+<AnchorPane onMouseClicked="#ShowList" prefHeight="504.0" prefWidth="817.0" style="-fx-background-color: #d8bfd8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Manager">
     <children>
-      <AnchorPane fx:id="Bar_for_view" layoutX="3.0" layoutY="88.0" prefHeight="415.0" prefWidth="258.0">
-         <children>
-              <ListView fx:id="ListOfTasks" layoutX="8.0" layoutY="45.0" onMouseClicked="#ShowList" prefHeight="356.0" prefWidth="229.0" />
-         </children>
-      </AnchorPane>
-        <Label alignment="TOP_CENTER" layoutX="16.0" layoutY="25.0" prefHeight="44.0" prefWidth="649.0" text="Welcome To Atis" textFill="#a3272f">
+      <ImageView fitHeight="564.0" fitWidth="819.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@OAWRX901.jpg" />
+         </image>
+      </ImageView>
+        <Label alignment="TOP_CENTER" layoutX="79.0" layoutY="15.0" prefHeight="44.0" prefWidth="649.0" text="Welcome To Atis">
             <font>
-                <Font name="Calibri Light" size="36.0" />
+                <Font name="Cambria Math" size="30.0" />
             </font>
         </Label>
-        <Button fx:id="EmergencyButton" layoutX="3.0" layoutY="513.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="37.0" prefWidth="679.0" text="Emergency Button" textFill="#e10a0a">
+        <Button fx:id="EmergencyCalls" layoutX="429.0" layoutY="97.0" mnemonicParsing="false" onAction="#ShowEmergency" prefHeight="30.0" prefWidth="163.0" text="Emergency calls" />
+        <Button fx:id="Members" layoutX="632.0" layoutY="97.0" mnemonicParsing="false" onAction="#ShowMembers" prefHeight="30.0" prefWidth="163.0" text="Members" />
+        <Label fx:id="welcome" layoutX="36.0" layoutY="92.0" prefHeight="38.0" prefWidth="400.0" text="Tasks Waiting for your approval:">
             <font>
-                <Font size="18.0" />
-            </font></Button>
-        <Button fx:id="EmergencyCalls" layoutX="543.0" layoutY="112.0" mnemonicParsing="false" onAction="#ShowEmergency" prefHeight="30.0" prefWidth="117.0" text="Emergency calls" textFill="#21b94c" />
-        <Button fx:id="Tasks" layoutX="407.0" layoutY="113.0" mnemonicParsing="false" onAction="#ShowTasks" prefHeight="30.0" prefWidth="111.0" text="Tasks" textFill="#17ae4c" />
-        <Button fx:id="Members" layoutX="280.0" layoutY="113.0" mnemonicParsing="false" onAction="#ShowMembers" prefHeight="30.0" prefWidth="111.0" text="Members" textFill="#20a41e" />
-        <Label fx:id="welcome" layoutX="4.0" layoutY="101.0" prefHeight="27.0" prefWidth="258.0" text="Wait for your approval:" textFill="#25a84c">
-            <font>
-                <Font name="Kristen ITC" size="16.0" />
+                <Font name="Leelawadee UI Semilight" size="19.0" />
             </font>
         </Label>
-        <Button fx:id="Accept" layoutX="510.0" layoutY="377.0" mnemonicParsing="false" onAction="#AcceptRequest" prefHeight="25.0" prefWidth="99.0" text="Accept" textFill="#23b540" />
-        <Button fx:id="Reject" layoutX="341.0" layoutY="378.0" mnemonicParsing="false" onAction="#RejectRequest" prefHeight="25.0" prefWidth="99.0" text="Reject" textFill="#14a823" />
-        <TextField fx:id="Reason" layoutX="436.0" layoutY="445.0" prefHeight="63.0" prefWidth="189.0" visible="false" />
-        <Label fx:id="WriteReason" layoutX="306.0" layoutY="445.0" prefHeight="23.0" prefWidth="129.0" text="Write the reason:" textFill="#19904b" visible="false">
+        <Button fx:id="Accept" layoutX="610.0" layoutY="363.0" mnemonicParsing="false" onAction="#AcceptRequest" prefHeight="25.0" prefWidth="190.0" text="Accept" />
+        <Button fx:id="Reject" layoutX="415.0" layoutY="363.0" mnemonicParsing="false" onAction="#RejectRequest" prefHeight="25.0" prefWidth="190.0" text="Reject" />
+        <TextField fx:id="Reason" layoutX="547.0" layoutY="405.0" prefHeight="53.0" prefWidth="247.0" visible="false" />
+        <Label fx:id="WriteReason" layoutX="424.0" layoutY="410.0" prefHeight="30.0" prefWidth="153.0" text="Write the reason:" visible="false">
             <font>
                 <Font name="Kristen ITC" size="14.0" />
             </font>
         </Label>
-        <Button fx:id="Send" layoutX="583.0" layoutY="479.0" mnemonicParsing="false" onAction="#SendReason" text="Send" textFill="#11ba3e" visible="false" />
-        <TextArea fx:id="Request" layoutX="280.0" layoutY="160.0" prefHeight="200.0" prefWidth="389.0" />
-      <Button fx:id="LogOutBtn" layoutX="10.0" layoutY="24.0" mnemonicParsing="false" onAction="#LOG_OUT" prefHeight="41.0" prefWidth="80.0" text="LOG OUT" />
+        <Button fx:id="Send" layoutX="551.0" layoutY="464.0" mnemonicParsing="false" onAction="#SendReason" prefHeight="30.0" prefWidth="247.0" text="Send" visible="false">
+         <font>
+            <Font name="Andalus" size="12.0" />
+         </font></Button>
+        <TextArea fx:id="Request" layoutX="415.0" layoutY="154.0" prefHeight="200.0" prefWidth="389.0" />
+      <Button fx:id="LogOutBtn" layoutX="2.0" mnemonicParsing="false" onAction="#LOG_OUT" prefHeight="30.0" prefWidth="86.0" text="LOG OUT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <ListView fx:id="ListOfTasks" layoutX="36.0" layoutY="135.0" onMouseClicked="#ShowList" prefHeight="337.0" prefWidth="328.0" />
+      <Button fx:id="Emergency_btn" layoutX="2.0" layoutY="504.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="38.0" prefWidth="817.0" text="Emergency Button">
+         <font>
+            <Font name="Leelawadee UI Semilight" size="17.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="95.0" fitWidth="187.0" layoutX="658.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image-removebg-preview%20(1).png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

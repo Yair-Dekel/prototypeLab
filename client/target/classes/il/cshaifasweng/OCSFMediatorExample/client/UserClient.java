@@ -32,6 +32,7 @@ public class UserClient extends AbstractClient {
     protected void handleMessageFromServer(Object msg) throws IOException {
         System.out.println("got into handleMessageFromServer ");
         if (msg instanceof NewTaskMessage) {
+            System.out.println("leeeen");///////////////////////////////////////////////////////////////////////
             NewTaskMessage ntm = (NewTaskMessage) msg;
             EventBus.getDefault().post(new NewTaskEvent(ntm));
 
