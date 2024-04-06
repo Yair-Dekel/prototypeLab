@@ -3,6 +3,7 @@ il\cshaifasweng\OCSFMediatorExample\entities\LogInOutMessage.class
 il\cshaifasweng\OCSFMediatorExample\entities\Notification.class
 il\cshaifasweng\OCSFMediatorExample\entities\Registered_user.class
 il\cshaifasweng\OCSFMediatorExample\entities\DisplayDataMessage.class
+il\cshaifasweng\OCSFMediatorExample\entities\SecureUtils.class
 il\cshaifasweng\OCSFMediatorExample\entities\MessageOfStatus.class
 il\cshaifasweng\OCSFMediatorExample\entities\Emergency_call.class
 il\cshaifasweng\OCSFMediatorExample\entities\Communities.class
