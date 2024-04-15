@@ -95,47 +95,47 @@ public class MainController {
         password_TF.clear();
         Username_TF.clear();
 
-        byte[] salt = retrieveSaltForUser(username);
-        if (salt == null) {
-            // Salt not found for the user
-            showErrorDialog("User not found or salt not available");
-            return;
-        }
+//        byte[] salt = retrieveSaltForUser(username);
+//        if (salt == null) {
+//            // Salt not found for the user
+//            showErrorDialog("User not found or salt not available");
+//            return;
+//        }
 
-        String hashedPassword = SecureUtils.getSecurePassword(password,salt);
-        System.out.println("Hashed password: " + hashedPassword);
+//        String hashedPassword = SecureUtils.getSecurePassword(password,salt);
+//        System.out.println("Hashed password: " + hashedPassword);
 
-        Message message = new Message("Confirm information", username, hashedPassword);
+        Message message = new Message("Confirm information", username, password);
         UserClient.getClient().sendToServer(message);
 
     }
 
-    private byte[] retrieveSaltForUser(String username) {
-        byte[] salt = null;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Atis?serverTimezone=UTC", "root", "050898")) {
-            String query = "SELECT salt FROM Users WHERE username = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, username);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        // Retrieve the salt string from the database
-                        String saltString = resultSet.getString("salt");
-                        // Decode the salt string from Base64 to bytes
-                        salt = Base64.getDecoder().decode(saltString);
-                        System.out.println("Retrieved salt for user " + username + ": " + Arrays.toString(salt));
-                    } else {
-                        System.out.println("Salt not found for user: " + username);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.err.println("Error retrieving salt for user " + username + ": " + e.getMessage());
-            // Handle any potential exceptions
-        }
-
-        return salt;
-    }
+//    private byte[] retrieveSaltForUser(String username) {
+//        byte[] salt = null;
+//        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Atis?serverTimezone=UTC", "root", "050898")) {
+//            String query = "SELECT salt FROM Users WHERE username = ?";
+//            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//                preparedStatement.setString(1, username);
+//                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                    if (resultSet.next()) {
+//                        // Retrieve the salt string from the database
+//                        String saltString = resultSet.getString("salt");
+//                        // Decode the salt string from Base64 to bytes
+//                        salt = Base64.getDecoder().decode(saltString);
+//                        System.out.println("Retrieved salt for user " + username + ": " + Arrays.toString(salt));
+//                    } else {
+//                        System.out.println("Salt not found for user: " + username);
+//                    }
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            System.err.println("Error retrieving salt for user " + username + ": " + e.getMessage());
+//            // Handle any potential exceptions
+//        }
+//
+//        return salt;
+//    }
 
 
 
