@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="newVbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #0ca9c7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
+<VBox fx:id="newVbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #c4bfa0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
    <AnchorPane fx:id="btn1" prefHeight="500.0" prefWidth="600.0">
-      <Label layoutX="102.0" layoutY="14.0" prefHeight="56.0" prefWidth="398.0" style="-fx-background-color: yellow;" text="           All Tasks" textAlignment="CENTER">
+      <Label layoutY="4.0" prefHeight="66.0" prefWidth="600.0" style="-fx-background-color: #131302;" text="                     All Tasks" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="38.0" />
          </font>
@@ -20,14 +20,14 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <VBox fx:id="tasksContaine" layoutX="66.0" layoutY="83.0" prefHeight="383.0" prefWidth="174.0" />
+      <VBox fx:id="tasksContaine" layoutX="66.0" layoutY="103.0" prefHeight="363.0" prefWidth="174.0" />
       <VBox fx:id="showingVbox" layoutX="304.0" layoutY="94.0" prefHeight="383.0" prefWidth="264.0">
          <children>
-            <TextArea fx:id="DataFromServerTF" prefHeight="314.0" prefWidth="260.0" />
+            <TextArea fx:id="DataFromServerTF" prefHeight="314.0" prefWidth="260.0" style="-fx-background-color: #c4bfa0;" VBox.vgrow="NEVER" />
          </children>
       </VBox>
    </AnchorPane>
-   <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="560.0" text="Emergency Button" textFill="#0ca9c7">
+   <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="560.0" text="Emergency Button">
       <VBox.margin>
          <Insets left="20.0" right="20.0" top="20.0" />
       </VBox.margin>

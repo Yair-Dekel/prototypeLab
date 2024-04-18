@@ -7,8 +7,11 @@ public class Message implements Serializable {
     int id;
     LocalDateTime timeStamp;
     String message;
+    Registered_user user;
 
-    Task task=null;
+    String Password;
+    String userName;
+
 
 
 
@@ -18,6 +21,25 @@ public class Message implements Serializable {
         this.id = id;
         this.timeStamp = timeStamp;
         this.message = message;
+    }
+
+    public Message(String message,String userName,String password)
+    {
+        this.message=message;
+        this.userName=userName;
+        Password=password;
+
+    }
+
+    public Message(String message,String userName)
+    {
+        this.message=message;
+        this.userName=userName;
+
+    }
+    public Message(String message)
+    {
+        this.message=message;
     }
 
     public Message(int id, String message) {
@@ -34,7 +56,15 @@ public class Message implements Serializable {
         this.data = null;
     }
 
-    public Message(int id, String message,String data) {
+    public Registered_user getUser() {
+        return user;
+    }
+
+    public void setUser(Registered_user user) {
+        this.user = user;
+    }
+
+    public Message(int id, String message, String data) {
         this.id = id;
         this.timeStamp = LocalDateTime.now();
         this.message = message;
@@ -73,7 +103,19 @@ public class Message implements Serializable {
         this.data = data;
     }
 
-    public Task getTask() {
-        return task;
+    public String getPassword() {
+        return Password;
     }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+}
 }

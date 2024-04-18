@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onMouseClicked="#ShowList" prefHeight="569.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Manager">
+    <children>
+      <AnchorPane fx:id="Bar_for_view" layoutX="3.0" layoutY="88.0" prefHeight="415.0" prefWidth="258.0">
+         <children>
+              <ListView fx:id="ListOfTasks" layoutX="8.0" layoutY="45.0" onMouseClicked="#ShowList" prefHeight="356.0" prefWidth="229.0" />
+         </children>
+      </AnchorPane>
+        <Button fx:id="EmergencyButton" layoutX="3.0" layoutY="513.0" mnemonicParsing="false" onAction="#switchToemergency" prefHeight="37.0" prefWidth="679.0" text="Emergency Button" textFill="#e10a0a">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font></Button>
+        <Button fx:id="EmergencyCalls" layoutX="543.0" layoutY="112.0" mnemonicParsing="false" onAction="#ShowEmergency" prefHeight="30.0" prefWidth="117.0" text="Emergency calls" textFill="#21b94c" />
+        <Button fx:id="Tasks" layoutX="407.0" layoutY="113.0" mnemonicParsing="false" onAction="#ShowTasks" prefHeight="30.0" prefWidth="111.0" text="Tasks" textFill="#17ae4c" />
+        <Button fx:id="Members" layoutX="280.0" layoutY="113.0" mnemonicParsing="false" onAction="#ShowMembers" prefHeight="30.0" prefWidth="111.0" text="Members" textFill="#20a41e" />
+        <Label fx:id="welcome" layoutX="4.0" layoutY="101.0" prefHeight="27.0" prefWidth="258.0" text="Wait for your approval:" textFill="#25a84c">
+            <font>
+                <Font name="Kristen ITC" size="12.0" />
+            </font>
+        </Label>
+        <Button fx:id="Accept" layoutX="510.0" layoutY="360.0" mnemonicParsing="false" onAction="#AcceptRequest" prefHeight="25.0" prefWidth="99.0" text="Accept" textFill="#23b540" />
+        <Button fx:id="Reject" layoutX="341.0" layoutY="361.0" mnemonicParsing="false" onAction="#RejectRequest" prefHeight="25.0" prefWidth="99.0" text="Reject" textFill="#14a823" />
+        <TextField fx:id="Reason" layoutX="436.0" layoutY="403.0" prefHeight="63.0" prefWidth="189.0" visible="false" />
+        <Label fx:id="WriteReason" layoutX="306.0" layoutY="403.0" prefHeight="23.0" prefWidth="129.0" text="Write the reason:" textFill="#19904b" visible="false">
+            <font>
+                <Font name="Kristen ITC" size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="Send" layoutX="583.0" layoutY="479.0" mnemonicParsing="false" onAction="#SendReason" text="Send" textFill="#11ba3e" visible="false" />
+        <TextArea fx:id="Request" layoutX="280.0" layoutY="153.0" prefHeight="200.0" prefWidth="389.0" />
+      <Button fx:id="Log_Out" layoutX="585.0" layoutY="25.0" mnemonicParsing="false" onAction="#LOG_OUT" prefHeight="25.0" prefWidth="76.0" text="LOG OUT" textFill="#52ab70" />
+      <ImageView fitHeight="112.0" fitWidth="151.0" layoutX="407.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image-removebg-preview%20(1).png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

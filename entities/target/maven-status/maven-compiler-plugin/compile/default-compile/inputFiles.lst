@@ -1,5 +1,13 @@
 C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\Task.java
-C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\MessageOfStatus.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\NewTaskMessage.java
 C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\Message.java
 C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\Registered_user.java
-C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\DisplayTasksMassage.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\Emergency_call.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\NewEmergencyCall.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\TaskType.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\Notification.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\DisplayDataMessage.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\MessageOfStatus.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\LogInOutMessage.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\DisplayCalls.java
+C:\Users\user\IdeaProjects\prototypeLab\entities\src\main\java\il\cshaifasweng\OCSFMediatorExample\entities\Communities.java
