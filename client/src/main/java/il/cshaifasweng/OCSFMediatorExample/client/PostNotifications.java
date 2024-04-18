@@ -41,15 +41,25 @@ public class PostNotifications {
         Platform.runLater(() -> {
             unregeister = false;
             // Create a media file for the notification sound
-            Media errorsound = new Media(new File("sorry_sound.wav").toURI().toString());
+//            Media errorsound = new Media(new File("sorry_sound.wav").toURI().toString());
+//            MediaPlayer mediaPlayer1 = new MediaPlayer(errorsound);
+//            Media confirmsound = new Media(new File("yay_sound.mp3").toURI().toString());
+//            MediaPlayer mediaPlayer2 = new MediaPlayer(confirmsound);
+//            Media victorysound = new Media(new File("victory_sound.wav").toURI().toString());
+//            MediaPlayer mediaPlayer3 = new MediaPlayer(victorysound);
+//            Media donesound = new Media(new File("done_sound.wav").toURI().toString());
+//            MediaPlayer mediaPlayer4 = new MediaPlayer(donesound);
+//            Media pleasesound = new Media(new File("please_sound.wav").toURI().toString());
+//            MediaPlayer mediaPlayer5 = new MediaPlayer(pleasesound);
+            Media errorsound = new Media(new File("C:/Users/shake/OneDrive/שולחן העבודה/study/שנה ד'/s.w engneering/prototypeLab/client/sorry_sound.wav").toURI().toString());
             MediaPlayer mediaPlayer1 = new MediaPlayer(errorsound);
-            Media confirmsound = new Media(new File("yay_sound.mp3").toURI().toString());
+            Media confirmsound = new Media(new File("C:/Users/shake/OneDrive/שולחן העבודה/study/שנה ד'/s.w engneering/prototypeLab/client/yay_sound.mp3").toURI().toString());
             MediaPlayer mediaPlayer2 = new MediaPlayer(confirmsound);
-            Media victorysound = new Media(new File("victory_sound.wav").toURI().toString());
+            Media victorysound = new Media(new File("C:/Users/shake/OneDrive/שולחן העבודה/study/שנה ד'/s.w engneering/prototypeLab/client/victory_sound.wav").toURI().toString());
             MediaPlayer mediaPlayer3 = new MediaPlayer(victorysound);
-            Media donesound = new Media(new File("done_sound.wav").toURI().toString());
+            Media donesound = new Media(new File("C:/Users/shake/OneDrive/שולחן העבודה/study/שנה ד'/s.w engneering/prototypeLab/client/done_sound.wav").toURI().toString());
             MediaPlayer mediaPlayer4 = new MediaPlayer(donesound);
-            Media pleasesound = new Media(new File("please_sound.wav").toURI().toString());
+            Media pleasesound = new Media(new File("C:/Users/shake/OneDrive/שולחן העבודה/study/שנה ד'/s.w engneering/prototypeLab/client/please_sound.wav").toURI().toString());
             MediaPlayer mediaPlayer5 = new MediaPlayer(pleasesound);
             System.out.println("in notification");
             if (event.getNotification().getNotification().equals("Task Accepted")) {

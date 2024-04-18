@@ -131,7 +131,7 @@ public class MembersController {
             try {
 //                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //                currentStage.close();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserTasks.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("userTasks.fxml"));
 
                 // Create an instance of the UserTasksController and pass the user to its constructor
                 UserTasksController controller = new UserTasksController();

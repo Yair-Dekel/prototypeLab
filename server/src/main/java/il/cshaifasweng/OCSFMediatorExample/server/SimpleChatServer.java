@@ -242,9 +242,42 @@ public class SimpleChatServer {
                 Registered_user user6 = new Registered_user("Shira","Omer","ShiraOmer22","1220",false,"0502479900",Communities.ROMEMA);
                 Registered_user user7 = new Registered_user("Yarden","Mesgav","yarden_yarden3","1230",false,"0532251580",Communities.ROMEMA);
                 Registered_user user9 = new Registered_user("mais","Ohaion","mais","111",true,"0502213188",Communities.ROMEMA);
+                Registered_user user10 = new Registered_user("Vered","Lir","verduni","1234",false,"0508653121", Communities.ROMEMA);
 
+//////////////////////
+                Registered_user user11 = new Registered_user("Rina","Samir","r_samir1","123",false,"0507653121", Communities.AHUZA);
+                Registered_user user12 = new Registered_user("Soheir","Merei","sohirMer2","1234",false,"0538173191",Communities.AHUZA);
+                Registered_user user13 = new Registered_user("Sonya","Samir","soni_s","1235",false,"054856249",Communities.AHUZA);
+                Registered_user user14 = new Registered_user("Rina","Lior","lior123","111",false,"050275188",Communities.RAMAT_BEGIN);
+                Registered_user user15 = new Registered_user("Gihad","Abdallah","abdalji1","1231",false,"053928111",Communities.RAMAT_BEGIN);
+                Registered_user user16 = new Registered_user("Aisha","Abdallah","aishallh","1220",false,"050964200",Communities.RAMAT_BEGIN);
+                Registered_user user17 = new Registered_user("Ida","Saleh","salda87","1230",true,"0533256485",Communities.RAMAT_BEGIN);
+                Registered_user user18 = new Registered_user("Lilach","Cohen","lili2000","111",true,"055648288",Communities.DENIA);
+                Registered_user user19 = new Registered_user("Gihad","Cohen","abdalji1","1231",false,"054448111",Communities.DENIA);
+                Registered_user user20 = new Registered_user("Shuki","Jermans","shoosh","98",false,"055648737",Communities.DENIA);
+                Registered_user user21 = new Registered_user("Yair","Dell","Yair","1231",false,"054448311",Communities.DENIA);
+                Registered_user user22 = new Registered_user("Shir","David","shirush","050",true,"0533296485",Communities.RAMAT_ESCHOL);
+                Registered_user user23 = new Registered_user("Shani","Noy","saniki","12345",false,"055848288",Communities.RAMAT_ESCHOL);
+                Registered_user user24 = new Registered_user("Ron","Hayon","rono","1231",false,"059848111",Communities.RAMAT_ESCHOL);
+                Registered_user user25 = new Registered_user("Snir","Avraham","sa97","97",false,"055621737",Communities.RAMAT_ESCHOL);
+                Registered_user user26 = new Registered_user("Idan","Hili","Budu","1239",false,"050648311",Communities.RAMAT_ESCHOL);
+                session.save(user11);
+                session.save(user12);
+                session.save(user13);
+                session.save(user14);
+                session.save(user15);
+                session.save(user16);
+                session.save(user17);
+                session.save(user18);
+                session.save(user19);
 
-
+                session.save(user20);
+                session.save(user21);
+                session.save(user22);
+                session.save(user23);
+                session.save(user24);
+                session.save(user25);
+                session.save(user26);
                 session.save(user1);
                 session.save(user2);
                 session.save(user3);
@@ -252,7 +285,9 @@ public class SimpleChatServer {
                 session.save(user5);
                 session.save(user6);
                 session.save(user7);
-                session.save(user8);session.save(user9);
+                session.save(user8);
+                session.save(user9);
+                session.save(user10);
                 //  session.getTransaction().commit(); // Save everything.
 
                 System.out.println("2");

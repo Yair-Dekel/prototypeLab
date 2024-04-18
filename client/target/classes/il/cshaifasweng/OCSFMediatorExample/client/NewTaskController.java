@@ -41,10 +41,16 @@ public class NewTaskController {
     @Subscribe
     public void TaskNotification(UsersNotificationEvent event)
     {
-        System.out.println("post in newTask");
-        PostNotifications.getInstance().TaskNotification(event);
+        Platform.runLater(() -> {
+            PostNotifications.getInstance().TaskNotification(event);
+        });
+        if (PostNotifications.unregeister)
+        {
+            System.out.println("got inside");
+            EventBus.getDefault().unregister(this);
+            System.out.println("unregistered");
+        }
     }
-
 
     @FXML
     private void check_confirm_display_task() throws IOException {

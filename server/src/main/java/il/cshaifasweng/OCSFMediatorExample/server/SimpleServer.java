@@ -19,10 +19,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 public class SimpleServer extends AbstractServer {
 
@@ -761,20 +758,15 @@ public class SimpleServer extends AbstractServer {
 
     private List<Task> checkTasksWnoVolunteer(Registered_user user) {
         System.out.println("no volunteer check");
+        System.out.println(user.getUsername()+ " shira recognized");
         LocalDateTime currentTime = LocalDateTime.now();
         Transaction tx2 = null;
         try {
+            System.out.println("in try");
             SessionFactory sessionFactory = FactoryUtil.getSessionFactory();
             session = sessionFactory.openSession();
 
             tx2 = session.beginTransaction();
-            // HQL query to select tasks with status other than "Completed" or "Not Completed" and deadline smaller than today
-//            String sqlQuery = "SELECT * FROM Tasks " +
-//                    "INNER JOIN Users ON Tasks.registered_user_id = Users.id " +
-//                    "WHERE Tasks.Status = 'waiting for volunteer' AND " +
-//                    "Tasks.registered_user_id != :id AND " +
-//                    "Users.community = :comm AND " +
-//                    "TIMESTAMPDIFF(MINUTE, Tasks.approvalTime, :currentTime) >= 1"; /
 
             String sqlQuery = "SELECT * FROM Tasks " +
                     "WHERE Status = 'waiting for volunteer' AND registered_user_id != :user " +
@@ -784,20 +776,19 @@ public class SimpleServer extends AbstractServer {
             query.setParameter("user", user.getId());
             query.setParameter("currentTime", currentTime);
             query.addEntity(Task.class);
-
-//            SQLQuery<Task> query = session.createSQLQuery(sqlQuery);
-//            query.setParameter("comm", user.getCommunity());
-//            query.setParameter("id", user.getId());
-//            query.setParameter("currentTime", currentTime);
-//            query.addEntity(Task.class);
-            // Execute the query
+            System.out.println("a");
             List<Task> oldTasks = query.list();
+            System.out.println("b");
             tx2.commit();
-
+            System.out.println("c");
             // Check if the list is empty
-            for (Task task : oldTasks) {
+            Iterator<Task> iterator = oldTasks.iterator();
+            while (iterator.hasNext()) {
+                Task task = iterator.next();
+                System.out.println("d");
                 if (task.getRegistered_user().getCommunity() != user.getCommunity()) {
-                    oldTasks.remove(task);
+                    iterator.remove(); // Safely remove the current task from the iterator
+                    System.out.println("e");
                 }
             }
             if (oldTasks.isEmpty()) {
@@ -1040,12 +1031,14 @@ public class SimpleServer extends AbstractServer {
 
                     System.out.println("Confirm");
                     List<Registered_user> users = session.createQuery("FROM Registered_user", Registered_user.class).getResultList();
-                    byte[] salt = retrieveSaltForUser(username);
-                    String hashedPassword = SecureUtils.getSecurePassword(password, salt);
-                    System.out.println("Hashed password: " + hashedPassword);
+//                    byte[] salt = retrieveSaltForUser(username);
+//                    String hashedPassword = SecureUtils.getSecurePassword(password, salt);
+//
                     Message message = null;
                     for (Registered_user user : users) {
                         if (user.getUsername().equals(username)) {
+                            byte[] salt = retrieveSaltForUser(username);
+                            String hashedPassword = SecureUtils.getSecurePassword(password, salt);
                             if (user.getPassword().equals(hashedPassword)) {
                                 if (CheckExistManagerClient(client, username) && CheckExistUserClient(client, username)) {
                                     message = new Message("correct");
@@ -1298,6 +1291,7 @@ public class SimpleServer extends AbstractServer {
                     System.out.println("no problem in here GV");
 
                 }
+                else {System.out.println("null");}
             }
         }
         try {

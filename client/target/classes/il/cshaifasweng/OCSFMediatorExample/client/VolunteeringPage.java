@@ -63,11 +63,19 @@ public class VolunteeringPage {
 
     String Saveuser;
 
+    @Subscribe
     public void TaskNotification(UsersNotificationEvent event)
     {
-        PostNotifications.getInstance().TaskNotification(event);
+        Platform.runLater(() -> {
+            PostNotifications.getInstance().TaskNotification(event);
+        });
+        if (PostNotifications.unregeister)
+        {
+            System.out.println("got inside");
+            EventBus.getDefault().unregister(this);
+            System.out.println("unregistered");
+        }
     }
-
 
     @FXML
     void volunteeringTaskShow(MouseEvent event) {
